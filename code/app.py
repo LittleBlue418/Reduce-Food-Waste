@@ -38,9 +38,13 @@ def delete_recipe(recipe):
 
 # INGREDIENTS END POINTS
 
+
 @app.route('/ingredients', methods=['GET'])
 def list_ingredients():
-    return "List all ingredients"
+    ingredients = [ingredient.json() for ingredient in Ingredients.query.all()]
+    return {
+        'ingredients': ingredients,
+    }
 
 @app.route('/ingredients', methods=['POST'])
 def add_ingredient():
