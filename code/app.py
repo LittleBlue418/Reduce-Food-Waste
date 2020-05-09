@@ -2,10 +2,15 @@ import os
 
 from flask import Flask
 
+from db import db
+from models.ingredients import Ingredients
+from models.tags import Tags
+from models.users import Users
+
 
 app = Flask(__name__)
-
-
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # RECIPIES END POINTS
 
@@ -123,5 +128,12 @@ def delete_user_favorite(favorite):
     return "User favorite deleted"
 
 
+
+db.init_app(app)
+
+
+@app.before_first_request
+def create_tables():
+    db.create_all()
 
 app.run(port=5000)
