@@ -1,6 +1,7 @@
 import os
 
 from flask import Flask
+from flask_restful import reqparse
 
 from db import db
 from models.ingredients import IngredientsModel
@@ -48,7 +49,34 @@ def list_ingredients():
 
 @app.route('/ingredients', methods=['POST'])
 def add_ingredient():
-    return "Add an ingredient"
+
+    parser = reqparse.RequestParser()
+    parser.add_argument('icon',
+        type=str,
+        required=True,
+        help="This field cannot be left blank!"
+    )
+    parser.add_argument('name',
+        type=str,
+        required=True,
+        help="This field cannot be left blank!"
+    )
+
+    request_data = parser.parse_args()
+
+    if IngredientsModel.find_by_name(request_data['name']):
+        return {'message': "An item with name '{}' already exists".format(request_data['name'])}, 400
+
+    new_ingredient = IngredientsModel(**request_data)
+
+    try:
+            new_ingredient.save_to_db()
+    except:
+            return {"message": "An error occurred"}, 500
+
+    return new_ingredient.json()
+
+
 
 @app.route('/ingredients/<ingredient>', methods=['PUT'])
 def edit_ingredient(ingredient):
