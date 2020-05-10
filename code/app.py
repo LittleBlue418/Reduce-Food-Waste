@@ -3,7 +3,7 @@ import os
 from flask import Flask
 
 from db import db
-from models.ingredients import Ingredients
+from models.ingredients import IngredientsModel
 from models.tags import Tags
 from models.users import Users
 
@@ -41,7 +41,7 @@ def delete_recipe(recipe):
 
 @app.route('/ingredients', methods=['GET'])
 def list_ingredients():
-    ingredients = [ingredient.json() for ingredient in Ingredients.query.all()]
+    ingredients = [ingredient.json() for ingredient in IngredientsModel.query.all()]
     return {
         'ingredients': ingredients,
     }
