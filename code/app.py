@@ -47,6 +47,7 @@ def list_ingredients():
         'ingredients': ingredients,
     }
 
+
 @app.route('/ingredients', methods=['POST'])
 def add_ingredient():
 
@@ -76,6 +77,15 @@ def add_ingredient():
 
     return new_ingredient.json()
 
+
+@app.route('/ingredients/<ingredient_id>', methods=['GET'])
+def get_ingredient(ingredient_id):
+    ingredient = IngredientsModel.query.get(ingredient_id)
+
+    if ingredient is None:
+        return {"message": "An ingredient with that ID does not exist"}, 404
+
+    return ingredient.json()
 
 
 @app.route('/ingredients/<ingredient_id>', methods=['PUT'])
