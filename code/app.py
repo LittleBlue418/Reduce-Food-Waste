@@ -1,10 +1,10 @@
 import os
 
 from flask import Flask
-from flask_restful import reqparse
+from flask_restful import reqparse, Api
 
 from db import db
-from models.ingredients import IngredientsModel
+from resources.ingredients import Ingredient, IngredientsCollection
 from models.tags import Tags
 from models.users import Users
 
@@ -12,6 +12,11 @@ from models.users import Users
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+api = Api(app)
+
+api.add_resource(IngredientsCollection, '/ingredients')
+api.add_resource(Ingredient, '/ingredients/<ingredient_id>')
 
 # RECIPIES END POINTS
 
@@ -34,102 +39,6 @@ def edit_existing_recipe(recipe):
 @app.route('/recipes/<recipe>', methods=['DELETE'])
 def delete_recipe(recipe):
     return "Delete specified recipe"
-
-
-
-# INGREDIENTS END POINTS
-
-
-@app.route('/ingredients', methods=['GET'])
-def list_ingredients():
-    ingredients = [ingredient.json() for ingredient in IngredientsModel.query.all()]
-    return {
-        'ingredients': ingredients,
-    }
-
-
-@app.route('/ingredients', methods=['POST'])
-def add_ingredient():
-
-    parser = reqparse.RequestParser()
-    parser.add_argument('icon',
-        type=str,
-        required=True,
-        help="This field cannot be left blank!"
-    )
-    parser.add_argument('name',
-        type=str,
-        required=True,
-        help="This field cannot be left blank!"
-    )
-
-    request_data = parser.parse_args()
-
-    if IngredientsModel.find_by_name(request_data['name']):
-        return {'message': "An item with name '{}' already exists".format(request_data['name'])}, 400
-
-    new_ingredient = IngredientsModel(**request_data)
-
-    try:
-            new_ingredient.save_to_db()
-    except:
-            return {"message": "An error occurred"}, 500
-
-    return new_ingredient.json()
-
-
-@app.route('/ingredients/<ingredient_id>', methods=['GET'])
-def get_ingredient(ingredient_id):
-    ingredient = IngredientsModel.query.get(ingredient_id)
-
-    if ingredient is None:
-        return {"message": "An ingredient with that ID does not exist"}, 404
-
-    return ingredient.json()
-
-
-@app.route('/ingredients/<ingredient_id>', methods=['PUT'])
-def edit_ingredient(ingredient_id):
-
-    parser = reqparse.RequestParser()
-    parser.add_argument('icon',
-        type=str,
-        required=True,
-        help="This field cannot be left blank!"
-    )
-    parser.add_argument('name',
-        type=str,
-        required=True,
-        help="This field cannot be left blank!"
-    )
-
-    request_data = parser.parse_args()
-
-    ingredient = IngredientsModel.query.get(ingredient_id)
-
-    if ingredient is None:
-        return {"message": "An ingredient with that ID does not exist"}, 404
-
-    ingredient.name = request_data['name']
-    ingredient.icon = request_data['icon']
-
-    ingredient.save_to_db()
-
-    return ingredient.json()
-
-@app.route('/ingredients/<ingredient_id>', methods=['DELETE'])
-def delete_ingredient(ingredient_id):
-    ingredient = IngredientsModel.query.get(ingredient_id)
-
-    if ingredient is None:
-        return {"message": "An ingredient with that ID does not exist"}, 404
-
-    ingredient.delete_from_db()
-    return {"message": "Ingredient deleted"}, 200
-
-
-
-
 
 
 
