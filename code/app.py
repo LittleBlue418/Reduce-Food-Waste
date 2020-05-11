@@ -107,9 +107,19 @@ def edit_ingredient(ingredient_id):
 
     return ingredient.json()
 
-@app.route('/ingredients/<ingredient>', methods=['DELETE'])
-def delete_ingredient(ingredient):
-    return "Delete an ingredient"
+@app.route('/ingredients/<ingredient_id>', methods=['DELETE'])
+def delete_ingredient(ingredient_id):
+    ingredient = IngredientsModel.query.get(ingredient_id)
+
+    if ingredient is None:
+        return {"message": "An ingredient with that ID does not exist"}, 404
+
+    ingredient.delete_from_db()
+    return {"message": "Ingredient deleted"}, 200
+
+
+
+
 
 
 
