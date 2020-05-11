@@ -78,9 +78,34 @@ def add_ingredient():
 
 
 
-@app.route('/ingredients/<ingredient>', methods=['PUT'])
-def edit_ingredient(ingredient):
-    return "Edit an ingredient"
+@app.route('/ingredients/<ingredient_id>', methods=['PUT'])
+def edit_ingredient(ingredient_id):
+
+    parser = reqparse.RequestParser()
+    parser.add_argument('icon',
+        type=str,
+        required=True,
+        help="This field cannot be left blank!"
+    )
+    parser.add_argument('name',
+        type=str,
+        required=True,
+        help="This field cannot be left blank!"
+    )
+
+    request_data = parser.parse_args()
+
+    ingredient = IngredientsModel.query.get(ingredient_id)
+
+    if ingredient is None:
+        return {"message": "An ingredient with that ID does not exist"}, 404
+
+    ingredient.name = request_data['name']
+    ingredient.icon = request_data['icon']
+
+    ingredient.save_to_db()
+
+    return ingredient.json()
 
 @app.route('/ingredients/<ingredient>', methods=['DELETE'])
 def delete_ingredient(ingredient):
