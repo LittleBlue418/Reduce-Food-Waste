@@ -5,7 +5,7 @@ from flask_restful import reqparse, Api
 
 from db import db
 from resources.ingredients import Ingredient, IngredientsCollection
-from models.tags import TagsModel
+from resources.tags import Tag, TagCollection
 from models.users import Users
 
 
@@ -17,6 +17,8 @@ api = Api(app)
 
 api.add_resource(IngredientsCollection, '/ingredients')
 api.add_resource(Ingredient, '/ingredients/<ingredient_id>')
+api.add_resource(TagCollection , '/tags')
+api.add_resource(Tag, '/tags/<tag_id>')
 
 # RECIPIES END POINTS
 
@@ -39,97 +41,6 @@ def edit_existing_recipe(recipe):
 @app.route('/recipes/<recipe>', methods=['DELETE'])
 def delete_recipe(recipe):
     return "Delete specified recipe"
-
-
-
-# TAGS END POINTS
-
-@app.route('/tags', methods=['GET'])
-def list_tags():
-    tag_list = [tag.json() for tag in TagsModel.query.all()]
-    return {
-        'tags': tag_list
-    }
-
-
-@app.route('/tags', methods=['POST'])
-def add_tag():
-    parser = reqparse.RequestParser()
-    parser.add_argument('icon',
-                        type=str,
-                        required=True,
-                        help="This field cannot be left blank!"
-                        )
-    parser.add_argument('name',
-                        type=str,
-                        required=True,
-                        help="This field cannot be left blank!"
-                        )
-
-    request_data = parser.parse_args()
-
-    if TagsModel.find_by_name(request_data['name']):
-        return {'message': "A tag with name '{}' already exists".format(request_data['name'])}, 400
-
-    new_tag = TagsModel(**request_data)
-
-    try:
-        new_tag.save_to_db()
-    except:
-        return {"message": "An error occured"}, 500
-
-    return new_tag.json()
-
-
-@app.route('/tags/<tag_id>', methods=['GET'])
-def get_tag(tag_id):
-    tag = TagsModel.query.get(tag_id)
-
-    if tag is None:
-        return {"message": "A tag with that ID does not exist"}, 404
-
-    return tag.json()
-
-
-@app.route('/tags/<tag_id>', methods=['PUT'])
-def edit_tag(tag_id):
-    parser = reqparse.RequestParser()
-    parser.add_argument('icon',
-                        type=str,
-                        required=True,
-                        help="This field cannot be left blank!"
-                        )
-    parser.add_argument('name',
-                        type=str,
-                        required=True,
-                        help="This field cannot be left blank!"
-                        )
-
-    request_data = parser.parse_args()
-
-    tag = TagsModel.query.get(tag_id)
-
-    if tag is None:
-        return {"message": "A tag with that ID does not exist"}, 404
-
-    tag.name = request_data['name']
-    tag.icon = request_data['icon']
-
-    tag.save_to_db()
-
-    return tag.json()
-
-
-@app.route('/tags/<tag_id>', methods=['DELETE'])
-def delete_tag(tag_id):
-    tag = TagsModel.query.get(tag_id)
-
-    if tag is None:
-        return {"message": "A tag with that ID does not exist"}, 404
-
-    tag.delete_from_db()
-    return {"message": "Tag deleted"}, 200
-
 
 
 
