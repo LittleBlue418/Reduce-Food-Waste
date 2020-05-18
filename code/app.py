@@ -5,7 +5,6 @@ from flask_restful import reqparse, Api
 
 from db import db
 from resources.ingredients import Ingredient, IngredientsCollection
-from resources.tags import Tag, TagCollection
 from resources.users import User, UserCollection
 
 
@@ -18,8 +17,6 @@ api = Api(app)
 
 api.add_resource(IngredientsCollection, '/ingredients')
 api.add_resource(Ingredient, '/ingredients/<ingredient_id>')
-api.add_resource(TagCollection, '/tags')
-api.add_resource(Tag, '/tags/<tag_id>')
 api.add_resource(UserCollection, '/users')
 api.add_resource(User, '/users/<user_id>')
 
