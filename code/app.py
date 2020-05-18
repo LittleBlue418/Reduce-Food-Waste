@@ -1,18 +1,24 @@
 import os
 
+from dotenv import load_dotenv
 from flask import Flask
 from flask_restful import reqparse, Api
+from flask_pymongo import PyMongo
 
-from db import db
 from resources.ingredients import Ingredient, IngredientsCollection
 from resources.users import User, UserCollection
 
+load_dotenv()
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
-    'DATABASE_URL', 'sqlite:///data.db')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+password = os.environ.get("MONGODB_PASSWORD")
+
+app.config["MONGO_DBNAME"] = 'food-waste-database'
+app.config["MONGO_URI"] = 'mongodb+srv://root:{}@food-waste-cluster-1n8bd.mongodb.net/food-waste-database?retryWrites=true&w=majority'.format(
+    password)
+
+mongo = PyMongo(app)
 api = Api(app)
 
 api.add_resource(IngredientsCollection, '/ingredients')
@@ -79,12 +85,10 @@ def delete_user_favorite(favorite):
     return "User favorite deleted"
 
 
-db.init_app(app)
 
-
-@app.before_first_request
-def create_tables():
-    db.create_all()
-
-
-app.run(port=5000)
+if __name__ == '__main__':
+    app.run(
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", 5000)),
+        debug=True
+    )
