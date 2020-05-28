@@ -40,7 +40,7 @@ class Ingredient(Resource):
 
 
     def get(self, ingredient_id):
-        ingredient = mongo.db.ingredients.find_one({"_id": ObjectId(ingredient_id)})
+        ingredient = IngredientsModel.find_by_id(ingredient_id)
 
         if ingredient is None:
              return {"message": "An ingredient with that ID does not exist"}, 404
@@ -51,7 +51,7 @@ class Ingredient(Resource):
     def put(self, ingredient_id):
         request_data = Ingredient.parser.parse_args()
 
-        if mongo.db.ingredients.find_one({"_id": ObjectId(ingredient_id)}):
+        if IngredientsModel.find_by_id(ingredient_id):
             mongo.db.ingredients.update({"_id": ObjectId(ingredient_id)},
                 {
                     'name': request_data['name'],
@@ -67,9 +67,8 @@ class Ingredient(Resource):
             return {"message": "An ingredient with that ID does not exist"}, 404
 
 
-
     def delete(self, ingredient_id):
-        ingredient = mongo.db.ingredients.find_one({"_id": ObjectId(ingredient_id)})
+        ingredient = IngredientsModel.find_by_id(ingredient_id)
 
         if ingredient is None:
             return {"message": "An ingredient with that ID does not exist"}, 404
@@ -81,8 +80,6 @@ class Ingredient(Resource):
 
 
 class IngredientsCollection(Resource):
-
-
     def get(self):
         ingredients = [
             IngredientsModel.return_as_object(ingredient)
@@ -95,6 +92,7 @@ class IngredientsCollection(Resource):
             ]
         }
 
+
     def post(self):
         request_data = Ingredient.parser.parse_args()
 
@@ -106,4 +104,3 @@ class IngredientsCollection(Resource):
             return IngredientsModel.return_as_object(request_data)
         except:
             return {"message": "An error occurred"}, 500
-
