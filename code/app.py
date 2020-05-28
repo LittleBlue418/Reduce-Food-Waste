@@ -3,8 +3,8 @@ import os
 from dotenv import load_dotenv
 from flask import Flask
 from flask_restful import reqparse, Api
-from flask_pymongo import PyMongo
 
+from models import mongo
 from resources.ingredients import Ingredient, IngredientsCollection
 from resources.users import User, UserCollection
 
@@ -18,7 +18,7 @@ app.config["MONGO_DBNAME"] = 'food-waste-database'
 app.config["MONGO_URI"] = 'mongodb+srv://root:{}@food-waste-cluster-1n8bd.mongodb.net/food-waste-database?retryWrites=true&w=majority'.format(
     password)
 
-mongo = PyMongo(app)
+mongo.init_app(app)
 api = Api(app)
 
 api.add_resource(IngredientsCollection, '/ingredients')
