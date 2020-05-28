@@ -1,6 +1,7 @@
 from flask_restful import Resource, reqparse
 
 from models import mongo
+from pymongo.collection import ObjectId
 from models.ingredients import IngredientsModel
 
 
@@ -38,14 +39,14 @@ class Ingredient(Resource):
                         )
 
 
-
     def get(self, ingredient_id):
-        ingredient = IngredientsModel.query.get(ingredient_id)
+        ingredient = mongo.db.ingredients.find_one({"_id": ObjectId(ingredient_id)})
 
         if ingredient is None:
-            return {"message": "An ingredient with that ID does not exist"}, 404
+             return {"message": "An ingredient with that ID does not exist"}, 404
 
-        return ingredient.json()
+        return IngredientsModel.return_as_object(ingredient)
+
 
     def put(self, ingredient_id):
         request_data = Ingredient.parser.parse_args()
