@@ -19,7 +19,7 @@ class IngredientsModel(db.Model):
             'icon': self.icon,
         }
 
-    def return_object_id(obj):
+    def return_as_object(obj):
         return {
             key: str(value) if key == '_id' else value
             for key, value in obj.items()

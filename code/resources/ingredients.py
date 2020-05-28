@@ -78,7 +78,7 @@ class IngredientsCollection(Resource):
 
     def get(self):
         ingredients = [
-            IngredientsModel.return_object_id(ingredient)
+            IngredientsModel.return_as_object(ingredient)
             for ingredient in mongo.db.ingredients.find()
         ]
         print(ingredients)
@@ -96,7 +96,7 @@ class IngredientsCollection(Resource):
 
         try:
             mongo.db.ingredients.insert_one(request_data)
-            return IngredientsModel.return_object_id(request_data)
+            return IngredientsModel.return_as_object(request_data)
         except:
             return {"message": "An error occurred"}, 500
 
