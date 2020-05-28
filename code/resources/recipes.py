@@ -42,30 +42,11 @@ class RecipeCollection(Resource):
 
     def post(self):
         request_data = request.json
-        ingredient_info = request_data['ingredients']
-        allergies = {
-            "vegan": True,
-            "vegetarian": True,
-            "gluten_free": True,
-            "nut_free": True,
-            "egg_free": True
-        }
 
-        # itterate through the ingedients & check for allergies
+        if RecipesModel.find_by_name(request_data['name']):
+           return {'message': "A recipe with name '{}' already exists".format(request_data['name'])}, 400
 
-        for ingredient in ingredient_info:
-            if not RecipesModel.check_vegan(ingredient['ingredient']):
-                allergies["vegan"] = False
-            if not RecipesModel.check_vegetarian(ingredient['ingredient']):
-                allergies["vegetarian"] = False
-            if not RecipesModel.check_gluten_free(ingredient['ingredient']):
-                allergies["gluten_free"] = False
-            if not RecipesModel.check_nut_free(ingredient['ingredient']):
-                allergies["nut_free"] = False
-            if not RecipesModel.check_egg_free(ingredient['ingredient']):
-                allergies["egg_free"] = False
-
-        request_data['allergies'] = allergies
+        request_data['allergies'] = RecipesModel.get_allergy_information(request_data)
 
         try:
             mongo.db.recipes.insert_one(request_data)
@@ -73,10 +54,5 @@ class RecipeCollection(Resource):
         except:
             return {"message": "An error occurred"}, 500
 
-
-        if RecipesModel.find_by_name(request_data['name']):
-            return {'message': "A recipe with name '{}' already exists".format(request_data['name'])}, 400
-        else:
-            return 'x'
 
 
