@@ -73,12 +73,13 @@ class Ingredient(Resource):
         return ingredient.json()
 
     def delete(self, ingredient_id):
-        ingredient = IngredientsModel.query.get(ingredient_id)
+        ingredient = mongo.db.ingredients.find_one({"_id": ObjectId(ingredient_id)})
 
         if ingredient is None:
             return {"message": "An ingredient with that ID does not exist"}, 404
 
-        ingredient.delete_from_db()
+        mongo.db.ingredients.remove({"_id": ObjectId(ingredient_id)})
+
         return {"message": "Ingredient deleted"}, 200
 
 
