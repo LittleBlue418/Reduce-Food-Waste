@@ -51,13 +51,22 @@ class Ingredient(Resource):
     def put(self, ingredient_id):
         request_data = Ingredient.parser.parse_args()
 
-        ingredient = IngredientsModel.query.get(ingredient_id)
-
-        if ingredient is None:
+        if mongo.db.ingredients.find_one({"_id": ObjectId(ingredient_id)}):
+            mongo.db.ingredients.update({"_id": ObjectId(ingredient_id)},
+                {
+                    'name': request_data['name'],
+                    'vegan': request_data['vegan'],
+                    'vegetarian': request_data['vegetarian'],
+                    'gluten_free': request_data['gluten_free'],
+                    'nut_free': request_data['nut_free'],
+                    'egg_free': request_data['egg_free'],
+                }
+            )
+            return IngredientsModel.return_as_object(request_data)
+        else:
             return {"message": "An ingredient with that ID does not exist"}, 404
 
-        ingredient.name = request_data['name']
-        ingredient.icon = request_data['icon']
+
 
         ingredient.save_to_db()
 
