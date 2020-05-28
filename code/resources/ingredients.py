@@ -68,10 +68,6 @@ class Ingredient(Resource):
 
 
 
-        ingredient.save_to_db()
-
-        return ingredient.json()
-
     def delete(self, ingredient_id):
         ingredient = mongo.db.ingredients.find_one({"_id": ObjectId(ingredient_id)})
 
