@@ -56,18 +56,14 @@ class IngredientsCollection(Resource):
 
 
     def get(self):
-        #ingredients = [ingredient.json() for ingredient in IngredientsModel.query.all()]
-        #return {
-        #    'ingredients': ingredients,
-        #}
         ingredients = [
             IngredientsModel.return_object_id(ingredient)
             for ingredient in mongo.db.ingredients.find()
         ]
         print(ingredients)
         return {
-            'message': [
-                'message'
+            'ingredients': [
+                ingredients
             ]
         }
 
