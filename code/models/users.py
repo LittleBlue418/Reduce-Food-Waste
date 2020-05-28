@@ -21,7 +21,7 @@ class UserModel(db.Model):
 
     @classmethod
     def find_by_name(cls, name):
-        return cls.query.filter_by(name=name).first()
+        return mongo.db.users.find_one({"name": name})
 
     def return_as_object(obj):
         return {

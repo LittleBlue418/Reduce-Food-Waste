@@ -67,12 +67,11 @@ class UserCollection(Resource):
         if UserModel.find_by_name(request_data['name']):
             return {'message': "A user with name '{}' already exists".format(request_data['name'])}, 400
 
-        new_user = UserModel(**request_data)
-
         try:
-            new_user.save_to_db()
+            mongo.db.users.insert_one(request_data)
+            return UserModel.return_as_object(request_data)
         except:
             return {"message": "An error occurred"}, 500
 
-        return new_user.json()
+
 
