@@ -7,6 +7,7 @@ from flask_restful import reqparse, Api
 from models import mongo
 from resources.ingredients import Ingredient, IngredientsCollection
 from resources.users import User, UserCollection
+from resources.recipes import Recipe, RecipeCollection
 
 load_dotenv()
 
@@ -25,33 +26,13 @@ api.add_resource(IngredientsCollection, '/ingredients')
 api.add_resource(Ingredient, '/ingredients/<ingredient_id>')
 api.add_resource(UserCollection, '/users')
 api.add_resource(User, '/users/<user_id>')
-
-# RECIPIES END POINTS
-
-
-@app.route('/recipes', methods=['GET'])
-def list_all_recipes():
-    return "All recipes"
+api.add_resource(RecipeCollection, '/recipes')
 
 
-@app.route('/recipes/<recipe>', methods=['GET'])
-def fetch_recipe(recipe):
-    return "Returns requested recipe"
 
 
-@app.route('/recipes', methods=['POST'])
-def add_new_recipe():
-    return "Add new recipe"
 
 
-@app.route('/recipes/<recipe>', methods=['PUT'])
-def edit_existing_recipe(recipe):
-    return "Edit specified recipe"
-
-
-@app.route('/recipes/<recipe>', methods=['DELETE'])
-def delete_recipe(recipe):
-    return "Delete specified recipe"
 
 
 
