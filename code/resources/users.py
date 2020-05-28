@@ -41,12 +41,13 @@ class User(Resource):
 
 
     def delete(self, user_id):
-        user = UserModel.query.get(user_id)
+        user = UserModel.find_by_id(user_id)
 
         if user is None:
             return {"message": "A user with that ID does not exist"}, 404
 
-        user.delete_from_db()
+        mongo.db.users.remove({"_id": ObjectId(user_id)})
+
         return {"message": "User deleted"}, 200
 
 
