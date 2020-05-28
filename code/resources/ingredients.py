@@ -6,16 +6,37 @@ from models.ingredients import IngredientsModel
 
 class Ingredient(Resource):
     parser = reqparse.RequestParser()
-    parser.add_argument('icon',
-                        type=str,
-                        required=True,
-                        help="This field cannot be left blank!"
-                        )
     parser.add_argument('name',
                         type=str,
                         required=True,
-                        help="This field cannot be left blank!"
+                        help="Ingredient must have a name"
                         )
+    parser.add_argument('vegan',
+                        type=bool,
+                        required=True,
+                        help="You must specify whether the ingredient is vegan"
+                        )
+    parser.add_argument('vegetarian',
+                        type=bool,
+                        required=True,
+                        help="You must specify whether the ingredient is vegetarian"
+                        )
+    parser.add_argument('gluten_free',
+                        type=bool,
+                        required=True,
+                        help="You must specify whether the ingredient is gluten_free"
+                        )
+    parser.add_argument('nut_free',
+                        type=bool,
+                        required=True,
+                        help="You must specify whether the ingredient is nut_free"
+                        )
+    parser.add_argument('egg_free',
+                        type=bool,
+                        required=True,
+                        help="You must specify whether the ingredient is egg_free"
+                        )
+
 
 
     def get(self, ingredient_id):
@@ -71,13 +92,11 @@ class IngredientsCollection(Resource):
         request_data = Ingredient.parser.parse_args()
 
         if IngredientsModel.find_by_name(request_data['name']):
-            return {'message': "An item with name '{}' already exists".format(request_data['name'])}, 400
-
-        new_ingredient = IngredientsModel(**request_data)
+             return {'message': "An item with name '{}' already exists".format(request_data['name'])}, 400
 
         try:
-                new_ingredient.save_to_db()
+            mongo.db.ingredients.insert_one(request_data)
+            return IngredientsModel.return_object_id(request_data)
         except:
-                return {"message": "An error occurred"}, 500
+            return {"message": "An error occurred"}, 500
 
-        return new_ingredient.json()

@@ -28,7 +28,8 @@ class IngredientsModel(db.Model):
 
     @classmethod
     def find_by_name(cls, name):
-        return cls.query.filter_by(name=name).first()
+        print(name)
+        return mongo.db.ingredients.find_one({"name": name}) #.query.filter_by(name=name).first()
 
 
     def save_to_db(self):
