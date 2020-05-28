@@ -1,4 +1,3 @@
-from db import db
 from models import mongo
 from pymongo.collection import ObjectId
 

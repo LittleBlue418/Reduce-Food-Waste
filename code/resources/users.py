@@ -17,6 +17,7 @@ class User(Resource):
                         help="This field cannot be left blank!"
                         )
 
+
     def get(self, user_id):
         user = UserModel.find_by_id(user_id)
 
@@ -24,6 +25,7 @@ class User(Resource):
             return {"message": "A user with that ID does not exist"}, 404
 
         return UserModel.return_as_object(user)
+
 
     def put(self, user_id):
         request_data = User.parser.parse_args()
@@ -62,6 +64,7 @@ class UserCollection(Resource):
         return {
             'users': users
         }
+
 
     def post(self):
         request_data = User.parser.parse_args()
