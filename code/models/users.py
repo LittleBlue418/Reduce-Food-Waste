@@ -1,4 +1,5 @@
 from db import db
+from models import mongo
 
 class UserModel(db.Model):
     __tablename__ = 'users'
@@ -22,6 +23,11 @@ class UserModel(db.Model):
     def find_by_name(cls, name):
         return cls.query.filter_by(name=name).first()
 
+    def return_as_object(obj):
+        return {
+            key: str(value) if key == '_id' else value
+            for key, value in obj.items()
+        }
 
     def save_to_db(self):
         db.session.add(self)

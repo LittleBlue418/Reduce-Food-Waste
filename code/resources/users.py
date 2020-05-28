@@ -1,15 +1,16 @@
 from flask_restful import Resource, reqparse
 
+from models import mongo
 from models.users import UserModel
 
 class User(Resource):
     parser = reqparse.RequestParser()
-    parser.add_argument('password',
+    parser.add_argument('name',
                         type=str,
                         required=True,
                         help="This field cannot be left blank!"
                         )
-    parser.add_argument('name',
+    parser.add_argument('password',
                         type=str,
                         required=True,
                         help="This field cannot be left blank!"
@@ -51,10 +52,13 @@ class User(Resource):
 
 class UserCollection(Resource):
     def get(self):
-        users = [u.json() for u in UserModel.query.all()]
+        users = [
+            UserModel.return_as_object(user)
+            for user in mongo.db.users.find()
+        ]
 
         return {
-            'users': users,
+            'users': users
         }
 
     def post(self):
