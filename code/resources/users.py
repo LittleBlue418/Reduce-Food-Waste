@@ -17,12 +17,12 @@ class User(Resource):
                         )
 
     def get(self, user_id):
-        user = UserModel.query.get(user_id)
+        user = UserModel.find_by_id(user_id)
 
         if user is None:
             return {"message": "A user with that ID does not exist"}, 404
 
-        return user.json()
+        return UserModel.return_as_object(user)
 
     def put(self, user_id):
         request_data = User.parser.parse_args()
