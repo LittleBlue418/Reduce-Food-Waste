@@ -85,7 +85,7 @@ class IngredientsCollection(Resource):
             IngredientsModel.return_as_object(ingredient)
             for ingredient in mongo.db.ingredients.find()
         ]
-        print(ingredients)
+
         return {
             'ingredients': [
                 ingredients
