@@ -45,14 +45,13 @@ class Recipe(Resource):
 
 
         try:
-            request_data = RecipesModel.build_recipe_from_request(request_data)
+            updated_recipe = RecipesModel.build_recipe_from_request(request_data)
+            mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, updated_recipe)
+            updated_recipe['_id'] = recipe_id
+            return RecipesModel.return_as_object(updated_recipe)
+
         except ValidationError as error:
             return {"message": error.message}, 400
-
-
-        try:
-            mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, request_data)
-            return RecipesModel.return_as_object(request_data)
         except:
             return {"message": "An error occurred saving to database"}, 500
 
