@@ -33,36 +33,46 @@ class RecipesModel():
         }
 
         # Name
-        if not request_data['name']:
+        built_recipy['name'] = request_data.get('name', '').strip()
+
+        if len(built_recipy['name']) < 1:
             raise ValidationError('Recipe must have a name!')
-        built_recipy['name'] = request_data['name']
+        if len(built_recipy['name']) > 60:
+            raise ValidationError('Recipe name cannot contain more than sixty characters!')
 
 
         # Description
-        if not request_data['description']:
+        built_recipy['description'] = request_data['description'].strip()
+
+        if len(built_recipy['description']) < 1:
             raise ValidationError('Recipe must have a description!')
-        if  len(request_data['description']) > 60:
+        if len(built_recipy['description']) > 60:
             raise ValidationError('Description should be less than 60 charectors!')
-        built_recipy['description'] = request_data['description']
 
 
         # Image
-        if not request_data['image']:
+        built_recipy['image'] = request_data['image'].strip()
+
+        if len(built_recipy['image']) < 2:
             raise ValidationError('Recipe must have an image!')
-        built_recipy['image'] = request_data['image']
 
 
         # Method
+        built_recipy['method'] = request_data['method']
         if  len(request_data['method']) < 2:
             raise ValidationError('Method needs at least two steps!')
-        built_recipy['method'] = request_data['method']
+        for step in built_recipy['method']:
+            step.strip()
+            if len(step) < 1:
+                raise ValidationError('Each step needs at least one character!')
 
 
         # Ingredients
-        if  len(request_data['ingredients']) < 2:
+        built_recipy['ingredients'] = request_data['ingredients']
+        if  len(built_recipy['ingredients']) < 2:
             raise ValidationError('All recipes need at least two ingredients!')
 
-        ingredient_list = request_data['ingredients']
+        ingredient_list = built_recipy['ingredients']
         for ingredient_object in ingredient_list:
             ingredient_id = ingredient_object['ingredient']['_id']
             if not ingredient_id:
@@ -88,7 +98,6 @@ class RecipesModel():
                 if not ingredient_from_db[key]:
                     allergies[key] = False
 
-        built_recipy['ingredients'] = request_data['ingredients']
         built_recipy['allergies'] = allergies
 
         return built_recipy
