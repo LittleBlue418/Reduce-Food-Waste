@@ -27,6 +27,7 @@ api.add_resource(Ingredient, '/ingredients/<ingredient_id>')
 api.add_resource(UserCollection, '/users')
 api.add_resource(User, '/users/<user_id>')
 api.add_resource(RecipeCollection, '/recipes')
+api.add_resource(Recipe, '/recipes/<recipe_id>')
 
 
 

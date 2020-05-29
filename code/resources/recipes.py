@@ -27,6 +27,13 @@ class Recipe(Resource):
                         required=True,
                         help="Recipe must have ingredients")
 
+    def get(self, recipe_id):
+        recipe = RecipesModel.find_recipe_by_id(recipe_id)
+
+        if recipe is None:
+             return {"message": "A recipe with that ID does not exist"}, 404
+
+        return RecipesModel.return_as_object(recipe)
 
 
 class RecipeCollection(Resource):
