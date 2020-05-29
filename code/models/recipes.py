@@ -1,7 +1,7 @@
 from models import mongo, ValidationError
 
 from pymongo.collection import ObjectId
-
+from resources.ingredients import IngredientsModel
 class RecipesModel():
     def return_as_object(obj):
         return {
@@ -14,12 +14,9 @@ class RecipesModel():
         return mongo.db.recipes.find_one({"name": name})
 
     @classmethod
-    def find_recipe_by_id(cls, _id):
+    def find_by_id(cls, _id):
         return mongo.db.recipes.find_one({"_id": ObjectId(_id)})
 
-    @classmethod
-    def find_ingredient_by_id(cls, _id):
-        return mongo.db.ingredients.find_one({"_id": ObjectId(_id)})
 
     @classmethod
     def build_recipe_from_request(cls, request_data):
@@ -78,7 +75,7 @@ class RecipesModel():
             if not ingredient_id:
                 raise ValidationError('Ingredient needs and ID!')
 
-            ingredient_from_db = cls.find_ingredient_by_id(ingredient_id)
+            ingredient_from_db = IngredientsModel.find_by_id(ingredient_id)
             if not ingredient_from_db:
                 raise ValidationError('Ingredient not found in database')
 

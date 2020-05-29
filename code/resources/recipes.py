@@ -29,7 +29,7 @@ class Recipe(Resource):
                         help="Recipe must have ingredients")
 
     def get(self, recipe_id):
-        recipe = RecipesModel.find_recipe_by_id(recipe_id)
+        recipe = RecipesModel.find_by_id(recipe_id)
 
         if recipe is None:
              return {"message": "A recipe with that ID does not exist"}, 404
@@ -40,7 +40,7 @@ class Recipe(Resource):
     def put(self, recipe_id):
         request_data = request.json
 
-        if not RecipesModel.find_recipe_by_id(recipe_id):
+        if not RecipesModel.find_by_id(recipe_id):
             return {"message": "A Recipe with that ID does not exist"}
 
 
@@ -58,7 +58,7 @@ class Recipe(Resource):
 
 
     def delete(self, recipe_id):
-        recipe = RecipesModel.find_recipe_by_id(recipe_id)
+        recipe = RecipesModel.find_by_id(recipe_id)
 
         if not recipe:
             return {"message": "A recipe with this name does not exist"}
