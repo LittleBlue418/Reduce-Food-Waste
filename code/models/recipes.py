@@ -21,6 +21,18 @@ class RecipesModel():
         return mongo.db.ingredients.find_one({"_id": ObjectId(_id)})
 
     @classmethod
+    def build_recipe_from_request(cls, request_data):
+        ingredient_list = request_data['ingredients']
+        for ingredient_object in ingredient_list:
+            ingredient_id = ingredient_object['ingredient']['_id']
+            ingredient_from_db = cls.find_ingredient_by_id(ingredient_id)
+            ingredient_object['ingredient']['name'] = ingredient_from_db['name']
+
+        request_data['allergies'] = RecipesModel.get_allergy_information(request_data)
+
+        return request_data
+
+    @classmethod
     def get_allergy_information(cls, request_data):
         allergies = {
             "vegan": True,
