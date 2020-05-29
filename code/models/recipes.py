@@ -1,4 +1,5 @@
-from models import mongo
+from models import mongo, ValidationError
+
 from pymongo.collection import ObjectId
 
 class RecipesModel():
@@ -22,37 +23,76 @@ class RecipesModel():
 
     @classmethod
     def build_recipe_from_request(cls, request_data):
-        ingredient_list = request_data['ingredients']
-        for ingredient_object in ingredient_list:
-            ingredient_id = ingredient_object['ingredient']['_id']
-            ingredient_from_db = cls.find_ingredient_by_id(ingredient_id)
-            ingredient_object['ingredient']['name'] = ingredient_from_db['name']
-
-        request_data['allergies'] = RecipesModel.get_allergy_information(request_data)
-
-        return request_data
-
-    @classmethod
-    def get_allergy_information(cls, request_data):
-        allergies = {
-            "vegan": True,
-            "vegetarian": True,
-            "gluten_free": True,
-            "nut_free": True,
-            "egg_free": True
+        built_recipy = {
+            'name': 'name',
+            'description': 'description',
+            'image': 'image',
+            'method': [],
+            'ingredients': [],
+            'allergies': {}
         }
 
-        ingredient_list = request_data['ingredients']
+        # Name
+        if not request_data['name']:
+            raise ValidationError('Recipe must have a name!')
+        built_recipy['name'] = request_data['name']
 
+
+        # Description
+        if not request_data['description']:
+            raise ValidationError('Recipe must have a description!')
+        if  len(request_data['description']) > 60:
+            raise ValidationError('Description should be less than 60 charectors!')
+        built_recipy['description'] = request_data['description']
+
+
+        # Image
+        if not request_data['image']:
+            raise ValidationError('Recipe must have an image!')
+        built_recipy['image'] = request_data['image']
+
+
+        # Method
+        if  len(request_data['method']) < 2:
+            raise ValidationError('Method needs at least two steps!')
+        built_recipy['method'] = request_data['method']
+
+
+        # Ingredients
+        if  len(request_data['ingredients']) < 2:
+            raise ValidationError('All recipes need at least two ingredients!')
+
+        ingredient_list = request_data['ingredients']
         for ingredient_object in ingredient_list:
             ingredient_id = ingredient_object['ingredient']['_id']
+            if not ingredient_id:
+                raise ValidationError('Ingredient needs and ID!')
+
             ingredient_from_db = cls.find_ingredient_by_id(ingredient_id)
+            if not ingredient_from_db:
+                raise ValidationError('Ingredient not found in database')
+
+            ingredient_object['ingredient']['name'] = ingredient_from_db['name']
+
+
+            # Allergies
+            allergies = {
+                "vegan": True,
+                "vegetarian": True,
+                "gluten_free": True,
+                "nut_free": True,
+                "egg_free": True
+            }
 
             for key in allergies.keys():
                 if not ingredient_from_db[key]:
                     allergies[key] = False
 
+        built_recipy['ingredients'] = request_data['ingredients']
+        built_recipy['allergies'] = allergies
 
-        return allergies
+        return built_recipy
+
+
 
 

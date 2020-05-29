@@ -1,7 +1,7 @@
 from flask_restful import Resource, reqparse
 from flask import request
 
-from models import mongo
+from models import mongo, ValidationError
 from models.recipes import RecipesModel
 
 class Recipe(Resource):
@@ -36,6 +36,23 @@ class Recipe(Resource):
         return RecipesModel.return_as_object(recipe)
 
 
+    # def put(self, recipe_id):
+    #     request_data = request.json
+
+
+    #     if RecipesModel.find_recipe_by_id(recipe_id):
+    #         modified_recipe = {
+    #             'name': request_data['name'],
+    #             'description': request_data['description'],
+    #             'image': request_data['image'],
+    #         }
+
+    #     print(request_data['ingredients'])
+
+
+
+
+
 class RecipeCollection(Resource):
     def get(self):
         recipes = [
@@ -53,7 +70,10 @@ class RecipeCollection(Resource):
         if RecipesModel.find_by_name(request_data['name']):
            return {'message': "A recipe with name '{}' already exists".format(request_data['name'])}, 400
 
-        request_data['allergies'] = RecipesModel.get_allergy_information(request_data)
+        try:
+            request_data = RecipesModel.build_recipe_from_request(request_data)
+        except ValidationError as error:
+            return {"message": error.message}, 400
 
         try:
             mongo.db.recipes.insert_one(request_data)
