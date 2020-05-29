@@ -88,12 +88,13 @@ class RecipeCollection(Resource):
 
         try:
             request_data = RecipesModel.build_recipe_from_request(request_data)
+            result = mongo.db.recipes.insert_one(request_data)
+            request_data['_id'] = result.inserted_id
+
+            return RecipesModel.return_as_object(request_data)
+
         except ValidationError as error:
             return {"message": error.message}, 400
-
-        try:
-            mongo.db.recipes.insert_one(request_data)
-            return RecipesModel.return_as_object(request_data)
         except:
             return {"message": "An error occurred"}, 500
 
