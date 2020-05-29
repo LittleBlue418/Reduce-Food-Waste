@@ -57,6 +57,16 @@ class Recipe(Resource):
             return {"message": "An error occurred saving to database"}, 500
 
 
+    def delete(self, recipe_id):
+        recipe = RecipesModel.find_recipe_by_id(recipe_id)
+
+        if not recipe:
+            return {"message": "A recipe with this name does not exist"}
+
+        mongo.db.recipes.remove({"_id": ObjectId(recipe_id)})
+
+        return {"message": "Recipe deleted"}, 200
+
 
 
 
