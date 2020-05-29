@@ -3,6 +3,7 @@ from flask import request
 
 from models import mongo, ValidationError
 from models.recipes import RecipesModel
+from pymongo.collection import ObjectId
 
 class Recipe(Resource):
     parser = reqparse.RequestParser()
@@ -36,18 +37,24 @@ class Recipe(Resource):
         return RecipesModel.return_as_object(recipe)
 
 
-    # def put(self, recipe_id):
-    #     request_data = request.json
+    def put(self, recipe_id):
+        request_data = request.json
+
+        if not RecipesModel.find_recipe_by_id(recipe_id):
+            return {"message": "A Recipe with that ID does not exist"}
 
 
-    #     if RecipesModel.find_recipe_by_id(recipe_id):
-    #         modified_recipe = {
-    #             'name': request_data['name'],
-    #             'description': request_data['description'],
-    #             'image': request_data['image'],
-    #         }
+        try:
+            request_data = RecipesModel.build_recipe_from_request(request_data)
+        except ValidationError as error:
+            return {"message": error.message}, 400
 
-    #     print(request_data['ingredients'])
+
+        try:
+            mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, request_data)
+            return RecipesModel.return_as_object(request_data)
+        except:
+            return {"message": "An error occurred saving to database"}, 500
 
 
 
