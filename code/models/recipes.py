@@ -30,44 +30,17 @@ class RecipesModel():
             "egg_free": True
         }
 
-        ingredient_info = request_data['ingredients']
+        ingredient_list = request_data['ingredients']
 
-        for ingredient in ingredient_info:
-            if not cls.check_vegan(ingredient['ingredient']):
-                allergies["vegan"] = False
-            if not cls.check_vegetarian(ingredient['ingredient']):
-                allergies["vegetarian"] = False
-            if not cls.check_gluten_free(ingredient['ingredient']):
-                allergies["gluten_free"] = False
-            if not cls.check_nut_free(ingredient['ingredient']):
-                allergies["nut_free"] = False
-            if not cls.check_egg_free(ingredient['ingredient']):
-                allergies["egg_free"] = False
+        for ingredient_object in ingredient_list:
+            ingredient_id = ingredient_object['ingredient']['_id']
+            ingredient_from_db = cls.find_ingredient_by_id(ingredient_id)
+
+            for key in ['vegan', 'vegetarian', 'gluten_free', 'nut_free', 'egg_free']
+                if not ingredient_from_db[key]:
+                    allergies[key] = False
+
 
         return allergies
 
-    @classmethod
-    def check_vegan(cls, obj):
-        ingredient = cls.find_ingredient_by_id(obj['_id'])
-        return ingredient['vegan']
-
-    @classmethod
-    def check_vegetarian(cls, obj):
-        ingredient = cls.find_ingredient_by_id(obj['_id'])
-        return ingredient['vegetarian']
-
-    @classmethod
-    def check_gluten_free(cls, obj):
-        ingredient = cls.find_ingredient_by_id(obj['_id'])
-        return ingredient['gluten_free']
-
-    @classmethod
-    def check_nut_free(cls, obj):
-        ingredient = cls.find_ingredient_by_id(obj['_id'])
-        return ingredient['nut_free']
-
-    @classmethod
-    def check_egg_free(cls, obj):
-        ingredient = cls.find_ingredient_by_id(obj['_id'])
-        return ingredient['egg_free']
 
