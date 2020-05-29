@@ -36,7 +36,7 @@ class RecipesModel():
             ingredient_id = ingredient_object['ingredient']['_id']
             ingredient_from_db = cls.find_ingredient_by_id(ingredient_id)
 
-            for key in ['vegan', 'vegetarian', 'gluten_free', 'nut_free', 'egg_free']
+            for key in allergies.keys():
                 if not ingredient_from_db[key]:
                     allergies[key] = False
 
