@@ -5,10 +5,13 @@
     box-sizing: border-box;
     border-radius: 5px;
     font-size: 15px;
-    padding: 2px 4px;
-
 }
 
 .LoginButton:hover {
     background-color: rgb(10, 150, 10);
+}
+
+p {
+    padding: 3px 5px;
+    margin: 0;
 }

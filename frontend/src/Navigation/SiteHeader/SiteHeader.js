@@ -12,7 +12,7 @@ const SiteHeader = (props) => (
 
       <Banner />
 
-      <LoginButton>Log In</LoginButton>
+      <LoginButton />
 
   </header>
 );
