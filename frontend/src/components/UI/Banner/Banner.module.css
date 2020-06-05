@@ -1,0 +1,25 @@
+.Banner {
+    font-family: 'Gloria Hallelujah', cursive;
+    color: white;
+    font-size: 18px;
+    font-weight: 100;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: space-between;
+
+}
+
+@media (max-width: 499px) {
+    .BannerText {
+        display: none;
+    }
+}
+
+.Logo {
+    height: 40px;
+    margin-right: 10px;
+}

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import SiteHeader from '../components/SiteHeader/SiteHeader'
+import SiteHeader from '../Navigation/SiteHeader/SiteHeader'
 import RecipeCards from '../components/RecipeCards/RecipeCards'
+import Layout from '../Layout/Layout';
 
 
 class App extends Component {
@@ -16,7 +17,7 @@ class App extends Component {
   render() {
       return(
         <div className = "App" >
-          <SiteHeader />
+          <Layout />
           <h1>This app is running</h1>
           <RecipeCards />
         </div>
