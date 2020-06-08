@@ -50,7 +50,8 @@ class App extends Component {
 
             <Layout />
             <SearchPage
-              tipFunc={this.randomTip}/>
+              tipFunc={this.randomTip}
+              tags={this.tags}/>
 
           </AuthContext.Provider>
 

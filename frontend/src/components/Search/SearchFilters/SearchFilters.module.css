@@ -1,0 +1,20 @@
+.SearchFilters {
+    border: 2px solid lightgrey;
+    border-radius: 10px;
+    width: 80%;
+    margin: auto;
+    margin-top: 10px;
+
+}
+
+.SearchFilters form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 5px;
+}
+
+.SearchFilters form div {
+    padding: 2px 0;
+}
