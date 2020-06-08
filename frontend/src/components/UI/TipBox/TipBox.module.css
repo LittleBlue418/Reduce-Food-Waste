@@ -5,6 +5,10 @@
     margin: auto;
 }
 
+.message {
+    padding: 2px;
+}
+
 .TipBox img {
     height: 30px;
     margin-left: 5px;

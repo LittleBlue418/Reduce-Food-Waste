@@ -14,7 +14,7 @@ const TipBox = ({clicked, tipShown, tipFunc}) => {
         <img src={Chevron}/>
       </div>
       {tipShown ?
-        <div>
+        <div className={classes.message}>
           <p>{tipFunc().message}</p>
         </div> : null
       }
