@@ -1,0 +1,16 @@
+.TipBox {
+    border: 2px solid lightgrey;
+    border-radius: 10px;
+    width: 80%;
+    margin: auto;
+}
+
+.TipBox img {
+    height: 30px;
+    margin-left: 5px;
+}
+
+.TipHeader {
+    display: flex;
+    justify-content: center;
+}
