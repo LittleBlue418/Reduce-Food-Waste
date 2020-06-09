@@ -1,0 +1,79 @@
+.RecipeCard {
+    border: 2px solid lightgrey;
+    width: 80%;
+    height: 100px;
+    margin: auto;
+    margin-top: 10px;
+    padding: 3px;
+}
+
+.RecipeHead {
+    display: flex;
+    justify-content: space-between;
+    height: 30%;
+}
+
+.IconDiv {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.IconDiv div {
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 25px;
+    width: 25px
+}
+
+.RecipeBody {
+    display: flex;
+    height: 70%;
+}
+
+.RecipeImageDiv {
+    height: 100%;
+    width: 40%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.RecipeImageDiv img {
+    max-width: 100%;
+    max-height: 100%;
+
+}
+
+@media (min-width: 400px) {
+    .IconDiv div {
+        height: 30px;
+        width: 30px
+    }
+}
+
+@media (min-width: 750px) {
+    .RecipeCard {
+        width: 46%;
+    }
+}
+
+.vegan {
+    background-image: url(../../../assets/icons/vegan.png);
+}
+
+.vegetarian {
+    background-image: url(../../../assets/icons/vegetarian.png);
+}
+
+.gluten_free {
+    background-image: url(../../../assets/icons/gluten_free.png);
+}
+
+.nut_free {
+    background-image: url(../../../assets/icons/nut_free.png);
+}
+
+.egg_free {
+    background-image: url(../../../assets/icons/egg_free.png);
+}

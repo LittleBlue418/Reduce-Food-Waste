@@ -1,8 +1,40 @@
-import React from 'react'
+import React from 'react';
+import './RecipeCard.css';
 
-const RecipeCard = (props) => {
+import picture from '../../../assets/images/pLLXRlt.jpg';
+
+
+const RecipeCard = ({recipe}) => {
   return (
-    <h1>This is a recipe card</h1>
+    <div className="RecipeCard">
+
+      <div className="RecipeHead">
+        <p>{recipe.name}</p>
+        <div className="IconDiv">
+          {Object.entries(recipe.allergies).map(([key, value]) => {
+            if (value === true) {
+                return (
+                  <div key={recipe.id+key}
+                      className={key}
+                      alt={key}
+                  />
+                )
+            }
+          })}
+        </div>
+      </div>
+
+      <div className="RecipeBody">
+        <div className="RecipeImageDiv">
+          <img src={picture}></img>
+        </div>
+        <div>
+
+          <p>list of ingredients (chips)</p>
+        </div>
+      </div>
+    </div>
+
   )
 
 };

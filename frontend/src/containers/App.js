@@ -13,9 +13,9 @@ class App extends Component {
   }
 
   recipes = [
-    { id: 'sbv7a', name: 'test recipe 1', ingredients: ['sausages', 'carrots'] },
-    { id: 'sbv7a', name: 'test recipe 2', ingredients: ['sausages', 'carrots'] },
-    { id: 'sbv7a', name: 'test recipe 3', ingredients: ['sausages', 'carrots'] },
+    { id: 'sbv7a', name: 'Salad', ingredients: ['letuce', 'tomato'], allergies: {vegan: true, vegetarian: true, gluten_free: true, nut_free: true, egg_free: true} },
+    { id: 'sbv73', name: 'Omlet', ingredients: ['egg', 'milk'], allergies: {vegan: false, vegetarian: true, gluten_free: true, nut_free: true, egg_free: false}  },
+    { id: 'sbv74', name: 'tuna pasta', ingredients: ['tuna', 'pasta', 'mayonaise'], allergies: {vegan: false, vegetarian: false, gluten_free: true, nut_free: true, egg_free: false}  },
   ]
 
   tips = [
@@ -51,7 +51,9 @@ class App extends Component {
             <Layout />
             <SearchPage
               tipFunc={this.randomTip}
-              tags={this.tags}/>
+              tags={this.tags}
+              recipes={this.recipes}
+            />
 
           </AuthContext.Provider>
 

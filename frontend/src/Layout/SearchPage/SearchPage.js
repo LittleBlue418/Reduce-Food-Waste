@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TipBox from '../../components/UI/TipBox/TipBox';
 import Search from '../../components/Search/Search';
+import RecipeCards from '../../components/RecipeCards/RecipeCards';
 
 class SearchPage extends Component {
   state = {
@@ -29,7 +30,7 @@ class SearchPage extends Component {
 
 
   render() {
-    const {tipFunc} = this.props
+    const {tipFunc, recipes} = this.props
 
     return (
       <div>
@@ -41,6 +42,9 @@ class SearchPage extends Component {
         <Search
           searchParams={this.state.searchParams}
           addSearchParam={this.addSearchParam}
+        />
+        <RecipeCards
+          recipes={recipes}
         />
       </div>
     );
