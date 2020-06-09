@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
 import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 import AuthContext from '../context/AuthContext';
 import Layout from '../Layout/Layout';
 import SearchPage from '../Layout/SearchPage/SearchPage';
+import RecipePage from '../components/RecipePage/RecipePage';
 
 
 
@@ -41,7 +48,9 @@ class App extends Component {
 
   render() {
       return(
-        <div className = "App" >
+        <Router>
+
+          <div className = "App" >
           <AuthContext.Provider
             value={{
               authenticated: this.state.authenticated,
@@ -49,15 +58,31 @@ class App extends Component {
             }}>
 
             <Layout />
-            <SearchPage
-              tipFunc={this.randomTip}
-              tags={this.tags}
-              recipes={this.recipes}
-            />
+
+            <Switch>
+
+              <Route path="/recipe">
+                <RecipePage />
+              </Route>
+
+              <Route path="/">
+                <SearchPage
+                  tipFunc={this.randomTip}
+                  tags={this.tags}
+                  recipes={this.recipes}
+                />
+              </Route>
+
+
+
+            </Switch>
+
 
           </AuthContext.Provider>
 
-        </div>
+          </div>
+
+        </Router>
       );
   }
 
