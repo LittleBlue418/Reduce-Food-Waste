@@ -1,0 +1,28 @@
+.RecipePage {
+    border: 2px solid lightgrey;
+    width: 80%;
+    margin: auto;
+}
+
+.middleSection {
+    display: flex;
+    justify-content: space-between;
+}
+
+.PictureDiv {
+    height: 80%;
+    width: 40%;
+    display: flex;
+    justify-content: flex-end;
+    outline: 2px solid blue
+}
+
+.RecipePicture {
+    outline: 2px solid red;
+    background-image: url(../../assets/images/pLLXRlt.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    min-height: 100px;
+    width: 100%;
+    background-position: right;
+}

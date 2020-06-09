@@ -12,7 +12,6 @@ import picture from '../../../assets/images/pLLXRlt.jpg';
 
 const RecipeCard = ({recipe}) => {
   return (
-    <Router>
       <Link to="/recipe">
       <div className="RecipeCard">
 
@@ -43,7 +42,6 @@ const RecipeCard = ({recipe}) => {
         </div>
       </div>
       </Link>
-    </Router>
   )
 
 };

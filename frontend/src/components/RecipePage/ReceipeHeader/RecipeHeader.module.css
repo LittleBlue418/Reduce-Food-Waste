@@ -1,0 +1,25 @@
+.RecipeHeader {
+    width: 100%;
+    fill: red;
+    display: flex;
+}
+
+.StarDiv {
+    height: 10%;
+    width: 10%;
+}
+
+.StarDiv div {
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 30px;
+    width: 30px
+}
+
+.star {
+    background-image: url(../../../assets/icons/star-icon.png);
+}
+
+.empty_star {
+    background-image: url(../../../assets/icons/star-icon-empty.png);
+}
