@@ -7,6 +7,11 @@
     font-size: 15px;
 }
 
+.LoginButton a {
+    text-decoration: none;
+    color: white;
+}
+
 .LoginButton:hover {
     background-color: rgb(10, 150, 10);
 }

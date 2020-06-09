@@ -5,7 +5,15 @@
     margin: auto;
     margin-top: 10px;
     padding: 3px;
+    text-decoration: none;
+    color: black;
+
 }
+
+a:-webkit-any-link {
+     text-decoration: none;
+}
+
 
 .RecipeHead {
     display: flex;
