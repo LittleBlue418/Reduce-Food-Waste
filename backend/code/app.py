@@ -3,6 +3,7 @@ import os
 from dotenv import load_dotenv
 from flask import Flask
 from flask_restful import reqparse, Api
+from flask_cors import CORS
 
 from models import mongo
 from resources.ingredients import Ingredient, IngredientsCollection
@@ -12,6 +13,7 @@ from resources.recipes import Recipe, RecipeCollection
 load_dotenv()
 
 app = Flask(__name__)
+CORS(app)
 
 password = os.environ.get("MONGODB_PASSWORD")
 
@@ -22,12 +24,12 @@ app.config["MONGO_URI"] = 'mongodb+srv://root:{}@food-waste-cluster-1n8bd.mongod
 mongo.init_app(app)
 api = Api(app)
 
-api.add_resource(IngredientsCollection, '/ingredients')
-api.add_resource(Ingredient, '/ingredients/<ingredient_id>')
-api.add_resource(UserCollection, '/users')
-api.add_resource(User, '/users/<user_id>')
-api.add_resource(RecipeCollection, '/recipes')
-api.add_resource(Recipe, '/recipes/<recipe_id>')
+api.add_resource(IngredientsCollection, '/api/ingredients')
+api.add_resource(Ingredient, '/api/ingredients/<ingredient_id>')
+api.add_resource(UserCollection, '/api/users')
+api.add_resource(User, '/api/users/<user_id>')
+api.add_resource(RecipeCollection, '/api/recipes')
+api.add_resource(Recipe, '/api/recipes/<recipe_id>')
 
 
 
