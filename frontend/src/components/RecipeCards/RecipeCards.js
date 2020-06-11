@@ -14,7 +14,7 @@ const RecipeCards = ({recipes}) => {
         recipes.map((recipe) => (
           <RecipeCard
             recipe={recipe}
-            key={recipe.id}
+            key={recipe._id}
           />
         ))
       }

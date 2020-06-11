@@ -31,15 +31,15 @@ export class APIClient {
   }
 
   get_ingredient(ingredient_id) {
-    return this.http.get(this.baseUrl + '/api/ingredients' + ingredient_id).then(result => result.data)
+    return this.http.get(this.baseUrl + '/api/ingredients/' + ingredient_id).then(result => result.data)
   }
 
   update_ingredient(ingredient_id, ingredient) {
-    return this.http.put(this.baseUrl + '/api/ingredients' + ingredient_id, ingredient).then(result => result.data)
+    return this.http.put(this.baseUrl + '/api/ingredients/' + ingredient_id, ingredient).then(result => result.data)
   }
 
   delete_ingredients(ingredient_id) {
-    return this.http.delete(this.baseUrl + '/api/ingredients' + ingredient_id).then(result => result.data)
+    return this.http.delete(this.baseUrl + '/api/ingredients/' + ingredient_id).then(result => result.data)
   }
 
   //============================================================
@@ -47,7 +47,7 @@ export class APIClient {
   //============================================================
 
   list_recipes() {
-    return this.http.get(this.baseUrl + '/api/recipes').then(result => result.data)
+    return this.http.get(this.baseUrl + '/api/recipes').then(result => result.data.recipes)
   }
 
   create_recipe(recipe) {
@@ -55,14 +55,16 @@ export class APIClient {
   }
 
   get_recipe(recipe_id) {
-    return this.http.get(this.baseUrl + '/api/recipes' + recipe_id).then(result => result.data)
+    return this.http.get(this.baseUrl + '/api/recipes/' + recipe_id).then(result => result.data)
   }
 
   update_recipe(recipe_id, recipe) {
-    return this.http.put(this.baseUrl + '/api/recipes' + recipe_id, recipe).then(result => result.data)
+    return this.http.put(this.baseUrl + '/api/recipes/' + recipe_id, recipe).then(result => result.data)
   }
 
   delete_recipe(recipe_id) {
-    return this.http.delete(this.baseUrl + '/api/recipes' + recipe_id).then(result => result.data)
+    return this.http.delete(this.baseUrl + '/api/recipes/' + recipe_id).then(result => result.data)
   }
 }
+
+export default APIClient;

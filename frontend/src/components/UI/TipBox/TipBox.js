@@ -11,7 +11,7 @@ const TipBox = ({clicked, tipShown, tipFunc}) => {
         className={classes.TipHeader}
         onClick={clicked}>
         <p>Tip!</p>
-        <img src={Chevron}/>
+        <img alt="down arrow" src={Chevron}/>
       </div>
       {tipShown ?
         <div className={classes.message}>

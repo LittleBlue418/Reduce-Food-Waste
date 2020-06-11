@@ -2,8 +2,14 @@ import React, { Component } from 'react';
 import TipBox from '../../components/UI/TipBox/TipBox';
 import Search from '../../components/Search/Search';
 import RecipeCards from '../../components/RecipeCards/RecipeCards';
+import APIClient from '../../apiClient';
 
 class SearchPage extends Component {
+  constructor(props) {
+    super(props);
+    this.API = new APIClient();
+  }
+
   state = {
     tipsBoxShown: false,
     searchParams: {
@@ -12,7 +18,14 @@ class SearchPage extends Component {
       gluten_free: false,
       nut_free: false,
       egg_free: false,
-    }
+    },
+    recipes: []
+  }
+
+  componentDidMount() {
+    this.API.list_recipes().then(recipes => {
+      this.setState({recipes: recipes})
+    })
   }
 
   toggleTipsBox = () => {
@@ -30,7 +43,8 @@ class SearchPage extends Component {
 
 
   render() {
-    const {tipFunc, recipes} = this.props
+    const {tipFunc} = this.props
+    const {recipes} = this.state
 
     return (
       <div>

@@ -4,7 +4,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
 
 import AuthContext from '../context/AuthContext';
@@ -61,7 +60,7 @@ class App extends Component {
 
             <Switch>
 
-              <Route path="/recipe">
+              <Route path="/recipe/:recipe_id">
                 <RecipePage />
               </Route>
 
@@ -72,8 +71,6 @@ class App extends Component {
                   recipes={this.recipes}
                 />
               </Route>
-
-
 
             </Switch>
 

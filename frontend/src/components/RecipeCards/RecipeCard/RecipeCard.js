@@ -1,18 +1,13 @@
 import React from 'react';
 import './RecipeCard.css';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import picture from '../../../assets/images/pLLXRlt.jpg';
 
 
 const RecipeCard = ({recipe}) => {
   return (
-      <Link to="/recipe">
+      <Link to={"/recipe/" + recipe._id}>
       <div className="RecipeCard">
 
         <div className="RecipeHead">
@@ -26,6 +21,8 @@ const RecipeCard = ({recipe}) => {
                         alt={key}
                     />
                   )
+              } else {
+                return null
               }
             })}
           </div>
@@ -33,7 +30,7 @@ const RecipeCard = ({recipe}) => {
 
         <div className="RecipeBody">
           <div className="RecipeImageDiv">
-            <img src={picture}></img>
+            <img alt={recipe.name} src={picture}></img>
           </div>
           <div>
 
