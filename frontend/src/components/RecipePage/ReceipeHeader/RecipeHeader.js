@@ -1,36 +1,55 @@
 import React from 'react';
-import classes from './RecipeHeader.module.css'
+import './RecipeHeader.css'
 
 import AuthContext from '../../../context/AuthContext';
+import Auxiliary from '../../../hoc/Auxiliary';
+import EditIcon from '../../../assets/icons/edit-solid.svg';
 
 
-const RecipeHeader = () => {
+const RecipeHeader = ({ name, allergies }) => {
   return (
+    <Auxiliary>
+      <div className="RecipeHeader">
+        <div className="header1">
+          <div className="StarDiv">
+            <AuthContext.Consumer>
+              {(context) => {
+                if (context.authenticated) {
+                  return (
+                    <div className="star" />
+                  )
+                } else {
+                  return (
+                    <div className="empty_star" />
+                  )
+                }
+              }}
+            </AuthContext.Consumer>
+          </div>
 
-  <div className={classes.RecipeHeader}>
-    <div className={classes.StarDiv}>
-      <AuthContext.Consumer>
-            {(context) => {
-              if (context.authenticated) {
+          <p>{name}</p>
+        </div>
+        <div className="header2">
+          <button><img alt="edit icon" src={EditIcon} /></button>
+          <div className="IconDivRecipe">
+            {Object.entries(allergies).map(([key, value]) => {
+              if (value === true) {
                 return (
-                  <div className={classes.star} />
+                  <div key={key + "recipe"}
+                    className={key}
+                    alt={key}
+                  />
                 )
               } else {
-                return (
-                  <div className={classes.empty_star} />
-                )
+                return null
               }
-            }}
-      </AuthContext.Consumer>
-    </div>
+            })}
+          </div>
+        </div>
+      </div>
 
-    <p>Recipe title here</p>
-    <button>Edit</button>
-    <div>X X X X</div>
-
-  </div>
-
-
+      <div className="Line"></div>
+    </Auxiliary>
   );
 };
 

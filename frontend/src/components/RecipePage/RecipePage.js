@@ -27,7 +27,10 @@ const RecipePage = () => {
     console.log(recipe)
     return (
     <div className={classes.RecipePage}>
-      <RecipeHeader />
+      <RecipeHeader
+        name={recipe.name}
+        allergies={recipe.allergies}
+      />
       <div className={classes.middleSection}>
         <RecipeIngrdients />
         <div className={classes.PictureDiv}>
