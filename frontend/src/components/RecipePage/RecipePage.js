@@ -30,6 +30,9 @@ const RecipePage = () => {
         name={recipe.name}
         allergies={recipe.allergies}
       />
+
+      <div className={classes.Line}></div>
+
       <div className={classes.middleSection}>
         <RecipeIngrdients
           ingredients={recipe.ingredients}
@@ -38,7 +41,12 @@ const RecipePage = () => {
           <div  className={classes.RecipePicture}/>
         </div>
       </div>
-      <RecipeMethod />
+
+      <div className={classes.Line}></div>
+
+      <RecipeMethod
+        method={recipe.method}
+      />
 
     </div>
   );

@@ -1,0 +1,15 @@
+.methodStep {
+    display: flex;
+    padding: 4px;
+}
+
+.methodStepToggled {
+    display: flex;
+    padding: 4px;
+    background-color: lightgrey;
+    text-decoration: line-through;
+}
+
+.methodStep input {
+    margin: auto 5px auto 5px;
+}

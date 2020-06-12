@@ -47,8 +47,6 @@ const RecipeHeader = ({ name, allergies }) => {
           </div>
         </div>
       </div>
-
-      <div className="Line"></div>
     </Auxiliary>
   );
 };

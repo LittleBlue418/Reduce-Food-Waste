@@ -69,16 +69,6 @@
     }
 }
 
-.Line {
-    background-color: lightgrey;
-    width: 80%;
-    height: 2px;
-    margin: auto;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-
 .vegan {
     background-image: url(../../../assets/icons/vegan.png);
 }

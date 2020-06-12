@@ -1,15 +1,19 @@
 import React from 'react';
+import MethodStep from './MethodStep/MethodStep';
 
-const RecipeMethod = () => {
+const RecipeMethod = ({method}) => {
+
   return (
     <div>
-      <ul>
-        <li>step 1</li>
-        <li>step 2</li>
-        <li>step 3</li>
-        <li>step 4</li>
-        <li>step 5</li>
-      </ul>
+        {method.map((method_step, index) => {
+          return (
+            <MethodStep
+              key={index}
+              method_step={method_step}
+              index={index}
+          />
+          )
+        })}
     </div>
   );
 };
