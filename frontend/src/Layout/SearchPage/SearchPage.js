@@ -1,68 +1,66 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
+
 import TipBox from '../../components/UI/TipBox/TipBox';
-import Search from '../../components/Search/Search';
+import SearchFilters from '../../components/Search/SearchFilters/SearchFilters';
+import SearchBox from '../../components/Search/SearchBox/SearchBox';
+import IngredientsChips from '../../components/Search/IngredientsChips/IngredientsChips';
 import RecipeCards from '../../components/RecipeCards/RecipeCards';
+
 import APIClient from '../../apiClient';
 
-class SearchPage extends Component {
-  constructor(props) {
-    super(props);
-    this.API = new APIClient();
-  }
 
-  state = {
-    tipsBoxShown: false,
-    searchParams: {
-      vegan: false,
-      vegetarian: false,
-      gluten_free: false,
-      nut_free: false,
-      egg_free: false,
-    },
-    recipes: []
-  }
+// get ingredients from API ingredients endpoint
+// pass ingredients to the search bar
+// On a click of the allergie info OR selection from the ingredients add to 'search'
+// search request on the get ingredients API
+// return matching recipes & update the search list
 
-  componentDidMount() {
-    this.API.list_recipes().then(recipes => {
-      this.setState({recipes: recipes})
+
+const SearchPage = () => {
+  const [API] = useState (new APIClient())
+  const [ingredients, appendToIngredients] = useState (["potato", "mayonaise"])
+  const [alogenFilters, setAlogenFilters] = useState ({
+                            vegan: false,
+                            vegetarian: false,
+                            gluten_free: false,
+                            nut_free: false,
+                            egg_free: false})
+  const [recipes, setRecipes] = useState ([])
+
+
+  useEffect(() => {
+    API.list_recipes().then(recipes => {
+      setRecipes(recipes)
     })
+  }, [API])
+
+  const toggleAlogen = (tag) => {
+    const searchParams = {...alogenFilters}
+    searchParams[tag] = !searchParams[tag]
+    setAlogenFilters(searchParams)
   }
-
-  toggleTipsBox = () => {
-    this.setState((prevState) => {
-      return {tipsBoxShown: !prevState.tipsBoxShown}
-    })
-  }
-
-  addSearchParam = (tag, isChecked) => {
-    const searchParams = this.state.searchParams
-    searchParams[tag] = isChecked
-    this.setState({searchParams: searchParams})
-  }
-
-
-
-  render() {
-    const {tipFunc} = this.props
-    const {recipes} = this.state
 
     return (
       <div>
-        <TipBox
-          clicked={this.toggleTipsBox}
-          tipShown={this.state.tipsBoxShown}
-          tipFunc={tipFunc}
+        <TipBox />
+
+        <SearchFilters
+            alogenFilters={alogenFilters}
+            toggleAlogen={toggleAlogen}
         />
-        <Search
-          searchParams={this.state.searchParams}
-          addSearchParam={this.addSearchParam}
+        <SearchBox
+            ingredients={ingredients}
         />
+        <IngredientsChips
+          ingredients={ingredients}
+        />
+
         <RecipeCards
           recipes={recipes}
         />
       </div>
     );
-  }
+
 }
 
 export default SearchPage;

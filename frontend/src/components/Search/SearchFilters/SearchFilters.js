@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './SearchFilters.module.css';
 
-const SearchFilters = ({searchParams, addSearchParam}) => {
+const SearchFilters = ({alogenFilters, toggleAlogen}) => {
   const capitalize = (string) => string.charAt(0).toUpperCase() + string.slice(1)
 
   const labelFromKey = (key) => capitalize(key.replace('_', ' '))
@@ -10,9 +10,9 @@ const SearchFilters = ({searchParams, addSearchParam}) => {
     <div className={classes.SearchFilters}>
       <form action="#">
         {
-          Object.entries(searchParams).map(([key, value]) => (
+          Object.entries(alogenFilters).map(([key, value]) => (
           <div key={key}>
-            <input type="checkbox"  checked={value} name={key} value={key} onChange={(event) => addSearchParam(key, event.target.checked)}/>
+            <input type="checkbox"  checked={value} name={key} value={key} onChange={() => toggleAlogen(key)}/>
             <label>{labelFromKey(key)}</label>
           </div>))
         }
