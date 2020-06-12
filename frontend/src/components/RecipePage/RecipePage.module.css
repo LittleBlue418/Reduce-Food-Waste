@@ -6,6 +6,7 @@
 
 .middleSection {
     display: flex;
+    flex-direction: column-reverse;
     justify-content: space-between;
 }
 
@@ -25,4 +26,11 @@
     min-height: 100px;
     width: 100%;
     background-position: right;
+}
+
+@media (min-width: 700px) {
+    .middleSection {
+        flex-direction: row;
+        justify-content: space-between;
+    }
 }

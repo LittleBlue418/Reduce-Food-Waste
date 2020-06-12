@@ -1,0 +1,16 @@
+.RecipeIngredientDiv {
+    display: flex;
+    justify-content: space-between;
+}
+
+.name {
+    width: 60%;
+}
+
+.amount {
+    width: 10%;
+}
+
+.unit {
+    width: 20%;
+}

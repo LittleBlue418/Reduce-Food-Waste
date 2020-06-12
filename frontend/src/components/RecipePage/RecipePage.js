@@ -24,7 +24,6 @@ const RecipePage = () => {
       return <p>Loading...</p>
     }
 
-    console.log(recipe)
     return (
     <div className={classes.RecipePage}>
       <RecipeHeader
@@ -32,7 +31,9 @@ const RecipePage = () => {
         allergies={recipe.allergies}
       />
       <div className={classes.middleSection}>
-        <RecipeIngrdients />
+        <RecipeIngrdients
+          ingredients={recipe.ingredients}
+        />
         <div className={classes.PictureDiv}>
           <div  className={classes.RecipePicture}/>
         </div>
