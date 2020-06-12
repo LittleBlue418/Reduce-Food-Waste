@@ -17,7 +17,7 @@ const Search = (props) => {
       />
 
       <SearchBox
-
+        ingredients={ingredients}
       />
 
       <IngredientsChips

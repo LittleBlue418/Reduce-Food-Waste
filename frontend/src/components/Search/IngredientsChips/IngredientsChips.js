@@ -25,7 +25,7 @@ const IngredientsChips = ({ingredients}) => {
     <div className={classes.root}>
       {ingredients.map((ingredient) =>{
         return (
-          <Chip label={ingredient} onDelete={handleDelete} color="primary" />
+          <Chip label={ingredient} onDelete={handleDelete} color="primary" key={ingredient}/>
         )
       })}
     </div>
