@@ -107,12 +107,17 @@ class RecipeSearch(Resource):
         for allergy in request_data.get('allergens', []):
             myquery["allergies." + allergy] = True
 
-        ingredient_list = []
 
-        for ingredient_id in request_data.get('ingredient_ids', []):
-            ingredient_list.append({"$elemMatch": {"ingredient._id": ingredient_id}})
-
-        myquery["ingredients"] = {"$all" : ingredient_list}
+        myquery["ingredients"] = {
+            "$all" :  [
+                {
+                    "$elemMatch": {
+                        "ingredient._id": ingredient_id
+                    }
+                }
+                for ingredient_id in request_data.get('ingredient_ids', [])
+            ]
+        }
 
         recipes = [
             RecipesModel.return_as_object(recipe)
