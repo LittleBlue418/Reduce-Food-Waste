@@ -98,5 +98,29 @@ class RecipeCollection(Resource):
         except:
             return {"message": "An error occurred"}, 500
 
+class RecipeSearch(Resource):
+    def post(self):
+        request_data = request.json
+
+        myquery = {}
+
+        for allergy in request_data.get('allergens', []):
+            myquery["allergies." + allergy] = True
+
+        ingredient_list = []
+
+        for ingredient_id in request_data.get('ingredient_ids', []):
+            ingredient_list.append({"$elemMatch": {"ingredient._id": ingredient_id}})
+
+        myquery["ingredients"] = {"$all" : ingredient_list}
+
+        recipes = [
+            RecipesModel.return_as_object(recipe)
+            for recipe in mongo.db.recipes.find(myquery)
+        ]
+
+        return {
+            'recipes': recipes
+        }
 
 
