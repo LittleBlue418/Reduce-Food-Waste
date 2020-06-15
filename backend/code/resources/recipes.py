@@ -4,6 +4,7 @@ from flask import request
 from models import mongo, ValidationError
 from models.recipes import RecipesModel
 from pymongo.collection import ObjectId
+from pymongo import ASCENDING
 
 class Recipe(Resource):
     parser = reqparse.RequestParser()
@@ -73,7 +74,7 @@ class RecipeCollection(Resource):
     def get(self):
         recipes = [
             RecipesModel.return_as_object(recipe)
-            for recipe in mongo.db.recipes.find()
+            for recipe in mongo.db.recipes.find().sort('name', ASCENDING)
         ]
 
         return {
@@ -121,7 +122,7 @@ class RecipeSearch(Resource):
 
         recipes = [
             RecipesModel.return_as_object(recipe)
-            for recipe in mongo.db.recipes.find(myquery)
+            for recipe in mongo.db.recipes.find(myquery).sort('name', ASCENDING)
         ]
 
         return {
