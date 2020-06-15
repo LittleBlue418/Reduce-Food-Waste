@@ -11,6 +11,8 @@ export class APIClient {
     this.update_ingredient = this.update_ingredient.bind(this)
     this.delete_ingredients = this.delete_ingredients.bind(this)
 
+    this.search_recipes = this.search_recipes.bind(this)
+
     this.list_recipes = this.list_recipes.bind(this)
     this.create_recipe = this.create_recipe.bind(this)
     this.get_recipe = this.get_recipe.bind(this)
@@ -23,7 +25,7 @@ export class APIClient {
   //============================================================
 
   list_ingredients() {
-    return this.http.get(this.baseUrl + '/api/ingredients').then(result => result.data)
+    return this.http.get(this.baseUrl + '/api/ingredients').then(result => result.data.ingredients)
   }
 
   create_ingredient(ingredient) {
@@ -45,6 +47,10 @@ export class APIClient {
   //============================================================
   // Recipes
   //============================================================
+
+  search_recipes() {
+    return this.http.post(this.baseUrl + '/api/recipes/_search').then(result => result.data.recipes)
+  }
 
   list_recipes() {
     return this.http.get(this.baseUrl + '/api/recipes').then(result => result.data.recipes)

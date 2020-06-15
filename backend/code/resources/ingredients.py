@@ -3,6 +3,7 @@ from flask_restful import Resource, reqparse
 from models import mongo
 from pymongo.collection import ObjectId
 from models.ingredients import IngredientsModel
+from pymongo import ASCENDING
 
 
 class Ingredient(Resource):
@@ -83,13 +84,11 @@ class IngredientsCollection(Resource):
     def get(self):
         ingredients = [
             IngredientsModel.return_as_object(ingredient)
-            for ingredient in mongo.db.ingredients.find()
+            for ingredient in mongo.db.ingredients.find().sort('name', ASCENDING)
         ]
 
         return {
-            'ingredients': [
-                ingredients
-            ]
+            'ingredients': ingredients
         }
 
 

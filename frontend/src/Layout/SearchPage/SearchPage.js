@@ -18,7 +18,7 @@ import APIClient from '../../apiClient';
 
 const SearchPage = () => {
   const [API] = useState (new APIClient())
-  const [ingredients, appendToIngredients] = useState (["potato", "mayonaise"])
+  const [ingredients, setIngredients] = useState (["potato", "mayonaise"])
   const [alogenFilters, setAlogenFilters] = useState ({
                             vegan: false,
                             vegetarian: false,
@@ -32,7 +32,12 @@ const SearchPage = () => {
     API.list_recipes().then(recipes => {
       setRecipes(recipes)
     })
+    API.list_ingredients().then(ingredients => {
+      const ingredient_names = ingredients.map(ingredient => ingredient.name)
+      setIngredients(ingredient_names)
+    })
   }, [API])
+
 
   const toggleAlogen = (tag) => {
     const searchParams = {...alogenFilters}
