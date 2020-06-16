@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import classes from './SearchBox.module.css'
+import { capitalize } from '../../../utilityFunctions';
 
 const SearchBox = ({ingredients, selectedIngredients, setSelectedIngredients}) => {
   const [inputValue, setInputValue] = useState ("")
@@ -22,7 +23,7 @@ const SearchBox = ({ingredients, selectedIngredients, setSelectedIngredients}) =
       onChange={(event, value, reason) => {
         setSelectedIngredients((oldValue) => [...oldValue, value])
       }}
-      getOptionLabel={(option) => option.name}
+      getOptionLabel={(option) => capitalize(option.name)}
       className={classes.SearchBox}
       renderInput={(params) => <TextField {...params} label="Select Ingredient" variant="outlined" />}
     />
