@@ -9,8 +9,6 @@ import RecipeCards from '../../components/RecipeCards/RecipeCards';
 import APIClient from '../../apiClient';
 
 
-// get ingredients from API ingredients endpoint
-// pass ingredients to the search bar
 // On a click of the allergie info OR selection from the ingredients add to 'search'
 // search request on the get ingredients API
 // return matching recipes & update the search list
@@ -18,20 +16,17 @@ import APIClient from '../../apiClient';
 
 const SearchPage = () => {
   const [API] = useState (new APIClient())
-  const [selectedIngredients, setSelectedIngredients] = useState([])
-
   const [ingredients, setIngredients] = useState ([])
+  const [recipes, setRecipes] = useState ([])
+
+  const [selectedIngredients, setSelectedIngredients] = useState([])
   const [alogenFilters, setAlogenFilters] = useState ({
                             vegan: false,
                             vegetarian: false,
                             gluten_free: false,
                             nut_free: false,
-                            egg_free: false})
-  const [recipes, setRecipes] = useState ([])
-  const [search, setSearch] = useState({
-    "ingredient_ids": [],
-    "allergens":[]
-  })
+                            egg_free: false
+                          })
 
 
   useEffect(() => {
@@ -43,16 +38,27 @@ const SearchPage = () => {
     })
   }, [API])
 
-  const addSearchIngredient = (event) => {
-    const ingredient_name = event.currentTarget.innerHTML
-    const ingredient_object = ingredients.ingredient_name
+  useEffect(() => {
+    const allogens = []
 
-    const searchParams = {...search}
-    searchParams["ingredient_ids"].push(event.currentTarget.innerHTML)
-    setSearch(searchParams)
-    console.log(search)
-  }
+    for (let [key, value] of Object.entries(alogenFilters)) {
+      if (value === true) {
+        allogens.push(key)
+      }
+    }
 
+    const ingredient_ids = []
+
+    for (let [key, value] of Object.entries(selectedIngredients)) {
+      ingredient_ids.push(value._id)
+    }
+
+    const searchBody = {
+      "ingredient_ids": ingredient_ids,
+      "allergens" : allogens
+    }
+
+  }, [selectedIngredients, alogenFilters])
 
   const toggleAlogen = (tag) => {
     const searchParams = {...alogenFilters}
@@ -75,7 +81,8 @@ const SearchPage = () => {
         />
 
         <IngredientsChips
-            searchResults={search}
+            selectedIngredients={selectedIngredients}
+            setSelectedIngredients={setSelectedIngredients}
         />
 
         <RecipeCards
