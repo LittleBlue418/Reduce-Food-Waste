@@ -1,9 +1,8 @@
 import React from 'react';
 import classes from './SearchFilters.module.css';
+import { capitalize } from '../../../utilityFunctions';
 
 const SearchFilters = ({alogenFilters, toggleAlogen}) => {
-  const capitalize = (string) => string.charAt(0).toUpperCase() + string.slice(1)
-
   const labelFromKey = (key) => capitalize(key.replace('_', ' '))
 
   return (
