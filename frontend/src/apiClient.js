@@ -48,8 +48,8 @@ export class APIClient {
   // Recipes
   //============================================================
 
-  search_recipes() {
-    return this.http.post(this.baseUrl + '/api/recipes/_search').then(result => result.data.recipes)
+  search_recipes(query) {
+    return this.http.post(this.baseUrl + '/api/recipes/_search', query).then(result => result.data.recipes)
   }
 
   list_recipes() {

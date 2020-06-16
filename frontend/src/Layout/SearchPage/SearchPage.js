@@ -30,9 +30,6 @@ const SearchPage = () => {
 
 
   useEffect(() => {
-    API.list_recipes().then(recipes => {
-      setRecipes(recipes)
-    })
     API.list_ingredients().then(ingredients => {
       setIngredients(ingredients)
     })
@@ -58,7 +55,11 @@ const SearchPage = () => {
       "allergens" : allogens
     }
 
-  }, [selectedIngredients, alogenFilters])
+    API.search_recipes(searchBody).then(recipes => {
+      setRecipes(recipes)
+    })
+
+  }, [API, selectedIngredients, alogenFilters])
 
   const toggleAlogen = (tag) => {
     const searchParams = {...alogenFilters}

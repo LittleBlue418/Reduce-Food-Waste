@@ -109,16 +109,17 @@ class RecipeSearch(Resource):
             myquery["allergies." + allergy] = True
 
 
-        myquery["ingredients"] = {
-            "$all" :  [
-                {
-                    "$elemMatch": {
-                        "ingredient._id": ingredient_id
+        if request_data.get('ingredient_ids'):
+            myquery["ingredients"] = {
+                "$all" :  [
+                    {
+                        "$elemMatch": {
+                            "ingredient._id": ingredient_id
+                        }
                     }
-                }
-                for ingredient_id in request_data.get('ingredient_ids', [])
-            ]
-        }
+                    for ingredient_id in request_data.get('ingredient_ids', [])
+                ]
+            }
 
         recipes = [
             RecipesModel.return_as_object(recipe)
