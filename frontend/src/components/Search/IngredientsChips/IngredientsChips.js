@@ -1,31 +1,38 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip';
+import { capitalize } from '../../../utilityFunctions';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-      display: 'flex',
-      justifyContent: 'center',
-      flexWrap: 'wrap',
-      '& > *': {
-        margin: theme.spacing(0.5),
-      },
+  root: {
+    display: 'flex',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+    '& > *': {
+      margin: theme.spacing(0.5),
     },
+  },
 }));
 
-const IngredientsChips = ({ingredients}) => {
-    const classes = useStyles();
+const IngredientsChips = ({ selectedIngredients, setSelectedIngredients}) => {
+  const classes = useStyles();
 
-    const handleDelete = () => {
-      console.info('You clicked the delete icon.');
-    };
+  const unSelectIngredient = (ingredient_id) => {
+    setSelectedIngredients(
+        selectedIngredients.filter(ingredient => ingredient._id !== ingredient_id)
+    )
+  }
 
   return (
-
     <div className={classes.root}>
-      {ingredients.map((ingredient) =>{
+      {selectedIngredients.map((ingredient) => {
         return (
-          <Chip label={ingredient} onDelete={handleDelete} color="primary" key={ingredient}/>
+          <Chip
+            label={capitalize(ingredient.name)}
+            onDelete={() => unSelectIngredient(ingredient._id)}
+            color="primary"
+            key={ingredient._id}
+          />
         )
       })}
     </div>
