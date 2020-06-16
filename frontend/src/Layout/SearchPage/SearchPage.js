@@ -18,7 +18,9 @@ import APIClient from '../../apiClient';
 
 const SearchPage = () => {
   const [API] = useState (new APIClient())
-  const [ingredients, setIngredients] = useState (["potato", "mayonaise"])
+  const [selectedIngredients, setSelectedIngredients] = useState([])
+
+  const [ingredients, setIngredients] = useState ([])
   const [alogenFilters, setAlogenFilters] = useState ({
                             vegan: false,
                             vegetarian: false,
@@ -26,6 +28,10 @@ const SearchPage = () => {
                             nut_free: false,
                             egg_free: false})
   const [recipes, setRecipes] = useState ([])
+  const [search, setSearch] = useState({
+    "ingredient_ids": [],
+    "allergens":[]
+  })
 
 
   useEffect(() => {
@@ -33,10 +39,19 @@ const SearchPage = () => {
       setRecipes(recipes)
     })
     API.list_ingredients().then(ingredients => {
-      const ingredient_names = ingredients.map(ingredient => ingredient.name)
-      setIngredients(ingredient_names)
+      setIngredients(ingredients)
     })
   }, [API])
+
+  const addSearchIngredient = (event) => {
+    const ingredient_name = event.currentTarget.innerHTML
+    const ingredient_object = ingredients.ingredient_name
+
+    const searchParams = {...search}
+    searchParams["ingredient_ids"].push(event.currentTarget.innerHTML)
+    setSearch(searchParams)
+    console.log(search)
+  }
 
 
   const toggleAlogen = (tag) => {
@@ -55,9 +70,12 @@ const SearchPage = () => {
         />
         <SearchBox
             ingredients={ingredients}
+            selectedIngredients={selectedIngredients}
+            setSelectedIngredients={setSelectedIngredients}
         />
+
         <IngredientsChips
-          ingredients={ingredients}
+            searchResults={search}
         />
 
         <RecipeCards
@@ -65,7 +83,6 @@ const SearchPage = () => {
         />
       </div>
     );
-
 }
 
 export default SearchPage;
