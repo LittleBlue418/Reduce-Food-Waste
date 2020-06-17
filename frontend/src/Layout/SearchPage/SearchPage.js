@@ -9,11 +9,6 @@ import RecipeCards from '../../components/RecipeCards/RecipeCards';
 import APIClient from '../../apiClient';
 
 
-// On a click of the allergie info OR selection from the ingredients add to 'search'
-// search request on the get ingredients API
-// return matching recipes & update the search list
-
-
 const SearchPage = () => {
   const [API] = useState (new APIClient())
   const [ingredients, setIngredients] = useState ([])
