@@ -10,6 +10,7 @@ import AuthContext from '../context/AuthContext';
 import Layout from '../Layout/Layout';
 import SearchPage from '../Layout/SearchPage/SearchPage';
 import RecipePage from '../components/RecipePage/RecipePage';
+import AddRecipePage from '../components/AddRecipePage/AddRecipePage';
 
 
 
@@ -36,6 +37,10 @@ class App extends Component {
 
               <Route path="/recipe/:recipe_id">
                 <RecipePage />
+              </Route>
+
+              <Route path="/addRecipe">
+                <AddRecipePage />
               </Route>
 
               <Route path="/">

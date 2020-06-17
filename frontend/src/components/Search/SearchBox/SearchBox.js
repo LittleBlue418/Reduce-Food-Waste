@@ -9,7 +9,6 @@ const SearchBox = ({ingredients, selectedIngredients, setSelectedIngredients}) =
 
   return (
     <Autocomplete
-      id="combo-box-demo"
       options={ingredients.filter((ingredient) => !selectedIngredients.includes(ingredient))}
       inputValue={inputValue}
       onInputChange={(event, value, reason) => {
