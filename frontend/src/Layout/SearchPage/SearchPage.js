@@ -36,19 +36,13 @@ const SearchPage = () => {
   }, [API])
 
   useEffect(() => {
-    const allogens = []
 
-    for (let [key, value] of Object.entries(alogenFilters)) {
-      if (value === true) {
-        allogens.push(key)
-      }
-    }
+    const allogens = Object.entries(alogenFilters)
+                      .filter((alogen) => alogen[1])
+                      .map((allogen) => allogen[0])
 
-    const ingredient_ids = []
+    const ingredient_ids = selectedIngredients.map(ingredient => ingredient._id)
 
-    for (let [key, value] of Object.entries(selectedIngredients)) {
-      ingredient_ids.push(value._id)
-    }
 
     const searchBody = {
       "ingredient_ids": ingredient_ids,
