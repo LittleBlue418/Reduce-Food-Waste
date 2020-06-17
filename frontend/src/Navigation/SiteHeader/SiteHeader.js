@@ -3,17 +3,13 @@ import classes from './SiteHeader.module.css';
 
 
 import Banner from '../../components/UI/Banner/Banner';
-import LoginButton from '../LoginButton/LoginButton';
+
 
 
 
 const SiteHeader = (props) => (
   <header className={classes.SiteHeader}>
-
       <Banner />
-
-      <LoginButton />
-
   </header>
 );
 
