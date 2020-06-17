@@ -6,6 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import Button from '@material-ui/core/Button';
+import ImageUploader from './ImageUploader/ImageUploader';
 
 import APIClient from '../../apiClient';
 import { capitalize } from '../../utilityFunctions';
@@ -85,7 +86,7 @@ const AddRecipePage = () => {
 
       <TextField label="Recipe Name" value={newRecipe.name} onChange={(e) => setName(e.target.value)} />
       <TextField label="Brief Description" value={newRecipe.description} onChange={(e) => setDescription(e.target.value)} />
-      <TextField label="Image" value={newRecipe.image} onChange={(e) => setImage(e.target.value)} />
+      <ImageUploader setImage={setImage}/>
 
       <br></br>
 
