@@ -49,11 +49,25 @@ export class APIClient {
   //============================================================
 
   search_recipes(query) {
-    return this.http.post(this.baseUrl + '/api/recipes/_search', query).then(result => result.data.recipes)
+    return this.http.post(this.baseUrl + '/api/recipes/_search', query).then(result => {
+      const recipies = result.data.recipes
+      let updated_recipes = recipies.map((recipe) => {
+        recipe['image_url'] = this.baseUrl + '/api/images/' + recipe['image_id']
+        return recipe
+      })
+      return updated_recipes
+    })
   }
 
   list_recipes() {
-    return this.http.get(this.baseUrl + '/api/recipes').then(result => result.data.recipes)
+    return this.http.get(this.baseUrl + '/api/recipes').then(result => {
+      const recipies = result.data.recipes
+      let updated_recipes = recipies.map((recipe) => {
+        recipe['image_url'] = this.baseUrl + '/api/images/' + recipe['image_id']
+        return recipe
+      })
+      return updated_recipes
+    })
   }
 
   create_recipe(recipe) {
@@ -61,7 +75,11 @@ export class APIClient {
   }
 
   get_recipe(recipe_id) {
-    return this.http.get(this.baseUrl + '/api/recipes/' + recipe_id).then(result => result.data)
+    return this.http.get(this.baseUrl + '/api/recipes/' + recipe_id).then(result => {
+      const recipe = result.data
+      recipe['image_url'] = this.baseUrl + '/api/images/' + recipe['image_id']
+      return recipe
+    })
   }
 
   update_recipe(recipe_id, recipe) {

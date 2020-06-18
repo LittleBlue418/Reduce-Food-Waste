@@ -2,8 +2,6 @@ import React from 'react';
 import './RecipeCard.css';
 import { Link } from "react-router-dom";
 
-import picture from '../../../assets/images/pLLXRlt.jpg';
-
 
 const RecipeCard = ({recipe}) => {
   return (
@@ -30,7 +28,7 @@ const RecipeCard = ({recipe}) => {
 
         <div className="RecipeBody">
           <div className="RecipeImageDiv">
-            <img alt={recipe.name} src={picture}></img>
+            <img alt={recipe.name} src={recipe.image_url}></img>
           </div>
           <div>
 
