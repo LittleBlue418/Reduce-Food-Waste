@@ -3,8 +3,11 @@ from flask import request
 
 from models import mongo, ValidationError
 from models.recipes import RecipesModel
+from models.images import ImageModel
 from pymongo.collection import ObjectId
 from pymongo import ASCENDING
+
+from base64 import b64decode
 
 class Recipe(Resource):
     parser = reqparse.RequestParser()
@@ -88,11 +91,21 @@ class RecipeCollection(Resource):
            return {'message': "A recipe with name '{}' already exists".format(request_data['name'])}, 400
 
         try:
-            request_data = RecipesModel.build_recipe_from_request(request_data)
-            result = mongo.db.recipes.insert_one(request_data)
-            request_data['_id'] = result.inserted_id
+            built_recipe = RecipesModel.build_recipe_from_request(request_data)
 
-            return RecipesModel.return_as_object(request_data)
+            image_data = b64decode(request_data['image_data'])
+            image_content_type = request_data['image_content_type']
+            built_image = ImageModel.build_image(image_data, image_content_type)
+
+            result = mongo.db.images.insert_one(built_image)
+
+            built_recipe['image_id'] = str(result.inserted_id)
+
+            result = mongo.db.recipes.insert_one(built_recipe)
+
+            built_recipe['_id'] = result.inserted_id
+
+            return RecipesModel.return_as_object(built_recipe)
 
         except ValidationError as error:
             return {"message": error.message}, 400

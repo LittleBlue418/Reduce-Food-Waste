@@ -14,11 +14,12 @@ import { capitalize } from '../../utilityFunctions';
 const AddRecipePage = () => {
   const [API] = useState(new APIClient())
   const [allIngredients, setAllIngredients] = useState([])
-  const [inputValue, setInputValue] = useState ("")
+  const [inputValue, setInputValue] = useState("")
   const [newRecipe, setNewRecipe] = useState({
     name: "",
     description: "",
-    image: "",
+    image_data: "",
+    image_content_type: "",
     method: [],
     ingredients: [],
   })
@@ -34,7 +35,11 @@ const AddRecipePage = () => {
 
   const setName = (name) => setNewRecipe({ ...newRecipe, name: name });
   const setDescription = (description) => setNewRecipe({ ...newRecipe, description: description });
-  const setImage = (image) => setNewRecipe({ ...newRecipe, image: image });
+  const setImage = (image_data, image_content_type) => setNewRecipe({
+                                                  ...newRecipe,
+                                                  image_data: image_data,
+                                                  image_content_type: image_content_type
+                                                });
 
   const addMethodStep = () => {
     newRecipe.method.push("")
@@ -48,7 +53,7 @@ const AddRecipePage = () => {
 
   const addIngredientEntry = (ingredient) => {
     newRecipe.ingredients.push({
-      ingredient:ingredient,
+      ingredient: ingredient,
       amount: "",
       unit: ""
     })
@@ -57,12 +62,12 @@ const AddRecipePage = () => {
 
   const addIngredientAmount = (amount, index) => {
     newRecipe.ingredients[index].amount = amount
-    setNewRecipe({ ...newRecipe})
+    setNewRecipe({ ...newRecipe })
   }
 
   const addIngredientUnit = (unit, index) => {
     newRecipe.ingredients[index].unit = unit
-    setNewRecipe({ ...newRecipe})
+    setNewRecipe({ ...newRecipe })
   }
 
   const saveToDatabase = () => {
@@ -71,7 +76,8 @@ const AddRecipePage = () => {
       setNewRecipe({
         name: "",
         description: "",
-        image: "",
+        image_data: "",
+        image_content_type: "",
         method: [],
         ingredients: [],
       })
@@ -86,12 +92,12 @@ const AddRecipePage = () => {
 
       <TextField label="Recipe Name" value={newRecipe.name} onChange={(e) => setName(e.target.value)} />
       <TextField label="Brief Description" value={newRecipe.description} onChange={(e) => setDescription(e.target.value)} />
-      <ImageUploader setImage={setImage}/>
+      <ImageUploader setImage={setImage} />
 
       <br></br>
 
       {newRecipe.method.map((step, index) => (
-        <TextField key={"method" +index} label={"Method Step " + index} value={step} onChange={(e) => updateMethodStep(e.target.value, index)} />
+        <TextField key={"method" + index} label={"Method Step " + index} value={step} onChange={(e) => updateMethodStep(e.target.value, index)} />
       ))}
 
       <br></br>
@@ -120,15 +126,15 @@ const AddRecipePage = () => {
       />
 
       {newRecipe.ingredients.map((ingredientEntry, index) => (
-        <div key={"ingredient" +index}>
+        <div key={"ingredient" + index}>
           <span>{ingredientEntry.ingredient.name}</span>
-          <TextField  label="Amount"
-                  value={ingredientEntry.amount}
-                  onChange={(e) => addIngredientAmount(e.target.value, index)}
+          <TextField label="Amount"
+            value={ingredientEntry.amount}
+            onChange={(e) => addIngredientAmount(e.target.value, index)}
           />
-          <TextField  label="Unit"
-                  value={ingredientEntry.unit}
-                  onChange={(e) => addIngredientUnit(e.target.value, index)}
+          <TextField label="Unit"
+            value={ingredientEntry.unit}
+            onChange={(e) => addIngredientUnit(e.target.value, index)}
           />
 
         </div>

@@ -23,7 +23,7 @@ class RecipesModel():
         built_recipy = {
             'name': 'name',
             'description': 'description',
-            'image': 'image',
+            'image_id': None,
             'method': [],
             'ingredients': [],
             'allergies': {}
@@ -45,13 +45,6 @@ class RecipesModel():
             raise ValidationError('Recipe must have a description!')
         if len(built_recipy['description']) > 60:
             raise ValidationError('Description should be less than 60 charectors!')
-
-
-        # Image
-        built_recipy['image'] = request_data['image'].strip()
-
-        if len(built_recipy['image']) < 2:
-            raise ValidationError('Recipe must have an image!')
 
 
         # Method
