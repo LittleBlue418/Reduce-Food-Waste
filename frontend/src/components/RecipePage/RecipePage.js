@@ -3,6 +3,8 @@ import {  useParams } from "react-router-dom";
 
 import classes from './RecipePage.module.css';
 
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 import RecipeHeader from './ReceipeHeader/RecipeHeader';
 import RecipeIngrdients from './RecipyIngredients/RecipeIngredients';
 import RecipeMethod from './Recipemethod/RecipeMethod';
@@ -21,7 +23,7 @@ const RecipePage = () => {
   }, [recipe_id, API]);
 
     if (recipe === null) {
-      return <p>Loading...</p>
+      return <CircularProgress />
     }
 
     return (

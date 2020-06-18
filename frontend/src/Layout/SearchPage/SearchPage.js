@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 import TipBox from '../../components/UI/TipBox/TipBox';
 import SearchFilters from '../../components/Search/SearchFilters/SearchFilters';
 import SearchBox from '../../components/Search/SearchBox/SearchBox';
@@ -13,6 +15,7 @@ const SearchPage = () => {
   const [API] = useState (new APIClient())
   const [ingredients, setIngredients] = useState ([])
   const [recipes, setRecipes] = useState ([])
+  const [loading, setLoading] = useState (true)
 
   const [selectedIngredients, setSelectedIngredients] = useState([])
   const [alogenFilters, setAlogenFilters] = useState ({
@@ -31,6 +34,7 @@ const SearchPage = () => {
   }, [API])
 
   useEffect(() => {
+    setLoading(true)
 
     const allogens = Object.entries(alogenFilters)
                       .filter((alogen) => alogen[1])
@@ -46,6 +50,7 @@ const SearchPage = () => {
 
     API.search_recipes(searchBody).then(recipes => {
       setRecipes(recipes)
+      setLoading(false)
     })
 
   }, [API, selectedIngredients, alogenFilters])
@@ -74,6 +79,12 @@ const SearchPage = () => {
             selectedIngredients={selectedIngredients}
             setSelectedIngredients={setSelectedIngredients}
         />
+
+        {
+          loading && (
+            <CircularProgress />
+          )
+        }
 
         <RecipeCards
           recipes={recipes}

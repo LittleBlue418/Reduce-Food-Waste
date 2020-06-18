@@ -117,6 +117,7 @@ const AddRecipePage = () => {
           }
         }}
         value={null}
+        loading={allIngredients.length === 0}
         onChange={(event, ingredient, reason) => {
           addIngredientEntry(ingredient)
         }}
