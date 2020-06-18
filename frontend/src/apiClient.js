@@ -5,6 +5,8 @@ export class APIClient {
     this.http = axios.create()
     this.baseUrl = 'http://localhost:5000'
 
+    this.updateImageURL = this.updateImageURL.bind(this)
+
     this.list_ingredients = this.list_ingredients.bind(this)
     this.create_ingredient = this.create_ingredient.bind(this)
     this.get_ingredient = this.get_ingredient.bind(this)
@@ -19,6 +21,14 @@ export class APIClient {
     this.update_recipe = this.update_recipe.bind(this)
     this.delete_recipe = this.delete_recipe.bind(this)
   }
+
+
+  updateImageURL(recipe) {
+    recipe['image_url'] = this.baseUrl + '/api/images/' + recipe['image_id']
+    return recipe
+  }
+
+
 
   //============================================================
   // Ingredients
@@ -50,40 +60,32 @@ export class APIClient {
 
   search_recipes(query) {
     return this.http.post(this.baseUrl + '/api/recipes/_search', query).then(result => {
-      const recipies = result.data.recipes
-      let updated_recipes = recipies.map((recipe) => {
-        recipe['image_url'] = this.baseUrl + '/api/images/' + recipe['image_id']
-        return recipe
-      })
-      return updated_recipes
+      return result.data.recipes.map(this.updateImageURL)
     })
   }
 
   list_recipes() {
     return this.http.get(this.baseUrl + '/api/recipes').then(result => {
-      const recipies = result.data.recipes
-      let updated_recipes = recipies.map((recipe) => {
-        recipe['image_url'] = this.baseUrl + '/api/images/' + recipe['image_id']
-        return recipe
-      })
-      return updated_recipes
+      return result.data.recipes.map(this.updateImageURL)
     })
   }
 
   create_recipe(recipe) {
-    return this.http.post(this.baseUrl + '/api/recipes', recipe).then(result => result.data)
+    return this.http.post(this.baseUrl + '/api/recipes', recipe).then(result => {
+      return this.updateImageURL(result.data)
+    })
   }
 
   get_recipe(recipe_id) {
     return this.http.get(this.baseUrl + '/api/recipes/' + recipe_id).then(result => {
-      const recipe = result.data
-      recipe['image_url'] = this.baseUrl + '/api/images/' + recipe['image_id']
-      return recipe
+      return this.updateImageURL(result.data)
     })
   }
 
   update_recipe(recipe_id, recipe) {
-    return this.http.put(this.baseUrl + '/api/recipes/' + recipe_id, recipe).then(result => result.data)
+    return this.http.put(this.baseUrl + '/api/recipes/' + recipe_id, recipe).then(result => {
+      return this.updateImageURL(result.data)
+    })
   }
 
   delete_recipe(recipe_id) {
