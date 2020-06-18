@@ -9,6 +9,7 @@ from models import mongo
 from resources.ingredients import Ingredient, IngredientsCollection
 from resources.users import User, UserCollection
 from resources.recipes import Recipe, RecipeCollection, RecipeSearch
+from resources.images import Image
 
 load_dotenv()
 
@@ -32,6 +33,7 @@ api.add_resource(User, '/api/users/<user_id>')
 api.add_resource(RecipeSearch, '/api/recipes/_search')
 api.add_resource(RecipeCollection, '/api/recipes')
 api.add_resource(Recipe, '/api/recipes/<recipe_id>')
+api.add_resource(Image, '/api/images/<image_id>')
 
 
 
