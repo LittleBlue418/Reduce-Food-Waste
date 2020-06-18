@@ -62,11 +62,13 @@ class Recipe(Resource):
 
     def delete(self, recipe_id):
         recipe = RecipesModel.find_by_id(recipe_id)
+        image_id = recipe['image_id']
 
         if not recipe:
             return {"message": "A recipe with this name does not exist"}
 
         mongo.db.recipes.remove({"_id": ObjectId(recipe_id)})
+        mongo.db.images.remove({"_id": ObjectId(image_id)})
 
         return {"message": "Recipe deleted"}, 200
 
