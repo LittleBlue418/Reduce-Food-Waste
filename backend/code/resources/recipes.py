@@ -44,14 +44,28 @@ class Recipe(Resource):
     def put(self, recipe_id):
         request_data = request.json
 
-        if not RecipesModel.find_by_id(recipe_id):
+        old_recipe = RecipesModel.find_by_id(recipe_id)
+
+        if not old_recipe:
             return {"message": "A Recipe with that ID does not exist"}
 
-
         try:
+            mongo.db.images.remove({"_id": ObjectId(old_recipe['image_id'])})
+
             updated_recipe = RecipesModel.build_recipe_from_request(request_data)
+
+            image_data = b64decode(request_data['image_data'])
+            image_content_type = request_data['image_content_type']
+            built_image = ImageModel.build_image(image_data, image_content_type)
+
+            result = mongo.db.images.insert_one(built_image)
+
+            updated_recipe['image_id'] = str(result.inserted_id)
+
             mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, updated_recipe)
+
             updated_recipe['_id'] = recipe_id
+
             return RecipesModel.return_as_object(updated_recipe)
 
         except ValidationError as error:
