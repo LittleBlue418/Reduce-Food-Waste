@@ -59,6 +59,8 @@ const RecipePage = () => {
         />
 
         <div className={classes.Line}></div>
+            <div><em>{recipe.description}</em></div>
+        <div className={classes.Line}></div>
 
         <div className={classes.middleSection}>
           <RecipeIngrdients
