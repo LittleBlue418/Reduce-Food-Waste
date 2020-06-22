@@ -183,28 +183,35 @@ const AddRecipePage = () => {
 
       <div className={classes.MethodHeadingDiv}>
         <h3>Method</h3>
-        <Button onClick={addMethodStep} color="primary">
-          <AddCircleOutlineIcon />
-        </Button>
       </div>
       {newRecipe.method.map((step, index) => (
-        <TextField
-          fullWidth
-          multiline
-          key={"method" + index}
-          label={"Method Step " + index}
-          value={step}
-          onChange={(e) => updateMethodStep(e.target.value, index)}
-        />
+        <div className={classes.MethodStepDiv}>
+          <TextField
+            fullWidth
+            multiline
+            key={"method" + index}
+            label={"Method Step " + index}
+            value={step}
+            onChange={(e) => updateMethodStep(e.target.value, index)}
+          />
+        </div>
       ))}
+      <div className={classes.AddStepButtonDiv}>
+        <ThemeProvider theme={buttonTheme}>
+          <Button variant="outlined" color="primary" onClick={addMethodStep}>
+            Add Step
+          </Button>
+        </ThemeProvider>
+      </div>
+
 
 
       <div className={classes.Line}></div>
 
 
-      <div className={classes.ButtonDiv}>
+      <div className={classes.SubmitButtonDiv}>
         <ThemeProvider theme={buttonTheme}>
-          <Button variant="outlined" color="primary" onClick={saveToDatabase}>
+          <Button variant="contained" color="primary" onClick={saveToDatabase}>
             Save Recipe
           </Button>
         </ThemeProvider>

@@ -7,17 +7,11 @@
     margin: 30px auto;
 }
 
-.MethodHeadingDiv {
-    display: flex;
-}
-
 .Line {
     background-color: lightgrey;
     width: 80%;
     height: 2px;
-    margin: auto;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin: 30px auto;
 }
 
 .IngredientsHeading {
@@ -44,7 +38,19 @@
     margin-top: 25px;
 }
 
-.ButtonDiv {
+.MethodHeadingDiv {
+    display: flex;
+}
+
+.MethodStepDiv{
+    margin-bottom: 15px;
+}
+
+.AddStepButtonDiv {
+    margin: 10px 0;
+}
+
+.SubmitButtonDiv {
     margin-bottom: 40px;
 }
 
@@ -58,5 +64,11 @@
         justify-content: space-between;
         align-items: center;
         padding: 0 20px;
+    }
+    .SubmitButtonDiv {
+        margin-top: 50px;
+    }
+    .Line {
+        margin: 50px auto;
     }
 }
