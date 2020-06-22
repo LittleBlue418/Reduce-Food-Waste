@@ -66,13 +66,12 @@ const RecipePage = () => {
           <RecipeIngrdients
             ingredients={recipe.ingredients}
           />
-
-            <div
+          <div
               className={classes.RecipePicture}
               style={{
                 backgroundImage: 'url(' + recipe.image_url + ')'
               }}
-            />
+          />
 
         </div>
 
