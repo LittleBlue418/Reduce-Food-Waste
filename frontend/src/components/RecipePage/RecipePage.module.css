@@ -1,3 +1,10 @@
+.ButtonDiv{
+    width: 80%;
+    margin: 10px auto;
+    display: flex;
+    justify-content: flex-start;
+}
+
 .RecipePage {
     border: 2px solid lightgrey;
     width: 80%;
