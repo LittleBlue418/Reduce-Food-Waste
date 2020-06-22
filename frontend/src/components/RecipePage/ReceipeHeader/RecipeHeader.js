@@ -2,8 +2,6 @@ import React from 'react';
 import './RecipeHeader.css'
 
 import Auxiliary from '../../../hoc/Auxiliary';
-import EditIcon from '../../../assets/icons/edit-solid.svg';
-
 
 const RecipeHeader = ({ name, allergies }) => {
   return (
