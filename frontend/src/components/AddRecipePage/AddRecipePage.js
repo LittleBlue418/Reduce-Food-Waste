@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import classes from './AddRecipePage.module.css';
 
 import TextField from '@material-ui/core/TextField';
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import Button from '@material-ui/core/Button';
 import ImageUploader from './ImageUploader/ImageUploader';
