@@ -15,6 +15,7 @@ const MethodStep = ({method_step}) => {
   return (
       <div className={stepClass}>
           <input type="checkbox"
+                className={classes.checkbox}
                 checked={clicked}
                 onChange={() => toggleClicked(
                 clicked => !clicked

@@ -1,15 +1,17 @@
 .methodStep {
     display: flex;
-    padding: 4px;
+    padding: 11px 4px;
+    text-align: left;
 }
 
 .methodStepToggled {
     display: flex;
-    padding: 4px;
+    padding: 11px 4px;
+    text-align: left;
     background-color: lightgrey;
     text-decoration: line-through;
 }
 
-.methodStep input {
-    margin: auto 5px auto 5px;
+.checkbox {
+    margin: auto 10px;
 }
