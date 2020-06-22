@@ -102,35 +102,26 @@ const AddRecipePage = () => {
 
       <h2>Add Recipe</h2>
 
-
       <div className={classes.TitleDiv}>
-        <TextField label="Recipe Name" value={newRecipe.name} onChange={(e) => setName(e.target.value)} />
-        <TextField label="Brief Description" value={newRecipe.description} onChange={(e) => setDescription(e.target.value)} />
+        <TextField
+          label="Recipe Name"
+          fullWidth
+          value={newRecipe.name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <TextField
+          label="Brief Description"
+          fullWidth
+          multiline
+          value={newRecipe.description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
       </div>
 
 
       <div className={classes.ImageUploaderDiv}>
         <ImageUploader setImage={setImage} />
       </div>
-
-      <div className={classes.Line}></div>
-
-      <div className={classes.MethodHeadingDiv}>
-        <h3>Method</h3>
-        <Button onClick={addMethodStep} color="primary">
-          <AddCircleOutlineIcon />
-        </Button>
-      </div>
-      {newRecipe.method.map((step, index) => (
-        <TextField
-          fullWidth
-          multiline
-          key={"method" + index}
-          label={"Method Step " + index}
-          value={step}
-          onChange={(e) => updateMethodStep(e.target.value, index)}
-        />
-      ))}
 
 
       <div className={classes.Line}></div>
@@ -183,6 +174,28 @@ const AddRecipePage = () => {
 
 
       <div className={classes.Line}></div>
+
+
+      <div className={classes.MethodHeadingDiv}>
+        <h3>Method</h3>
+        <Button onClick={addMethodStep} color="primary">
+          <AddCircleOutlineIcon />
+        </Button>
+      </div>
+      {newRecipe.method.map((step, index) => (
+        <TextField
+          fullWidth
+          multiline
+          key={"method" + index}
+          label={"Method Step " + index}
+          value={step}
+          onChange={(e) => updateMethodStep(e.target.value, index)}
+        />
+      ))}
+
+
+      <div className={classes.Line}></div>
+
 
       <div className={classes.ButtonDiv}>
         <ThemeProvider theme={buttonTheme}>
