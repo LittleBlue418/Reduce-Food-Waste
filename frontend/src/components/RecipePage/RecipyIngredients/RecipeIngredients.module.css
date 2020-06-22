@@ -1,16 +1,4 @@
-.RecipeIngredientDiv {
-    display: flex;
-    justify-content: space-between;
+.IngredientsContainerDiv {
+    width: 100%;
 }
 
-.name {
-    width: 60%;
-}
-
-.amount {
-    width: 10%;
-}
-
-.unit {
-    width: 20%;
-}

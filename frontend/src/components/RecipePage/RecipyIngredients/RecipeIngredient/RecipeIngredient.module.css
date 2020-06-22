@@ -1,0 +1,23 @@
+.methodStep {
+    display: flex;
+    padding: 4px;
+}
+
+.methodStepToggled {
+    display: flex;
+    padding: 4px;
+    background-color: lightgrey;
+    text-decoration: line-through;
+}
+
+.name {
+    width: 60%;
+}
+
+.amount {
+    width: 10%;
+}
+
+.unit {
+    width: 20%;
+}

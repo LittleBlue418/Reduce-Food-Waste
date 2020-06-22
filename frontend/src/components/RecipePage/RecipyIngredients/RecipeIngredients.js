@@ -1,30 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import classes from './RecipeIngredients.module.css'
+import RecipeIngredient from './RecipeIngredient/RecipeIngredient'
 
-const RecipeIngredients = ({ingredients}) => {
+const RecipeIngredients = ({ ingredients }) => {
+  const [clicked, toggleClicked] = useState (false)
+
+  let stepClass
+
+  if (clicked) {
+      stepClass = classes.methodStepToggled
+  } else {
+      stepClass = classes.methodStep
+  }
+
   return (
-    <div>
-      <div>
-        {ingredients.map((ingredient_entry) => {
-          const {amount, unit, ingredient:{name, _id}} = ingredient_entry
-          return (
-          <div
-            key={_id}
-            className={classes.RecipeIngredientDiv}>
-              <div className={classes.name}>
-                {name}
-              </div >
-              <div className={classes.amount}>
-                {amount}
-              </div>
-              <div className={classes.unit}>
-                {unit}
-              </div>
-          </div>
-          )
-        })}
-
-      </div>
+    <div className={classes.IngredientsContainerDiv}>
+      {ingredients.map((ingredient_entry) => {
+        return (
+          <RecipeIngredient ingredient_entry={ingredient_entry} />
+        )
+      })}
     </div>
   );
 };
