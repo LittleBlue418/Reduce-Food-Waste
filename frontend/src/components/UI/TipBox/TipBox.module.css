@@ -6,15 +6,20 @@
 }
 
 .message {
-    padding: 2px;
+    padding: 2px 7px;
 }
 
 .TipBox img {
     height: 30px;
-    margin-left: 5px;
+    margin-left: 15px;
+}
+
+.TipBox p {
+    margin: 10px 0;
 }
 
 .TipHeader {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
