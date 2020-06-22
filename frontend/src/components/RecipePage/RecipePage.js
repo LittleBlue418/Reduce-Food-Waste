@@ -6,6 +6,7 @@ import classes from './RecipePage.module.css';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from '@material-ui/core/Button';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import EditIcon from '@material-ui/icons/Edit';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import RecipeHeader from './ReceipeHeader/RecipeHeader';
@@ -43,6 +44,9 @@ const RecipePage = () => {
         <ThemeProvider theme={theme}>
           <Button className={classes.ButtonBack} variant="outlined" color="primary">
             <ArrowBackIcon />
+          </Button>
+          <Button className={classes.ButtonBack} variant="outlined" color="primary">
+            <EditIcon />
           </Button>
         </ThemeProvider>
       </div>
