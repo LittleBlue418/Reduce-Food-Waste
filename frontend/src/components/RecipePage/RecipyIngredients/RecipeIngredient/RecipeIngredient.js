@@ -3,7 +3,7 @@ import classes from './RecipeIngredient.module.css'
 
 const RecipeIngredients = ({ ingredient_entry }) => {
   const [clicked, toggleClicked] = useState (false)
-  const { amount, unit, ingredient: { name, _id } } = ingredient_entry
+  const { amount, unit, ingredient: { name } } = ingredient_entry
 
   let ingredientClass
 
@@ -14,9 +14,7 @@ const RecipeIngredients = ({ ingredient_entry }) => {
   }
 
   return (
-          <div
-            key={_id}
-            className={ingredientClass}>
+          <div className={ingredientClass}>
             <input type="checkbox"
                 className={classes.checkbox}
                 checked={clicked}
