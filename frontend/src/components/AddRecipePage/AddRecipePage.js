@@ -2,14 +2,24 @@ import React, { useState, useEffect } from 'react';
 import classes from './AddRecipePage.module.css';
 
 import TextField from '@material-ui/core/TextField';
-import IconButton from '@material-ui/core/IconButton';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import Button from '@material-ui/core/Button';
 import ImageUploader from './ImageUploader/ImageUploader';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import APIClient from '../../apiClient';
 import { capitalize } from '../../utilityFunctions';
+
+const buttonTheme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#006400',
+    },
+  },
+});
+
+
 
 const AddRecipePage = () => {
   const [API] = useState(new APIClient())
@@ -36,10 +46,10 @@ const AddRecipePage = () => {
   const setName = (name) => setNewRecipe({ ...newRecipe, name: name });
   const setDescription = (description) => setNewRecipe({ ...newRecipe, description: description });
   const setImage = (image_data, image_content_type) => setNewRecipe({
-                                                  ...newRecipe,
-                                                  image_data: image_data,
-                                                  image_content_type: image_content_type
-                                                });
+    ...newRecipe,
+    image_data: image_data,
+    image_content_type: image_content_type
+  });
 
   const addMethodStep = () => {
     newRecipe.method.push("")
@@ -90,21 +100,43 @@ const AddRecipePage = () => {
   return (
     <div className={classes.AddRecipePage}>
 
-      <TextField label="Recipe Name" value={newRecipe.name} onChange={(e) => setName(e.target.value)} />
-      <TextField label="Brief Description" value={newRecipe.description} onChange={(e) => setDescription(e.target.value)} />
-      <ImageUploader setImage={setImage} />
+      <h2>Add Recipe</h2>
 
-      <br></br>
 
+      <div className={classes.TitleDiv}>
+        <TextField label="Recipe Name" value={newRecipe.name} onChange={(e) => setName(e.target.value)} />
+        <TextField label="Brief Description" value={newRecipe.description} onChange={(e) => setDescription(e.target.value)} />
+      </div>
+
+
+      <div className={classes.ImageUploaderDiv}>
+        <ImageUploader setImage={setImage} />
+      </div>
+
+      <div className={classes.Line}></div>
+
+      <div className={classes.MethodHeadingDiv}>
+        <h3>Method</h3>
+        <Button onClick={addMethodStep} color="primary">
+          <AddCircleOutlineIcon />
+        </Button>
+      </div>
       {newRecipe.method.map((step, index) => (
-        <TextField key={"method" + index} label={"Method Step " + index} value={step} onChange={(e) => updateMethodStep(e.target.value, index)} />
+        <TextField
+          fullWidth
+          multiline
+          key={"method" + index}
+          label={"Method Step " + index}
+          value={step}
+          onChange={(e) => updateMethodStep(e.target.value, index)}
+        />
       ))}
 
-      <br></br>
 
-      <IconButton aria-label="delete" onClick={addMethodStep}>
-        <AddCircleOutlineIcon />
-      </IconButton>
+      <div className={classes.Line}></div>
+
+
+      <h3 className={classes.IngredientsHeading}>Ingredients</h3>
 
       <Autocomplete
         options={allIngredients.filter((ingredient) => !usedIngredients.includes(ingredient))}
@@ -126,25 +158,39 @@ const AddRecipePage = () => {
         renderInput={(params) => <TextField {...params} label="Select Ingredient" variant="outlined" />}
       />
 
-      {newRecipe.ingredients.map((ingredientEntry, index) => (
-        <div key={"ingredient" + index}>
-          <span>{ingredientEntry.ingredient.name}</span>
-          <TextField label="Amount"
-            value={ingredientEntry.amount}
-            onChange={(e) => addIngredientAmount(e.target.value, index)}
-          />
-          <TextField label="Unit"
-            value={ingredientEntry.unit}
-            onChange={(e) => addIngredientUnit(e.target.value, index)}
-          />
 
+      {newRecipe.ingredients.map((ingredientEntry, index) => (
+        <div className={classes.IngredientEntry} key={"ingredient" + index}>
+
+          <div>{capitalize(ingredientEntry.ingredient.name)}</div>
+
+          <div className={classes.IngredientFields}>
+            <div className={classes.IngredientField}>
+              <TextField label="Amount"
+                value={ingredientEntry.amount}
+                onChange={(e) => addIngredientAmount(e.target.value, index)}
+              />
+            </div>
+            <div className={classes.IngredientField}>
+              <TextField label="Unit"
+                value={ingredientEntry.unit}
+                onChange={(e) => addIngredientUnit(e.target.value, index)}
+              />
+            </div>
+          </div>
         </div>
       ))}
 
-      <Button variant="outlined" color="primary" onClick={saveToDatabase}>
-        Save Recipe
-      </Button>
 
+      <div className={classes.Line}></div>
+
+      <div className={classes.ButtonDiv}>
+        <ThemeProvider theme={buttonTheme}>
+          <Button variant="outlined" color="primary" onClick={saveToDatabase}>
+            Save Recipe
+          </Button>
+        </ThemeProvider>
+      </div>
     </div>
   );
 };

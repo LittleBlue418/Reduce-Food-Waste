@@ -1,0 +1,59 @@
+.AddRecipePage {
+    max-width: 80%;
+    margin: auto;
+}
+
+.ImageUploaderDiv {
+    margin: 30px auto;
+}
+
+.MethodHeadingDiv {
+    display: flex;
+}
+
+.Line {
+    background-color: lightgrey;
+    width: 80%;
+    height: 2px;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.IngredientsHeading {
+    text-align: left;
+}
+
+.IngredientEntry {
+    border: lightgrey 2px dashed;
+    border-radius: 16px;
+    margin: 10px auto;
+    padding: 10px 0;
+}
+
+.IngredientFields {
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.IngredientField{
+    margin: 10px;
+}
+
+.ButtonDiv {
+    margin-bottom: 40px;
+}
+
+@media(min-width: 750px) {
+    .TitleDiv {
+        display: flex;
+        flex-direction: column;
+    }
+    .IngredientEntry {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+    }
+}
