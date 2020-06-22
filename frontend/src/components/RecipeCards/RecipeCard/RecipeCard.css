@@ -3,7 +3,7 @@
     width: 80%;
     height: 100px;
     margin: auto;
-    margin-top: 10px;
+    margin-bottom: 15px;
     padding: 3px;
     text-decoration: none;
     color: black;
@@ -14,11 +14,32 @@ a:-webkit-any-link {
      text-decoration: none;
 }
 
-
 .RecipeHead {
+    height: 30%;
+}
+
+.RecipeHead p {
+    margin: 4px 0;
+}
+
+.RecipeBody {
     display: flex;
     justify-content: space-between;
-    height: 30%;
+    height: 70%;
+}
+
+.RecipeImageDiv {
+    height: 100%;
+    width: auto;
+    max-width: 50%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.RecipeImageDiv img {
+    max-width: 100%;
+    max-height: 100%;
+
 }
 
 .IconDiv {
@@ -35,36 +56,30 @@ a:-webkit-any-link {
     width: 25px
 }
 
-.RecipeBody {
-    display: flex;
-    height: 70%;
-}
 
-.RecipeImageDiv {
-    height: 100%;
-    width: 40%;
-    display: flex;
-    justify-content: flex-start;
-}
+/*  MEDIA QUERIES */
 
-.RecipeImageDiv img {
-    max-width: 100%;
-    max-height: 100%;
-
-}
 
 @media (min-width: 400px) {
     .IconDiv div {
         height: 30px;
         width: 30px
     }
+    .RecipeCard {
+        height: 120px;
+    }
 }
+
 
 @media (min-width: 750px) {
     .RecipeCard {
-        width: 46%;
+        width: 250px;
     }
 }
+
+
+/*  ICON IMAGES */
+
 
 .vegan {
     background-image: url(../../../assets/icons/vegan.png);

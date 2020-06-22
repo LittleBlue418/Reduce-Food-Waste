@@ -3,11 +3,6 @@ import RecipeCard from './RecipeCard/RecipeCard'
 import classes from './RecipeCards.module.css'
 
 const RecipeCards = ({recipes}) => {
-  // title
-  // dietary filters
-  // ingredients
-  // image
-
   return (
     <div className={classes.RecipeCards}>
       {
