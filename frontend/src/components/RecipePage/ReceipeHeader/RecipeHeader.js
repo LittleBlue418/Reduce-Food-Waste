@@ -9,12 +9,11 @@ const RecipeHeader = ({ name, allergies }) => {
   return (
     <Auxiliary>
       <div className="RecipeHeader">
-        <div className="header1">
-          <p>{name}</p>
+        <div className="TitleDiv">
+          <h2>{name}</h2>
         </div>
 
-        <div className="header2">
-          <button><img alt="edit icon" src={EditIcon} /></button>
+        <div className="IconsDiv">
           <div className="IconDivRecipe">
             {Object.entries(allergies).map(([key, value]) => {
               if (value === true) {

@@ -4,38 +4,39 @@
     flex-direction: column;
 }
 
-.header1 {
+.TitleDiv {
     display: flex;
-    padding: 5px 0 5px 5px;
+    padding: 5px 0 5px 10px;
 }
 
-.header2 {
-    display: flex;
-    justify-content: space-between;
-    padding: 5px 5px 5px 5px;
+.TitleDiv h2 {
+    margin: 10px 0;
 }
 
-.header2 img {
+.IconsDiv {
+    display: flex;
+    justify-content: flex-start;
+    padding: 5px 10px 0 10px;
+}
+
+.IconsDiv img {
     height: 20px;
     width: 20px;
-
 }
 
 .IconDivRecipe {
     height: 100%;
     width: 50%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
 }
 
 .IconDivRecipe div {
     background-size: contain;
     background-repeat: no-repeat;
     height: 30px;
-    width: 30px
+    width: 30px;
 }
-
-
 
 
 
@@ -43,31 +44,50 @@
     .RecipeHeader {
         flex-direction: row;
         justify-content: space-between;
+        align-items: center;
     }
-    .header1 {
+    .TitleDiv {
         min-width: 50%;
     }
-    .header2 {
+    .IconsDiv {
         min-width: 30%;
+        justify-content: flex-end;
+    }
+    .IconDivRecipe div {
+        height: 40px;
+        width: 40px
+    }
+    .IconDivRecipe {
+        height: 100%;
+        width: 100%;
+        justify-content: flex-end;
+    }
+    .TitleDiv h3 {
+        font-size: x-large;
     }
 }
 
 .vegan {
     background-image: url(../../../assets/icons/vegan.png);
+    background-position: center;
 }
 
 .vegetarian {
     background-image: url(../../../assets/icons/vegetarian.png);
+    background-position: center;
 }
 
 .gluten_free {
     background-image: url(../../../assets/icons/gluten_free.png);
+    background-position: center;
 }
 
 .nut_free {
     background-image: url(../../../assets/icons/nut_free.png);
+    background-position: center;
 }
 
 .egg_free {
     background-image: url(../../../assets/icons/egg_free.png);
+    background-position: center;
 }
