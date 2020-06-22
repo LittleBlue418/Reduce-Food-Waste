@@ -129,27 +129,6 @@ const AddRecipePage = () => {
 
       <h3 className={classes.IngredientsHeading}>Ingredients</h3>
 
-      <Autocomplete
-        options={allIngredients.filter((ingredient) => !usedIngredients.includes(ingredient))}
-        inputValue={inputValue}
-        onInputChange={(event, inputValue, reason) => {
-          if (reason === 'reset') {
-            setInputValue("")
-          } else {
-            setInputValue(inputValue)
-          }
-        }}
-        value={null}
-        loading={allIngredients.length === 0}
-        onChange={(event, ingredient, reason) => {
-          addIngredientEntry(ingredient)
-        }}
-        getOptionLabel={(option) => capitalize(option.name)}
-        className={classes.SearchBox}
-        renderInput={(params) => <TextField {...params} label="Select Ingredient" variant="outlined" />}
-      />
-
-
       {newRecipe.ingredients.map((ingredientEntry, index) => (
         <div className={classes.IngredientEntry} key={"ingredient" + index}>
 
@@ -171,6 +150,32 @@ const AddRecipePage = () => {
           </div>
         </div>
       ))}
+
+      <div className={classes.AutocompleteDiv}>
+        <Autocomplete
+          options={allIngredients.filter((ingredient) => !usedIngredients.includes(ingredient))}
+          inputValue={inputValue}
+          onInputChange={(event, inputValue, reason) => {
+            if (reason === 'reset') {
+              setInputValue("")
+            } else {
+              setInputValue(inputValue)
+            }
+          }}
+          value={null}
+          loading={allIngredients.length === 0}
+          onChange={(event, ingredient, reason) => {
+            addIngredientEntry(ingredient)
+          }}
+          getOptionLabel={(option) => capitalize(option.name)}
+          className={classes.SearchBox}
+          renderInput={(params) => <TextField {...params} label="Select Ingredient" variant="outlined" />}
+        />
+      </div>
+
+
+
+
 
 
       <div className={classes.Line}></div>

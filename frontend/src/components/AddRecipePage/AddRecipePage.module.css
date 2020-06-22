@@ -32,13 +32,16 @@
 }
 
 .IngredientFields {
-
     display: flex;
     justify-content: space-between;
 }
 
 .IngredientField{
     margin: 10px;
+}
+
+.AutocompleteDiv {
+    margin-top: 25px;
 }
 
 .ButtonDiv {
