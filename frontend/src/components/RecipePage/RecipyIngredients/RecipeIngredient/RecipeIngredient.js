@@ -5,19 +5,20 @@ const RecipeIngredients = ({ ingredient_entry }) => {
   const [clicked, toggleClicked] = useState (false)
   const { amount, unit, ingredient: { name, _id } } = ingredient_entry
 
-  let stepClass
+  let ingredientClass
 
   if (clicked) {
-      stepClass = classes.methodStepToggled
+    ingredientClass = classes.methodStepToggled
   } else {
-      stepClass = classes.methodStep
+    ingredientClass = classes.methodStep
   }
 
   return (
           <div
             key={_id}
-            className={stepClass}>
+            className={ingredientClass}>
             <input type="checkbox"
+                className={classes.checkbox}
                 checked={clicked}
                 onChange={() => toggleClicked(
                 clicked => !clicked
