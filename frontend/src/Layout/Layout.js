@@ -1,14 +1,35 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
+import Auxiliary from '../hoc/Auxiliary';
 import SiteHeader from '../Navigation/SiteHeader/SiteHeader';
+import SideDrawer from '../Navigation/SideDrawer/SideDrawer';
 
 
-class Layout extends Component {
-  render() {
-    return (
-        <SiteHeader />
-    );
+const Layout = () => {
+  const [sidedrawerShown, setSidedrawerShown] = useState (false)
+
+  const toggleSidedrawer = () => {
+    const currentState = sidedrawerShown
+    const newState = !currentState
+    setSidedrawerShown(newState)
   }
+
+    return (
+      <Auxiliary>
+
+        <SiteHeader
+          toggleSidedrawer={toggleSidedrawer}
+        />
+
+        <SideDrawer
+          clicked={toggleSidedrawer}
+          sidedrawerShown={sidedrawerShown}
+        />
+
+      </Auxiliary>
+
+    );
+
 }
 
 export default Layout;

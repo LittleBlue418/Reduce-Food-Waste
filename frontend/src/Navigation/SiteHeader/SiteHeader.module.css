@@ -6,10 +6,22 @@
     top: 0;
     left: 0;
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     align-items: center;
     position: relative;
     padding: 0 15px;
     box-sizing: border-box;
     margin-bottom: 20px;
+}
+
+
+.ButtonDiv {
+    border: white 2px solid;
+    border-radius: 10px;
+    width: 40px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 }
