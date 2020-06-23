@@ -19,7 +19,13 @@
     }
 }*/
 
-
+.MenuLogo {
+    height: 110px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
 
 .Open {
     transform: translateX(0);

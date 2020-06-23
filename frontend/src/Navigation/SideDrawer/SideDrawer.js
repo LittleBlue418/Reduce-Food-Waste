@@ -1,9 +1,10 @@
 import React from 'react';
-// import Logo from '../../assets/images/icon.png'
-// import NavItems from '../NavItems/NavItems';
+
 import classes from './SideDrawer.module.css';
 import Backdrop from '../../components/UI/Backdrop/Backdrop';
 import Auxiliary from '../../hoc/Auxiliary';
+import Logo from '../../components/UI/Logo/Logo';
+import NavItems from './NavItems/NavItems';
 
 
 const SideDrawer = ({clicked, sidedrawerShown}) => {
@@ -23,9 +24,15 @@ const SideDrawer = ({clicked, sidedrawerShown}) => {
       />
 
       <div className={attachedClasses.join(' ')}>
-        <nav>
 
+        <div className={classes.MenuLogo}>
+            <Logo />
+        </div>
+
+        <nav>
+          <NavItems />
         </nav>
+
       </div>
     </Auxiliary>
 
