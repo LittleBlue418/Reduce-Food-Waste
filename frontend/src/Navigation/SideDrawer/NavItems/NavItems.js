@@ -19,7 +19,7 @@ const NavItems = () => {
         About This Site
     </NavItem>
     <NavItem
-      link="/https://github.com/LittleBlue418"
+      link="https://github.com/LittleBlue418"
       target="_blank">
         Developer page
     </NavItem>
