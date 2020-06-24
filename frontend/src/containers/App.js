@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -14,13 +14,8 @@ import AddRecipePage from '../components/AddRecipePage/AddRecipePage';
 
 
 
-class App extends Component {
-  state = {
-    authenticated: false,
-  }
+const App = () => {
 
-
-  render() {
       return(
         <Router>
 
@@ -55,8 +50,6 @@ class App extends Component {
 
         </Router>
       );
-  }
-
 }
 
 export default App;
