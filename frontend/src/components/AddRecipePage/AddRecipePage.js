@@ -184,11 +184,12 @@ const AddRecipePage = () => {
         <h3>Method</h3>
       </div>
       {newRecipe.method.map((step, index) => (
-        <div className={classes.MethodStepDiv}>
+        <div
+          className={classes.MethodStepDiv}
+          key={"method" + index}>
           <TextField
             fullWidth
             multiline
-            key={"method" + index}
             label={"Method Step " + index}
             value={step}
             onChange={(e) => updateMethodStep(e.target.value, index)}
