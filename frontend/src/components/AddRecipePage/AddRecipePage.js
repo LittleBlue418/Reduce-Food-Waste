@@ -102,6 +102,7 @@ const AddRecipePage = () => {
       <h2>Add Recipe</h2>
 
       <div className={classes.TitleDiv}>
+        <h3>Title & Info</h3>
         <TextField
           label="Recipe Name"
           fullWidth
@@ -118,15 +119,19 @@ const AddRecipePage = () => {
       </div>
 
 
-      <div className={classes.ImageUploaderDiv}>
-        <ImageUploader setImage={setImage} />
+      <div className={classes.ImageUploaderWrapper}>
+        <h3>Picture</h3>
+        <div className={classes.ImageUploaderDiv}>
+          <ImageUploader setImage={setImage} />
+        </div>
       </div>
+
 
 
       <div className={classes.Line}></div>
 
 
-      <h3 className={classes.IngredientsHeading}>Ingredients</h3>
+      <h3>Ingredients</h3>
 
       {newRecipe.ingredients.map((ingredientEntry, index) => (
         <div className={classes.IngredientEntry} key={"ingredient" + index}>
@@ -173,16 +178,12 @@ const AddRecipePage = () => {
       </div>
 
 
-
-
-
-
       <div className={classes.Line}></div>
 
 
-      <div className={classes.MethodHeadingDiv}>
-        <h3>Method</h3>
-      </div>
+
+      <h3>Method</h3>
+
       {newRecipe.method.map((step, index) => (
         <div
           className={classes.MethodStepDiv}

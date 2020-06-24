@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import classes from './ImageUploader.module.css'
 
 import { Preview } from './Preview/Preview';
 import { resizeImage } from './ImageResizer/ImageResizer';
+
+import PublishIcon from "@material-ui/icons/Publish";
 
 
 const ImageUploader = ({setImage}) => {
@@ -26,7 +29,7 @@ const ImageUploader = ({setImage}) => {
   const style = {
     height: maxHeight,
     width: maxWidth,
-    position: "absolute",
+    position: "relative",
     border: "2px dashed lightgrey"
   }
 
@@ -46,10 +49,22 @@ const ImageUploader = ({setImage}) => {
     reader.readAsDataURL(file)
   }
 
+  const inputRef = React.createRef();
+
   return (
-    <div style={style}>
-      <input accept="image/*" type="file" onChange={onChange}/>
+    <div
+      className={classes.PreviewDiv}
+      onClick={() => inputRef.current.click()}
+    >
+      <PublishIcon />
+      <input
+        accept="image/*"
+        type="file"
+        ref={inputRef}
+        onChange={onChange}
+      />
       <Preview image={previewImage}/>
+
     </div>
 
   )

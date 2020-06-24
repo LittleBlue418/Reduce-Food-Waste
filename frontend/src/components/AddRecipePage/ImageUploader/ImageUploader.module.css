@@ -1,0 +1,30 @@
+.PreviewDiv {
+    height: 150px;
+    width: 266px;
+    position: relative;
+    border: 2px dashed lightgrey;
+    cursor: pointer;
+}
+
+.PreviewDiv input {
+    display: none;
+}
+
+.PreviewDiv svg {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    pointer-events: none;
+    fill: lightgrey;
+}
+
+@media (min-width: 750px) {
+    .PreviewDiv {
+        height: 200px;
+        width: 355px;
+    }
+}
