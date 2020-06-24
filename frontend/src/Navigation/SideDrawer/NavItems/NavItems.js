@@ -20,7 +20,7 @@ const NavItems = () => {
     </NavItem>
     <NavItem
       link="https://github.com/LittleBlue418"
-      target="_blank">
+      external>
         Developer page
     </NavItem>
   </ul>

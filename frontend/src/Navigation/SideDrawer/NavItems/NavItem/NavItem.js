@@ -1,14 +1,23 @@
 import React from 'react'
 import classes from './NavItem.module.css';
+import { Link } from "react-router-dom"
 
-const NavItem = (props) => (
+const NavItem = ({ link, children, external }) => (
   <li className={classes.NavItem}>
-    <a
-      href={props.link}
-      target={props.target}
-      className={props.active ? classes.active : null}>
-        {props.children}
-    </a>
+    {external ? (
+      <a
+        href={link}
+        target="_blank"
+        rel="noopener noreferrer">
+          {children}
+      </a>
+    ) : (
+      <Link
+      to={link}>
+        {children}
+    </Link>
+    )}
+
   </li>
 );
 

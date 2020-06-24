@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from "react-router-dom";
-
 import classes from './RecipePage.module.css';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Button from '@material-ui/core/Button';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import EditIcon from '@material-ui/icons/Edit';
-import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { useParams, Link } from "react-router-dom";
 
 import RecipeHeader from './ReceipeHeader/RecipeHeader';
 import RecipeIngrdients from './RecipyIngredients/RecipeIngredients';
@@ -15,13 +11,6 @@ import RecipeMethod from './Recipemethod/RecipeMethod';
 import APIClient from '../../apiClient';
 import Auxiliary from '../../hoc/Auxiliary'
 
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: '#006400',
-    },
-  },
-});
 
 const RecipePage = () => {
   const [recipe, setRecipe] = useState(null)
@@ -41,14 +30,7 @@ const RecipePage = () => {
   return (
     <Auxiliary>
       <div className={classes.ButtonDiv}>
-        <ThemeProvider theme={theme}>
-          <Button className={classes.ButtonBack} variant="outlined" color="primary">
-            <ArrowBackIcon />
-          </Button>
-          <Button className={classes.ButtonBack} variant="outlined" color="primary">
-            <EditIcon />
-          </Button>
-        </ThemeProvider>
+        <Link to="/"><ArrowBackIcon /></Link>
       </div>
 
 
