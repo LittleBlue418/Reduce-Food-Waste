@@ -26,13 +26,6 @@ const ImageUploader = ({setImage}) => {
     })
   }
 
-  const style = {
-    height: maxHeight,
-    width: maxWidth,
-    position: "relative",
-    border: "2px dashed lightgrey"
-  }
-
   reader.onload = () => {
     // called after reader is done
     scaleImage(reader.result)
