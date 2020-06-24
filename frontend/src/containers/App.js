@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -6,7 +6,6 @@ import {
   Route,
 } from "react-router-dom";
 
-import AuthContext from '../context/AuthContext';
 import Layout from '../Layout/Layout';
 import SearchPage from '../Layout/SearchPage/SearchPage';
 import RecipePage from '../components/RecipePage/RecipePage';
@@ -15,16 +14,19 @@ import AddRecipePage from '../components/AddRecipePage/AddRecipePage';
 
 
 const App = () => {
+  const [selectedIngredients, setSelectedIngredients] = useState([])
+  const [dietaryFilters, setDietaryFilters] = useState ({
+                            vegan: false,
+                            vegetarian: false,
+                            gluten_free: false,
+                            nut_free: false,
+                            egg_free: false
+                          })
 
       return(
         <Router>
 
           <div className = "App" >
-          <AuthContext.Provider
-            value={{
-              authenticated: this.state.authenticated,
-              login: this.loginHandler
-            }}>
 
             <Layout />
 
@@ -39,12 +41,15 @@ const App = () => {
               </Route>
 
               <Route path="/">
-                <SearchPage />
+                <SearchPage
+                  selectedIngredients={selectedIngredients}
+                  setSelectedIngredients={setSelectedIngredients}
+                  dietaryFilters={dietaryFilters}
+                  setDietaryFilters={setDietaryFilters}
+                />
               </Route>
 
             </Switch>
-
-          </AuthContext.Provider>
 
           </div>
 

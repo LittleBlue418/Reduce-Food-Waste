@@ -11,32 +11,29 @@ import RecipeCards from '../../components/RecipeCards/RecipeCards';
 import APIClient from '../../apiClient';
 
 
-const SearchPage = () => {
+const SearchPage = ({
+  selectedIngredients,
+  setSelectedIngredients,
+  dietaryFilters,
+  setDietaryFilters
+}) => {
+
   const [API] = useState (new APIClient())
-  const [ingredients, setIngredients] = useState ([])
+  const [allIngredients, setAllIngredients] = useState ([])
   const [recipes, setRecipes] = useState ([])
   const [loading, setLoading] = useState (true)
-
-  const [selectedIngredients, setSelectedIngredients] = useState([])
-  const [alogenFilters, setAlogenFilters] = useState ({
-                            vegan: false,
-                            vegetarian: false,
-                            gluten_free: false,
-                            nut_free: false,
-                            egg_free: false
-                          })
 
 
   useEffect(() => {
     API.list_ingredients().then(ingredients => {
-      setIngredients(ingredients)
+      setAllIngredients(ingredients)
     })
   }, [API])
 
   useEffect(() => {
     setLoading(true)
 
-    const allogens = Object.entries(alogenFilters)
+    const allogens = Object.entries(dietaryFilters)
                       .filter((alogen) => alogen[1])
                       .map((allogen) => allogen[0])
 
@@ -53,12 +50,12 @@ const SearchPage = () => {
       setLoading(false)
     })
 
-  }, [API, selectedIngredients, alogenFilters])
+  }, [API, selectedIngredients, dietaryFilters])
 
   const toggleAlogen = (tag) => {
-    const searchParams = {...alogenFilters}
+    const searchParams = {...dietaryFilters}
     searchParams[tag] = !searchParams[tag]
-    setAlogenFilters(searchParams)
+    setDietaryFilters(searchParams)
   }
 
     return (
@@ -66,11 +63,11 @@ const SearchPage = () => {
         <TipBox />
 
         <SearchFilters
-            alogenFilters={alogenFilters}
+            alogenFilters={dietaryFilters}
             toggleAlogen={toggleAlogen}
         />
         <SearchBox
-            ingredients={ingredients}
+            ingredients={allIngredients}
             selectedIngredients={selectedIngredients}
             setSelectedIngredients={setSelectedIngredients}
         />
