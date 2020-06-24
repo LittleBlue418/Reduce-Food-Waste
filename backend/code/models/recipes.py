@@ -58,6 +58,15 @@ class RecipesModel():
 
 
         # Ingredients
+
+        allergies = {
+            "vegan": True,
+            "vegetarian": True,
+            "gluten_free": True,
+            "nut_free": True,
+            "egg_free": True
+        }
+
         built_recipy['ingredients'] = request_data['ingredients']
         if  len(built_recipy['ingredients']) < 2:
             raise ValidationError('All recipes need at least two ingredients!')
@@ -76,14 +85,6 @@ class RecipesModel():
 
 
             # Allergies
-            allergies = {
-                "vegan": True,
-                "vegetarian": True,
-                "gluten_free": True,
-                "nut_free": True,
-                "egg_free": True
-            }
-
             for key in allergies.keys():
                 if not ingredient_from_db[key]:
                     allergies[key] = False
