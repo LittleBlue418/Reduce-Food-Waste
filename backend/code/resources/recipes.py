@@ -1,5 +1,6 @@
 from flask_restful import Resource, reqparse
 from flask import request
+from math import ceil
 
 from models import mongo, ValidationError
 from models.recipes import RecipesModel
@@ -90,14 +91,33 @@ class Recipe(Resource):
 
 
 class RecipeCollection(Resource):
+    RECIPES_PER_PAGE = 2
     def get(self):
+        # PAGINATION - Checking page number is an int
+        try:
+            # PAGINATION - value always 1 or higher
+            page = max(int(request.args.get('page', 1)), 1)
+        except ValueError:
+            return {'message': 'must be a whole number'}, 400
+
+        # PAGINATION - calculating skip value (when to start returing recipes from db)
+        skip = (page -1) * self.RECIPES_PER_PAGE
+
+        # PAGINATION - Query now uses limit and skip value to return recipes for one page
+        query = mongo.db.recipes.find().sort('name', ASCENDING).limit(self.RECIPES_PER_PAGE).skip(skip)
+
+        # Return all recipes as objects
         recipes = [
             RecipesModel.return_as_object(recipe)
-            for recipe in mongo.db.recipes.find().sort('name', ASCENDING)
+            for recipe in query
         ]
 
+        # PAGINATION - into about Pagination for front end & API users
         return {
-            'recipes': recipes
+            'recipes': recipes,
+            'total_pages': ceil(float(query.count()) / self.RECIPES_PER_PAGE),
+            'current_page': page,
+            'items_per_page': self.RECIPES_PER_PAGE
         }
 
     def post(self):
