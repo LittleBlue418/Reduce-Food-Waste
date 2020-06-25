@@ -24,6 +24,7 @@ const AddRecipePage = () => {
   const [API] = useState(new APIClient())
   const [allIngredients, setAllIngredients] = useState([])
   const [inputValue, setInputValue] = useState("")
+  const [previewImage, setPreviewImage] = useState(null);
   const [newRecipe, setNewRecipe] = useState({
     name: "",
     description: "",
@@ -90,6 +91,7 @@ const AddRecipePage = () => {
         method: [],
         ingredients: [],
       })
+      setPreviewImage(null)
     }).catch((error) => {
       console.log(error)
     })
@@ -122,7 +124,11 @@ const AddRecipePage = () => {
       <div className={classes.ImageUploaderWrapper}>
         <h3>Picture</h3>
         <div className={classes.ImageUploaderDiv}>
-          <ImageUploader setImage={setImage} />
+          <ImageUploader
+            setImage={setImage}
+            previewImage={previewImage}
+            setPreviewImage={setPreviewImage}
+          />
         </div>
       </div>
 

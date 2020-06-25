@@ -7,9 +7,8 @@ import { resizeImage } from './ImageResizer/ImageResizer';
 import PublishIcon from "@material-ui/icons/Publish";
 
 
-const ImageUploader = ({setImage}) => {
+const ImageUploader = ({ setImage, previewImage, setPreviewImage }) => {
   const reader = new FileReader();
-  const [previewImage, setPreviewImage] = useState(null);
 
   // Using 16:9 aspect ratio
   const maxHeight = 600;
