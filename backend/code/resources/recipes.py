@@ -91,7 +91,7 @@ class Recipe(Resource):
 
 
 class RecipeCollection(Resource):
-    RECIPES_PER_PAGE = 2
+    RECIPES_PER_PAGE = 9
     def get(self):
         # PAGINATION - Checking page number is an int (from header)
         try:
@@ -149,7 +149,7 @@ class RecipeCollection(Resource):
             return {"message": "An error occurred"}, 500
 
 class RecipeSearch(Resource):
-    RECIPES_PER_PAGE = 2
+    RECIPES_PER_PAGE = 9
     def post(self):
         # PAGINATION - Checking page number is an int (from header)
         try:
