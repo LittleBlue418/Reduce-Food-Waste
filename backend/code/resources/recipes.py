@@ -93,7 +93,7 @@ class Recipe(Resource):
 class RecipeCollection(Resource):
     RECIPES_PER_PAGE = 2
     def get(self):
-        # PAGINATION - Checking page number is an int
+        # PAGINATION - Checking page number is an int (from header)
         try:
             # PAGINATION - value always 1 or higher
             page = max(int(request.args.get('page', 1)), 1)
@@ -104,18 +104,18 @@ class RecipeCollection(Resource):
         skip = (page -1) * self.RECIPES_PER_PAGE
 
         # PAGINATION - Query now uses limit and skip value to return recipes for one page
-        query = mongo.db.recipes.find().sort('name', ASCENDING).limit(self.RECIPES_PER_PAGE).skip(skip)
+        query_cursor = mongo.db.recipes.find().sort('name', ASCENDING).limit(self.RECIPES_PER_PAGE).skip(skip)
 
         # Return all recipes as objects
         recipes = [
             RecipesModel.return_as_object(recipe)
-            for recipe in query
+            for recipe in query_cursor
         ]
 
         # PAGINATION - into about Pagination for front end & API users
         return {
             'recipes': recipes,
-            'total_pages': ceil(float(query.count()) / self.RECIPES_PER_PAGE),
+            'total_pages': ceil(float(query_cursor.count()) / self.RECIPES_PER_PAGE),
             'current_page': page,
             'items_per_page': self.RECIPES_PER_PAGE
         }
@@ -149,17 +149,29 @@ class RecipeCollection(Resource):
             return {"message": "An error occurred"}, 500
 
 class RecipeSearch(Resource):
+    RECIPES_PER_PAGE = 2
     def post(self):
+        # PAGINATION - Checking page number is an int (from header)
+        try:
+            # PAGINATION - value always 1 or higher
+            page = max(int(request.args.get('page', 1)), 1)
+        except ValueError:
+            return {'message': 'must be a whole number'}, 400
+
+        # PAGINATION - calculating skip value (when to start returing recipes from db)
+        skip = (page -1) * self.RECIPES_PER_PAGE
+
         request_data = request.json
 
-        myquery = {}
+        query = {}
 
+        # Building query - filter on allergies
         for allergy in request_data.get('allergens', []):
-            myquery["allergies." + allergy] = True
+            query["allergies." + allergy] = True
 
-
+        # Building query - filter on ingredients
         if request_data.get('ingredient_ids'):
-            myquery["ingredients"] = {
+            query["ingredients"] = {
                 "$all" :  [
                     {
                         "$elemMatch": {
@@ -170,13 +182,21 @@ class RecipeSearch(Resource):
                 ]
             }
 
+        # PAGINATION - Query now uses limit and skip value to return recipes for one page
+        query_cursor = mongo.db.recipes.find(query).sort('name', ASCENDING).limit(self.RECIPES_PER_PAGE).skip(skip)
+
+        # Return all recipes as objects
         recipes = [
             RecipesModel.return_as_object(recipe)
-            for recipe in mongo.db.recipes.find(myquery).sort('name', ASCENDING)
+            for recipe in query_cursor
         ]
 
+        # PAGINATION - into about Pagination for front end & API users
         return {
-            'recipes': recipes
+            'recipes': recipes,
+            'total_pages': ceil(float(query_cursor.count()) / self.RECIPES_PER_PAGE),
+            'current_page': page,
+            'items_per_page': self.RECIPES_PER_PAGE
         }
 
 
