@@ -10,6 +10,7 @@ import ImageUploader from './ImageUploader/ImageUploader';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import APIClient from '../../apiClient';
+import AddIngredientDialog from './AddIngredientmodal/AddIngredientDialog';
 import { capitalize } from '../../utilityFunctions';
 
 const buttonTheme = createMuiTheme({
@@ -38,6 +39,7 @@ const AddRecipePage = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
   const [sucess, setSucess] = useState(false)
+  const [openIngredientDialog, setOpenIngredientDialog] = useState(false)
 
   useEffect(() => {
     API.list_ingredients().then(ingredients => {
@@ -112,6 +114,11 @@ const AddRecipePage = () => {
 
   return (
     <div className={classes.AddRecipePage}>
+
+      <AddIngredientDialog
+        open={openIngredientDialog}
+        setOpen={setOpenIngredientDialog}
+      />
 
       <h2>Add Recipe</h2>
 
@@ -197,6 +204,11 @@ const AddRecipePage = () => {
           className={classes.SearchBox}
           renderInput={(params) => <TextField {...params} label="Select Ingredient" variant="outlined" />}
         />
+
+          <Button variant="outlined" color="primary" onClick={() => setOpenIngredientDialog(true)}>
+            Add Ingredient
+          </Button>
+
       </div>
 
 
