@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import Alert from '@material-ui/lab/Alert';
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import ImageUploader from './ImageUploader/ImageUploader';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
@@ -34,6 +35,7 @@ const AddRecipePage = () => {
     method: [],
     ingredients: [],
   })
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
   const [sucess, setSucess] = useState(false)
 
@@ -84,6 +86,7 @@ const AddRecipePage = () => {
   }
 
   const saveToDatabase = () => {
+    setLoading(true)
     API.create_recipe(newRecipe).then((response) => {
       console.log('saved')
       setNewRecipe({
@@ -97,8 +100,12 @@ const AddRecipePage = () => {
       setPreviewImage(null)
       setError(null)
       setSucess(response)
+      setLoading(false)
+      window.scrollTo(0, 0)
     }).catch((error) => {
       setError(error)
+      setLoading(false)
+      window.scrollTo(0, 0)
     })
   }
 
@@ -228,7 +235,7 @@ const AddRecipePage = () => {
       <div className={classes.SubmitButtonDiv}>
         <ThemeProvider theme={buttonTheme}>
           <Button variant="contained" color="primary" onClick={saveToDatabase}>
-            Save Recipe
+            { loading ? <CircularProgress size={24}/> : "Save Recipe" }
           </Button>
         </ThemeProvider>
       </div>
