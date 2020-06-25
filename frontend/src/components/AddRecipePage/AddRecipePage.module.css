@@ -3,6 +3,13 @@
     margin: auto;
 }
 
+.errorDiv {
+    border: 2px solid darkred;
+    background-color: rgba(165, 42, 42, 0.212);
+    border-radius: 5px;
+    padding: 10px 0;
+}
+
 .AddRecipePage h3 {
     text-align: left;
 }

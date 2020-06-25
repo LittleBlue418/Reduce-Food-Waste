@@ -33,6 +33,7 @@ const AddRecipePage = () => {
     method: [],
     ingredients: [],
   })
+  const [error, setError] = useState(null)
 
   useEffect(() => {
     API.list_ingredients().then(ingredients => {
@@ -92,8 +93,10 @@ const AddRecipePage = () => {
         ingredients: [],
       })
       setPreviewImage(null)
+      setError(null)
     }).catch((error) => {
-      console.log(error)
+      setError(error)
+      console.log(error.response.data.message)
     })
   }
 
@@ -102,6 +105,8 @@ const AddRecipePage = () => {
     <div className={classes.AddRecipePage}>
 
       <h2>Add Recipe</h2>
+
+  {error ? <div className={classes.errorDiv}>{error.response.data.message}</div> : null}
 
       <div className={classes.TitleDiv}>
         <h3>Title &amp; Info</h3>
