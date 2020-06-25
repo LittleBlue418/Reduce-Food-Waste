@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import classes from './SearchPage.module.css';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Pagination from '@material-ui/lab/Pagination';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import TipBox from '../../components/UI/TipBox/TipBox';
 import SearchFilters from '../../components/Search/SearchFilters/SearchFilters';
@@ -9,6 +12,14 @@ import IngredientsChips from '../../components/Search/IngredientsChips/Ingredien
 import RecipeCards from '../../components/RecipeCards/RecipeCards';
 
 import APIClient from '../../apiClient';
+
+const paginationTheme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#006400',
+    },
+  },
+});
 
 
 const SearchPage = ({
@@ -60,6 +71,12 @@ const SearchPage = ({
     const searchParams = {...dietaryFilters}
     searchParams[tag] = !searchParams[tag]
     setDietaryFilters(searchParams)
+    setCurrentPage(1)
+  }
+
+  const updateSelectedIngredients = (newSelectedIngredients) => {
+    setSelectedIngredients(newSelectedIngredients)
+    setCurrentPage(1)
   }
 
     return (
@@ -73,12 +90,12 @@ const SearchPage = ({
         <SearchBox
             ingredients={allIngredients}
             selectedIngredients={selectedIngredients}
-            setSelectedIngredients={setSelectedIngredients}
+            setSelectedIngredients={updateSelectedIngredients}
         />
 
         <IngredientsChips
             selectedIngredients={selectedIngredients}
-            setSelectedIngredients={setSelectedIngredients}
+            setSelectedIngredients={updateSelectedIngredients}
         />
 
         {
@@ -90,6 +107,25 @@ const SearchPage = ({
         <RecipeCards
           recipes={recipes}
         />
+
+        <div className={classes.PaginationDiv}>
+          <ThemeProvider theme={paginationTheme}>
+            <Pagination
+              color="primary"
+              count={totalPages}
+              page={currentPage}
+              variant="outlined"
+              siblingCount={0}
+              boundaryCount={1}
+              onChange={(event, page) => {
+                setCurrentPage(page)
+                window.scrollTo(0, 0)
+              }}
+            />
+          </ThemeProvider>
+
+        </div>
+
       </div>
     );
 }
