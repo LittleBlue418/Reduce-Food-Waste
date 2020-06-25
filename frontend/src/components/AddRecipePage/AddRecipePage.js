@@ -102,7 +102,7 @@ const AddRecipePage = () => {
       <h2>Add Recipe</h2>
 
       <div className={classes.TitleDiv}>
-        <h3>Title & Info</h3>
+        <h3>Title &amp; Info</h3>
         <TextField
           label="Recipe Name"
           fullWidth
