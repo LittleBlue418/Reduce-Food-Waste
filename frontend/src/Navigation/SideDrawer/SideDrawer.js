@@ -7,7 +7,7 @@ import Logo from '../../components/UI/Logo/Logo';
 import NavItems from './NavItems/NavItems';
 
 
-const SideDrawer = ({clicked, sidedrawerShown}) => {
+const SideDrawer = ({ toggleSidedrawer, sidedrawerShown }) => {
   let attachedClasses = [classes.SideDrawer, classes.Close];
 
   if (sidedrawerShown === true) {
@@ -19,15 +19,20 @@ const SideDrawer = ({clicked, sidedrawerShown}) => {
     <Auxiliary>
       <Backdrop
         show={sidedrawerShown}
-        clicked={clicked}
+        clicked={toggleSidedrawer}
         className={classes.SDBackdrop}
       />
 
       <div className={attachedClasses.join(' ')}>
 
-        <div className={classes.MenuLogo}>
+          <div
+            className={classes.MenuLogo}
+            onClick={toggleSidedrawer}
+          >
             <Logo />
-        </div>
+          </div>
+
+
 
         <nav>
           <NavItems />

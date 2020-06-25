@@ -22,7 +22,7 @@ const Layout = () => {
         />
 
         <SideDrawer
-          clicked={toggleSidedrawer}
+          toggleSidedrawer={toggleSidedrawer}
           sidedrawerShown={sidedrawerShown}
         />
 
