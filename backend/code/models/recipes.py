@@ -46,16 +46,9 @@ class RecipesModel():
         if len(built_recipy['description']) > 60:
             raise ValidationError('Description should be less than 60 charectors!')
 
-
-        # Method
-        built_recipy['method'] = request_data['method']
-        if  len(request_data['method']) < 2:
-            raise ValidationError('Method needs at least two steps!')
-        for step in built_recipy['method']:
-            step.strip()
-            if len(step) < 1:
-                raise ValidationError('Each step needs at least one character!')
-
+        # Image
+        if len(request_data["image_data"]) < 1:
+            raise ValidationError('Recipe must have an image!')
 
         # Ingredients
 
@@ -90,6 +83,17 @@ class RecipesModel():
                     allergies[key] = False
 
         built_recipy['allergies'] = allergies
+
+        # Method
+        built_recipy['method'] = request_data['method']
+        if  len(request_data['method']) < 2:
+            raise ValidationError('Method needs at least two steps!')
+        for step in built_recipy['method']:
+            step.strip()
+            if len(step) < 1:
+                raise ValidationError('Each step needs at least one character!')
+
+
 
         return built_recipy
 
