@@ -1,10 +1,8 @@
 import React from 'react';
 import classes from './SearchFilters.module.css';
-import { capitalize } from '../../../utilityFunctions';
+import { labelFromKey } from '../../../utilityFunctions';
 
 const SearchFilters = ({alogenFilters, toggleAlogen}) => {
-  const labelFromKey = (key) => capitalize(key.replace('_', ' '))
-
   return (
     <div className={classes.SearchFilters}>
       <form action="#">
