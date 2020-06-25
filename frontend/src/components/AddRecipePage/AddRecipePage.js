@@ -3,6 +3,7 @@ import classes from './AddRecipePage.module.css';
 
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import Alert from '@material-ui/lab/Alert';
 import Button from '@material-ui/core/Button';
 import ImageUploader from './ImageUploader/ImageUploader';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
@@ -33,7 +34,8 @@ const AddRecipePage = () => {
     method: [],
     ingredients: [],
   })
-  const [error, setError] = useState(null)
+  const [error, setError] = useState(false)
+  const [sucess, setSucess] = useState(false)
 
   useEffect(() => {
     API.list_ingredients().then(ingredients => {
@@ -82,7 +84,7 @@ const AddRecipePage = () => {
   }
 
   const saveToDatabase = () => {
-    API.create_recipe(newRecipe).then(() => {
+    API.create_recipe(newRecipe).then((response) => {
       console.log('saved')
       setNewRecipe({
         name: "",
@@ -94,9 +96,9 @@ const AddRecipePage = () => {
       })
       setPreviewImage(null)
       setError(null)
+      setSucess(response)
     }).catch((error) => {
       setError(error)
-      console.log(error.response.data.message)
     })
   }
 
@@ -106,7 +108,9 @@ const AddRecipePage = () => {
 
       <h2>Add Recipe</h2>
 
-  {error ? <div className={classes.errorDiv}>{error.response.data.message}</div> : null}
+      {error ? <Alert onClose={() => {setError(false)}} severity="error">{error.response.data.message}</Alert> : null}
+
+      {sucess ? <Alert onClose={() => {setSucess(false)}} severity="success">{sucess.name} added!</Alert> : null}
 
       <div className={classes.TitleDiv}>
         <h3>Title &amp; Info</h3>
