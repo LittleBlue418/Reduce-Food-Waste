@@ -22,6 +22,8 @@ const SearchPage = ({
   const [allIngredients, setAllIngredients] = useState ([])
   const [recipes, setRecipes] = useState ([])
   const [loading, setLoading] = useState (true)
+  const [currentPage, setCurrentPage] = useState (1)
+  const [totalPages, setTotalPages] = useState (0)
 
 
   useEffect(() => {
@@ -45,12 +47,14 @@ const SearchPage = ({
       "allergens" : allogens
     }
 
-    API.search_recipes(searchBody).then(recipes => {
-      setRecipes(recipes)
+    API.search_recipes(searchBody, currentPage).then(result => {
+      setCurrentPage(result.current_page)
+      setTotalPages(result.total_pages)
+      setRecipes(result.recipes)
       setLoading(false)
     })
 
-  }, [API, selectedIngredients, dietaryFilters])
+  }, [API, selectedIngredients, dietaryFilters, currentPage])
 
   const toggleAlogen = (tag) => {
     const searchParams = {...dietaryFilters}

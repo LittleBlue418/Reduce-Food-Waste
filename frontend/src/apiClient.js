@@ -23,6 +23,7 @@ export class APIClient {
   }
 
 
+  // Convert image id to url
   updateImageURL(recipe) {
     recipe['image_url'] = this.baseUrl + '/api/images/' + recipe['image_id']
     return recipe
@@ -58,15 +59,21 @@ export class APIClient {
   // Recipes
   //============================================================
 
-  search_recipes(query) {
-    return this.http.post(this.baseUrl + '/api/recipes/_search', query).then(result => {
-      return result.data.recipes.map(this.updateImageURL)
+  search_recipes(query, page=1) {
+    // Axios query - url, search query (from front), parameters (page number front front)
+    return this.http.post(this.baseUrl + '/api/recipes/_search', query, {params: {page:page}}).then(result => {
+      const recipeData = result.data
+      recipeData.recipes.forEach(this.updateImageURL)
+      return recipeData
     })
   }
 
-  list_recipes() {
-    return this.http.get(this.baseUrl + '/api/recipes').then(result => {
-      return result.data.recipes.map(this.updateImageURL)
+  list_recipes(page=1) {
+    // Axios query - url, parameters (page number front front)
+    return this.http.get(this.baseUrl + '/api/recipes', {params: {page:page}}).then(result => {
+      const recipeData = result.data
+      recipeData.recipes.forEach(this.updateImageURL)
+      return recipeData
     })
   }
 
