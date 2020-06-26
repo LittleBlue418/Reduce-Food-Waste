@@ -22,6 +22,7 @@ const ImageUploader = ({ setImage, previewImage, setPreviewImage }) => {
       const matches = data_url.match(regex)
       setImage(matches[2], matches[1])
       setPreviewImage(data_url)
+      console.log(data_url)
     })
   }
 

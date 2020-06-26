@@ -20,6 +20,8 @@ export class APIClient {
     this.get_recipe = this.get_recipe.bind(this)
     this.update_recipe = this.update_recipe.bind(this)
     this.delete_recipe = this.delete_recipe.bind(this)
+
+    this.get_image_as_data_url = this.get_image_as_data_url.bind(this)
   }
 
 
@@ -98,6 +100,26 @@ export class APIClient {
   delete_recipe(recipe_id) {
     return this.http.delete(this.baseUrl + '/api/recipes/' + recipe_id).then(result => result.data)
   }
+
+
+  //============================================================
+  // Images
+  //============================================================
+
+  get_image_as_data_url(image_id) {
+    return this.http.get(this.baseUrl + '/api/images/' + image_id, {
+      responseType: 'arraybuffer'
+    }).then((response) => {
+      // Constructing the data url for the image preview
+      // Opposite from the scale image function in the image uploader where we convert url to data
+      const content_type = response.headers["content-type"]
+      // Buffer is an object like window
+      const data = Buffer.from(response.data, 'binary').toString('base64')
+
+      return `data:${content_type};base64,${data}`
+    })
+  }
+
 }
 
 export default APIClient;
