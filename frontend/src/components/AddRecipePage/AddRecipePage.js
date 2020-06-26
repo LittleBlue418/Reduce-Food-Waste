@@ -2,12 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import classes from './AddRecipePage.module.css';
 
 import { APIContext } from '../../context/APIContext';
-import AddIngredientDialog from './AddIngredientmodal/AddIngredientDialog';
-import ImageUploader from './ImageUploader/ImageUploader';
-import IngredientAutocomplete from './IngredientAutocomplete/IngredientAutocomplete';
-import IngredientEntry from './IngredientEntry/IngredientEntry';
-import MethodStep from './MethodStep/MethodStep';
-import TitleSection from './TitleSection/TitleSection';
+import RecipeForm from '../RecipeForm/RecipeForm';
 
 import Alert from '@material-ui/lab/Alert';
 import Button from '@material-ui/core/Button';
@@ -17,8 +12,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 const AddRecipePage = () => {
   const API = useContext(APIContext)
-  const [allIngredients, setAllIngredients] = useState([])
-  const [inputValue, setInputValue] = useState("")
   const [previewImage, setPreviewImage] = useState(null);
   const [newRecipe, setNewRecipe] = useState({
     name: "",
@@ -31,70 +24,7 @@ const AddRecipePage = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
   const [sucess, setSucess] = useState(false)
-  const [openIngredientDialog, setOpenIngredientDialog] = useState(false)
 
-  useEffect(() => {
-    API.list_ingredients().then(ingredients => {
-      setAllIngredients(ingredients)
-    })
-  }, [API])
-
-
-  const usedIngredients = newRecipe.ingredients.map(ingredient => ingredient.ingredient)
-
-  const setName = (name) => setNewRecipe({ ...newRecipe, name: name });
-  const setDescription = (description) => setNewRecipe({ ...newRecipe, description: description });
-  const setImage = (image_data, image_content_type) => setNewRecipe({
-    ...newRecipe,
-    image_data: image_data,
-    image_content_type: image_content_type
-  });
-
-  const addMethodStep = () => {
-    newRecipe.method.push("")
-    setNewRecipe({ ...newRecipe })
-  }
-
-  const updateMethodStep = (step, index) => {
-    newRecipe.method[index] = step
-    setNewRecipe({ ...newRecipe })
-  }
-
-  const removeMethodStep = (index) => {
-    newRecipe.method.splice(index, 1)
-    setNewRecipe({ ...newRecipe })
-  }
-
-  const addIngredientEntry = (ingredient) => {
-    newRecipe.ingredients.push({
-      ingredient: ingredient,
-      amount: "",
-      unit: ""
-    })
-    setNewRecipe({ ...newRecipe })
-  }
-
-  const removeIngredientEntry = (index) => {
-    newRecipe.ingredients.splice(index, 1)
-    setNewRecipe({ ...newRecipe })
-  }
-
-  const addIngredientAmount = (amount, index) => {
-    newRecipe.ingredients[index].amount = amount
-    setNewRecipe({ ...newRecipe })
-  }
-
-  const addIngredientUnit = (unit, index) => {
-    newRecipe.ingredients[index].unit = unit
-    setNewRecipe({ ...newRecipe })
-  }
-
-  const onAddNewIngredient = (newIngredient) => {
-    const updatedAllIngredients = [...allIngredients, newIngredient]
-    updatedAllIngredients.sort((a, b) => a.name.localeCompare(b.name))
-    setAllIngredients(updatedAllIngredients)
-    addIngredientEntry(newIngredient)
-  }
 
   const saveToDatabase = () => {
     setLoading(true)
@@ -124,96 +54,18 @@ const AddRecipePage = () => {
   return (
     <div className={classes.AddRecipePage}>
 
-      <AddIngredientDialog
-        open={openIngredientDialog}
-        setOpen={setOpenIngredientDialog}
-        onCreated={onAddNewIngredient}
-      />
-
       <h2>Add Recipe</h2>
 
       {error ? <Alert onClose={() => { setError(false) }} severity="error">{error}</Alert> : null}
 
       {sucess ? <Alert onClose={() => { setSucess(false) }} severity="success">{sucess.name} added!</Alert> : null}
 
-      <TitleSection
-          nameValue={newRecipe.name}
-          descriptionValue={newRecipe.description}
-          setName={setName}
-          setDescription={setDescription}
+      <RecipeForm
+          recipe={newRecipe}
+          setRecipe={setNewRecipe}
+          previewImage={previewImage}
+          setPreviewImage={setPreviewImage}
       />
-
-
-      <div className={classes.ImageUploaderWrapper}>
-        <h3>Picture</h3>
-        <div className={classes.ImageUploaderDiv}>
-          <ImageUploader
-            setImage={setImage}
-            previewImage={previewImage}
-            setPreviewImage={setPreviewImage}
-          />
-        </div>
-      </div>
-
-
-      <div className={classes.Line}></div>
-
-
-      <h3>Ingredients</h3>
-
-      {newRecipe.ingredients.map((ingredientEntry, index) => (
-        <IngredientEntry
-          key={"ingredient" + index}
-          index={index}
-          ingredientEntry={ingredientEntry}
-          addIngredientAmount={addIngredientAmount}
-          addIngredientUnit={addIngredientUnit}
-          removeIngredientEntry={removeIngredientEntry}
-        />
-      ))}
-
-      <IngredientAutocomplete
-          allIngredients={allIngredients}
-          usedIngredients={usedIngredients}
-          inputValue={inputValue}
-          setInputValue={setInputValue}
-          addIngredientEntry={addIngredientEntry}
-      />
-
-      <div className={classes.CreateNewIngredientDiv}>
-        <p>Can't find the ingredient you are looking for?
-          <br />
-          <span onClick={() => setOpenIngredientDialog(true)}>
-            Create A New Ingredient
-          </span>
-        </p>
-      </div>
-
-
-      <div className={classes.Line}></div>
-
-
-      <h3>Method</h3>
-
-      {newRecipe.method.map((step, index) => (
-        <MethodStep
-          key={"method" + index}
-          index={index}
-          step={step}
-          updateMethodStep={updateMethodStep}
-          removeMethodStep={removeMethodStep}
-        />
-      ))}
-
-      <div className={classes.AddStepButtonDiv}>
-        <Button variant="outlined" color="primary" onClick={addMethodStep}>
-          Add Step
-        </Button>
-      </div>
-
-
-      <div className={classes.Line}></div>
-
 
       <div className={classes.SubmitButtonDiv}>
         <Button variant="contained" color="primary" onClick={saveToDatabase}>
