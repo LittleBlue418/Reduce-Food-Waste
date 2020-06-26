@@ -5,6 +5,8 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import Alert from '@material-ui/lab/Alert';
 import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ImageUploader from './ImageUploader/ImageUploader';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
@@ -68,12 +70,22 @@ const AddRecipePage = () => {
     setNewRecipe({ ...newRecipe })
   }
 
+  const removeMethodStep = (index) => {
+    newRecipe.method.splice(index, 1)
+    setNewRecipe({ ...newRecipe })
+  }
+
   const addIngredientEntry = (ingredient) => {
     newRecipe.ingredients.push({
       ingredient: ingredient,
       amount: "",
       unit: ""
     })
+    setNewRecipe({ ...newRecipe })
+  }
+
+  const removeIngredientEntry = (index) => {
+    newRecipe.ingredients.splice(index, 1)
     setNewRecipe({ ...newRecipe })
   }
 
@@ -130,9 +142,9 @@ const AddRecipePage = () => {
 
       <h2>Add Recipe</h2>
 
-      {error ? <Alert onClose={() => {setError(false)}} severity="error">{error}</Alert> : null}
+      {error ? <Alert onClose={() => { setError(false) }} severity="error">{error}</Alert> : null}
 
-      {sucess ? <Alert onClose={() => {setSucess(false)}} severity="success">{sucess.name} added!</Alert> : null}
+      {sucess ? <Alert onClose={() => { setSucess(false) }} severity="success">{sucess.name} added!</Alert> : null}
 
       <div className={classes.TitleDiv}>
         <h3>Title &amp; Info</h3>
@@ -188,6 +200,9 @@ const AddRecipePage = () => {
                 onChange={(e) => addIngredientUnit(e.target.value, index)}
               />
             </div>
+            <IconButton aria-label="delete" onClick={() => removeIngredientEntry(index)}>
+              <DeleteIcon />
+            </IconButton>
           </div>
         </div>
       ))}
@@ -233,7 +248,8 @@ const AddRecipePage = () => {
       {newRecipe.method.map((step, index) => (
         <div
           className={classes.MethodStepDiv}
-          key={"method" + index}>
+          key={"method" + index}
+        >
           <TextField
             fullWidth
             multiline
@@ -241,6 +257,9 @@ const AddRecipePage = () => {
             value={step}
             onChange={(e) => updateMethodStep(e.target.value, index)}
           />
+          <IconButton aria-label="delete" onClick={() => removeMethodStep(index)}>
+            <DeleteIcon />
+          </IconButton>
         </div>
       ))}
       <div className={classes.AddStepButtonDiv}>
@@ -259,7 +278,7 @@ const AddRecipePage = () => {
       <div className={classes.SubmitButtonDiv}>
         <ThemeProvider theme={buttonTheme}>
           <Button variant="contained" color="primary" onClick={saveToDatabase}>
-            { loading ? <CircularProgress size={24}/> : "Save Recipe" }
+            {loading ? <CircularProgress size={24} /> : "Save Recipe"}
           </Button>
         </ThemeProvider>
       </div>
