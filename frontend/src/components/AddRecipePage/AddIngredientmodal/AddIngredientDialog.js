@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import classes from './AddIngredientDialog.module.css';
 
 import APIClient from '../../../apiClient';
 import { labelFromKey } from '../../../utilityFunctions';
 
 import TextField from '@material-ui/core/TextField';
+import Alert from '@material-ui/lab/Alert';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import Dialog from '@material-ui/core/Dialog';
@@ -17,7 +17,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { green } from '@material-ui/core/colors';
 import { withStyles } from '@material-ui/core/styles';
 
-const AddIngredientDialog = ({ open, setOpen }) => {
+const AddIngredientDialog = ({ open, setOpen, onCreated }) => {
   const [API] = useState(new APIClient())
   const [dietaryRequirements, setDietaryRequirements] = useState({
     vegan: false,
@@ -35,6 +35,14 @@ const AddIngredientDialog = ({ open, setOpen }) => {
 
   const handleClose = () => {
     setOpen(false);
+    setDietaryRequirements({
+        vegan: false,
+        vegetarian: false,
+        gluten_free: false,
+        nut_free: false,
+        egg_free: false,
+      })
+    setError(false)
   };
 
   const saveToDatabase = () => {
@@ -42,18 +50,11 @@ const AddIngredientDialog = ({ open, setOpen }) => {
       name: ingredientName,
       ...dietaryRequirements,
     }
-    API.create_ingredient(newIngredient).then(() => {
+    API.create_ingredient(newIngredient).then((ingredient) => {
       handleClose()
-      setDietaryRequirements({
-        vegan: false,
-        vegetarian: false,
-        gluten_free: false,
-        nut_free: false,
-        egg_free: false,
-      })
-      console.log('saved')
+      onCreated(ingredient)
     }).catch((error) => {
-      setError(error)
+      setError(error.response.data.message)
     })
   }
 
@@ -71,6 +72,7 @@ const AddIngredientDialog = ({ open, setOpen }) => {
     <div>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Add Ingredient</DialogTitle>
+        {error ? <Alert onClose={() => {setError(false)}} severity="error">{error}</Alert> : null}
         <DialogContent>
           <DialogContentText>
             If you didn't find the ingredient in the drop down list you can add it here!

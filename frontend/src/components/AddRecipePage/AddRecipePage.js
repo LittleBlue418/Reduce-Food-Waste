@@ -87,6 +87,13 @@ const AddRecipePage = () => {
     setNewRecipe({ ...newRecipe })
   }
 
+  const onAddNewIngredient = (newIngredient) => {
+    const updatedAllIngredients = [...allIngredients, newIngredient]
+    updatedAllIngredients.sort((a, b) => a.name.localeCompare(b.name))
+    setAllIngredients(updatedAllIngredients)
+    addIngredientEntry(newIngredient)
+  }
+
   const saveToDatabase = () => {
     setLoading(true)
     API.create_recipe(newRecipe).then((response) => {
@@ -105,7 +112,7 @@ const AddRecipePage = () => {
       setLoading(false)
       window.scrollTo(0, 0)
     }).catch((error) => {
-      setError(error)
+      setError(error.response.data.message)
       setLoading(false)
       window.scrollTo(0, 0)
     })
@@ -118,11 +125,12 @@ const AddRecipePage = () => {
       <AddIngredientDialog
         open={openIngredientDialog}
         setOpen={setOpenIngredientDialog}
+        onCreated={onAddNewIngredient}
       />
 
       <h2>Add Recipe</h2>
 
-      {error ? <Alert onClose={() => {setError(false)}} severity="error">{error.response.data.message}</Alert> : null}
+      {error ? <Alert onClose={() => {setError(false)}} severity="error">{error}</Alert> : null}
 
       {sucess ? <Alert onClose={() => {setSucess(false)}} severity="success">{sucess.name} added!</Alert> : null}
 
@@ -204,11 +212,15 @@ const AddRecipePage = () => {
           className={classes.SearchBox}
           renderInput={(params) => <TextField {...params} label="Select Ingredient" variant="outlined" />}
         />
+      </div>
 
-          <Button variant="outlined" color="primary" onClick={() => setOpenIngredientDialog(true)}>
-            Add Ingredient
-          </Button>
-
+      <div className={classes.CreateNewIngredientDiv}>
+        <p>Can't find the ingredient you are looking for?
+          <br />
+          <span onClick={() => setOpenIngredientDialog(true)}>
+            Create A New Ingredient
+          </span>
+        </p>
       </div>
 
 

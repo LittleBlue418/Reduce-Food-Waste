@@ -47,6 +47,19 @@
     margin-top: 25px;
 }
 
+.CreateNewIngredientDiv {
+    margin: 10px auto;
+}
+
+.CreateNewIngredientDiv p {
+    padding: 5px 0;
+}
+
+.CreateNewIngredientDiv span {
+    text-decoration: underline;
+    color: blue;
+}
+
 .MethodStepDiv{
     margin-bottom: 15px;
 }
