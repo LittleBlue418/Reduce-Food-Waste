@@ -5,14 +5,13 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import Alert from '@material-ui/lab/Alert';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ImageUploader from './ImageUploader/ImageUploader';
 
 import { APIContext } from '../../context/APIContext';
 import AddIngredientDialog from './AddIngredientmodal/AddIngredientDialog';
 import { capitalize } from '../../utilityFunctions';
+import IngredientEntry from './IngredientEntry/IngredientEntry';
 import MethodStep from './MethodStep/MethodStep';
 
 
@@ -175,28 +174,14 @@ const AddRecipePage = () => {
       <h3>Ingredients</h3>
 
       {newRecipe.ingredients.map((ingredientEntry, index) => (
-        <div className={classes.IngredientEntry} key={"ingredient" + index}>
-
-          <div>{capitalize(ingredientEntry.ingredient.name)}</div>
-
-          <div className={classes.IngredientFields}>
-            <div className={classes.IngredientField}>
-              <TextField label="Amount"
-                value={ingredientEntry.amount}
-                onChange={(e) => addIngredientAmount(e.target.value, index)}
-              />
-            </div>
-            <div className={classes.IngredientField}>
-              <TextField label="Unit"
-                value={ingredientEntry.unit}
-                onChange={(e) => addIngredientUnit(e.target.value, index)}
-              />
-            </div>
-            <IconButton aria-label="delete" onClick={() => removeIngredientEntry(index)}>
-              <DeleteIcon />
-            </IconButton>
-          </div>
-        </div>
+        <IngredientEntry
+          key={"ingredient" + index}
+          index={index}
+          ingredientEntry={ingredientEntry}
+          addIngredientAmount={addIngredientAmount}
+          addIngredientUnit={addIngredientUnit}
+          removeIngredientEntry={removeIngredientEntry}
+        />
       ))}
 
       <div className={classes.AutocompleteDiv}>
