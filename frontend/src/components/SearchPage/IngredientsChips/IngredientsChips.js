@@ -31,7 +31,7 @@ const IngredientsChips = ({ selectedIngredients, setSelectedIngredients}) => {
           <Chip
             label={capitalize(ingredient.name)}
             onDelete={() => unSelectIngredient(ingredient._id)}
-            color="primary"
+            color="secondary"
             key={ingredient._id}
           />
         )

@@ -5,11 +5,11 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Pagination from '@material-ui/lab/Pagination';
 
 
-import TipBox from '../../components/UI/TipBox/TipBox';
-import SearchFilters from '../../components/Search/SearchFilters/SearchFilters';
-import SearchBox from '../../components/Search/SearchBox/SearchBox';
-import IngredientsChips from '../../components/Search/IngredientsChips/IngredientsChips';
-import RecipeCards from '../../components/RecipeCards/RecipeCards';
+import TipBox from './TipBox/TipBox';
+import SearchFilters from './SearchFilters/SearchFilters';
+import SearchBox from './SearchBox/SearchBox';
+import IngredientsChips from './IngredientsChips/IngredientsChips';
+import RecipeCards from './RecipeCards/RecipeCards';
 
 import APIClient from '../../apiClient';
 

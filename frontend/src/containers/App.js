@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 
 import Layout from '../Layout/Layout';
-import SearchPage from '../Layout/SearchPage/SearchPage';
+import SearchPage from '../components/SearchPage/SearchPage';
 import RecipePage from '../components/RecipePage/RecipePage';
 import AddRecipePage from '../components/AddRecipePage/AddRecipePage';
 
@@ -18,6 +18,9 @@ const theme = createMuiTheme({
     primary: {
       main: '#006400',
     },
+    secondary: {
+      main: '#9c27b0'
+    }
   },
 });
 

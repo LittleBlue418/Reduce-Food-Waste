@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
 import Auxiliary from '../hoc/Auxiliary';
-import SiteHeader from '../Navigation/SiteHeader/SiteHeader';
-import SideDrawer from '../Navigation/SideDrawer/SideDrawer';
+import SiteHeader from './SiteHeader/SiteHeader';
+import SideDrawer from './SideDrawer/SideDrawer';
 
 
 const Layout = () => {
