@@ -1,10 +1,9 @@
 import React from 'react';
-import classes from './RecipeIngredients.module.css'
 import RecipeIngredient from './RecipeIngredient/RecipeIngredient'
 
 const RecipeIngredients = ({ ingredients }) => {
   return (
-    <div className={classes.IngredientsContainerDiv}>
+    <div>
       {ingredients.map((ingredient_entry) => {
         return (
           <RecipeIngredient
