@@ -11,50 +11,60 @@ import SearchPage from '../Layout/SearchPage/SearchPage';
 import RecipePage from '../components/RecipePage/RecipePage';
 import AddRecipePage from '../components/AddRecipePage/AddRecipePage';
 
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#006400',
+    },
+  },
+});
 
 const App = () => {
   const [selectedIngredients, setSelectedIngredients] = useState([])
-  const [dietaryFilters, setDietaryFilters] = useState ({
-                            vegan: false,
-                            vegetarian: false,
-                            gluten_free: false,
-                            nut_free: false,
-                            egg_free: false
-                          })
+  const [dietaryFilters, setDietaryFilters] = useState({
+    vegan: false,
+    vegetarian: false,
+    gluten_free: false,
+    nut_free: false,
+    egg_free: false
+  })
 
-      return(
-        <Router>
+  return (
+    <ThemeProvider theme={theme}>
+      <Router>
 
-          <div className = "App" >
+        <div className="App" >
 
-            <Layout />
+          <Layout />
 
-            <Switch>
+          <Switch>
 
-              <Route path="/recipe/:recipe_id">
-                <RecipePage />
-              </Route>
+            <Route path="/recipe/:recipe_id">
+              <RecipePage />
+            </Route>
 
-              <Route path="/addRecipe">
-                <AddRecipePage />
-              </Route>
+            <Route path="/addRecipe">
+              <AddRecipePage />
+            </Route>
 
-              <Route path="/">
-                <SearchPage
-                  selectedIngredients={selectedIngredients}
-                  setSelectedIngredients={setSelectedIngredients}
-                  dietaryFilters={dietaryFilters}
-                  setDietaryFilters={setDietaryFilters}
-                />
-              </Route>
+            <Route path="/">
+              <SearchPage
+                selectedIngredients={selectedIngredients}
+                setSelectedIngredients={setSelectedIngredients}
+                dietaryFilters={dietaryFilters}
+                setDietaryFilters={setDietaryFilters}
+              />
+            </Route>
 
-            </Switch>
+          </Switch>
 
-          </div>
+        </div>
 
-        </Router>
-      );
+      </Router>
+    </ThemeProvider>
+  );
 }
 
 export default App;

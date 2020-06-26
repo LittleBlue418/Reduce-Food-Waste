@@ -9,19 +9,10 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ImageUploader from './ImageUploader/ImageUploader';
-import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import APIClient from '../../apiClient';
 import AddIngredientDialog from './AddIngredientmodal/AddIngredientDialog';
 import { capitalize } from '../../utilityFunctions';
-
-const buttonTheme = createMuiTheme({
-  palette: {
-    primary: {
-      main: '#006400',
-    },
-  },
-});
 
 
 
@@ -263,11 +254,9 @@ const AddRecipePage = () => {
         </div>
       ))}
       <div className={classes.AddStepButtonDiv}>
-        <ThemeProvider theme={buttonTheme}>
-          <Button variant="outlined" color="primary" onClick={addMethodStep}>
-            Add Step
-          </Button>
-        </ThemeProvider>
+        <Button variant="outlined" color="primary" onClick={addMethodStep}>
+          Add Step
+        </Button>
       </div>
 
 
@@ -276,11 +265,9 @@ const AddRecipePage = () => {
 
 
       <div className={classes.SubmitButtonDiv}>
-        <ThemeProvider theme={buttonTheme}>
-          <Button variant="contained" color="primary" onClick={saveToDatabase}>
-            {loading ? <CircularProgress size={24} /> : "Save Recipe"}
-          </Button>
-        </ThemeProvider>
+        <Button variant="contained" color="primary" onClick={saveToDatabase}>
+          {loading ? <CircularProgress size={24} /> : "Save Recipe"}
+        </Button>
       </div>
     </div>
   );
