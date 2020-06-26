@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import classes from './AddRecipePage.module.css';
 
 import { APIContext } from '../../context/APIContext';

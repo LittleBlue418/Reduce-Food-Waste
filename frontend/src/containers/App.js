@@ -10,6 +10,7 @@ import Layout from '../Layout/Layout';
 import SearchPage from '../components/SearchPage/SearchPage';
 import RecipePage from '../components/RecipePage/RecipePage';
 import AddRecipePage from '../components/AddRecipePage/AddRecipePage';
+import EditRecipePage from '../components/EditRecipePage/EditRecipePage';
 
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
@@ -20,7 +21,7 @@ const theme = createMuiTheme({
     },
     secondary: {
       main: '#7e57c2'
-    }
+    },
   },
 });
 
@@ -50,6 +51,10 @@ const App = () => {
 
             <Route path="/addRecipe">
               <AddRecipePage />
+            </Route>
+
+            <Route path="/editRecipe/:recipe_id">
+              <EditRecipePage />
             </Route>
 
             <Route path="/">

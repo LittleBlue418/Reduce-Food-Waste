@@ -1,0 +1,39 @@
+.EditRecipePage {
+    max-width: 80%;
+    margin: auto;
+}
+
+.EditRecipePage h3 {
+    text-align: left;
+}
+
+.HeaderDiv{
+    display: flex;
+    justify-content: space-between;
+}
+
+.HeaderDiv a {
+    margin: auto 0;
+}
+
+.HeaderDiv h2 {
+    margin: auto;
+}
+
+.SubmitButtonDiv {
+    margin-bottom: 40px;
+}
+
+.SubmitButtonDiv button {
+    min-width: 122px;
+}
+
+.SubmitButtonDiv svg {
+    color: white;
+}
+
+@media(min-width: 750px) {
+    .SubmitButtonDiv {
+        margin-top: 50px;
+    }
+}

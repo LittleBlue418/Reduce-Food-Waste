@@ -3,6 +3,7 @@ import classes from './RecipePage.module.css';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import EditIcon from '@material-ui/icons/Edit';
 import { useParams, Link } from "react-router-dom";
 
 import { APIContext } from '../../context/APIContext';
@@ -30,7 +31,8 @@ const RecipePage = () => {
   return (
     <Auxiliary>
       <div className={classes.ButtonDiv}>
-        <Link to="/"><ArrowBackIcon /></Link>
+        <Link to="/"><ArrowBackIcon color="primary"/></Link>
+        <Link to={`/editRecipe/${recipe_id}`}><EditIcon color="primary"/></Link>
       </div>
 
 
