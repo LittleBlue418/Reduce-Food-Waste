@@ -1,9 +1,10 @@
 import React from 'react';
 import classes from './MethodStep.module.css'
 
-import TextField from '@material-ui/core/TextField';
-import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
+import TextField from '@material-ui/core/TextField';
+
 
 const MethodStep = ({ index, step, updateMethodStep, removeMethodStep }) => {
   return (
