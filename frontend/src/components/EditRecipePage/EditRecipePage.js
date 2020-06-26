@@ -10,6 +10,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
 
 
 
@@ -52,13 +53,23 @@ const EditRecipePage = () => {
     })
   }
 
+  const deleteRecipeFromDatabase = () => {
+    API.delete_recipe(recipe_id).then(() => {
+      history.push('/')
+    }).catch((error) => {
+      setError(error.response.data.message)
+    })
+  }
+
 
   return (
     <div className={classes.EditRecipePage}>
       <div className={classes.HeaderDiv}>
         <Link to={`/recipe/${recipe_id}`}><ArrowBackIcon color="primary" /></Link>
         <h2>Edit Recipe</h2>
-        <Link to="/"><DeleteIcon color="error" /></Link>
+        <IconButton onClick={deleteRecipeFromDatabase}>
+          <DeleteIcon color="error" />
+        </IconButton>
       </div>
 
 
