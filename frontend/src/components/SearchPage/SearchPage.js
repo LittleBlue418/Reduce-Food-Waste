@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import classes from './SearchPage.module.css';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Pagination from '@material-ui/lab/Pagination';
 
-
+import { APIContext } from '../../context/APIContext';
 import TipBox from './TipBox/TipBox';
 import SearchFilters from './SearchFilters/SearchFilters';
 import SearchBox from './SearchBox/SearchBox';
 import IngredientsChips from './IngredientsChips/IngredientsChips';
 import RecipeCards from './RecipeCards/RecipeCards';
-
-import APIClient from '../../apiClient';
 
 
 const SearchPage = ({
@@ -21,7 +19,7 @@ const SearchPage = ({
   setDietaryFilters
 }) => {
 
-  const [API] = useState (new APIClient())
+  const API = useContext(APIContext)
   const [allIngredients, setAllIngredients] = useState ([])
   const [recipes, setRecipes] = useState ([])
   const [loading, setLoading] = useState (true)

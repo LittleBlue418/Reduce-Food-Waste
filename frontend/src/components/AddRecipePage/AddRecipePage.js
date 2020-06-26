@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import classes from './AddRecipePage.module.css';
 
 import TextField from '@material-ui/core/TextField';
@@ -10,14 +10,14 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ImageUploader from './ImageUploader/ImageUploader';
 
-import APIClient from '../../apiClient';
+import { APIContext } from '../../context/APIContext';
 import AddIngredientDialog from './AddIngredientmodal/AddIngredientDialog';
 import { capitalize } from '../../utilityFunctions';
 
 
 
 const AddRecipePage = () => {
-  const [API] = useState(new APIClient())
+  const API = useContext(APIContext)
   const [allIngredients, setAllIngredients] = useState([])
   const [inputValue, setInputValue] = useState("")
   const [previewImage, setPreviewImage] = useState(null);

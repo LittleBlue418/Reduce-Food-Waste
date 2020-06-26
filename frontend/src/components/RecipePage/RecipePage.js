@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import classes from './RecipePage.module.css';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { useParams, Link } from "react-router-dom";
 
+import { APIContext } from '../../context/APIContext';
 import RecipeHeader from './ReceipeHeader/RecipeHeader';
 import RecipeIngrdients from './RecipyIngredients/RecipeIngredients';
 import RecipeMethod from './Recipemethod/RecipeMethod';
-import APIClient from '../../apiClient';
 import Auxiliary from '../../hoc/Auxiliary'
 
 
 const RecipePage = () => {
+  const API = useContext(APIContext)
   const [recipe, setRecipe] = useState(null)
-  const [API] = useState(new APIClient())
   const { recipe_id } = useParams();
 
   useEffect(() => {

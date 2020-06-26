@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
-import APIClient from '../../../apiClient';
+import { APIContext } from '../../../context/APIContext';
 import { labelFromKey } from '../../../utilityFunctions';
 
 import TextField from '@material-ui/core/TextField';
@@ -18,7 +18,7 @@ import { green } from '@material-ui/core/colors';
 import { withStyles } from '@material-ui/core/styles';
 
 const AddIngredientDialog = ({ open, setOpen, onCreated }) => {
-  const [API] = useState(new APIClient())
+  const API = useContext(APIContext)
   const [dietaryRequirements, setDietaryRequirements] = useState({
     vegan: false,
     vegetarian: false,
