@@ -46,12 +46,8 @@ class RecipesModel():
         if len(built_recipy['description']) > 60:
             raise ValidationError('Description should be less than 60 charectors!')
 
-        # Image
-        if len(request_data["image_data"]) < 1:
-            raise ValidationError('Recipe must have an image!')
 
         # Ingredients
-
         allergies = {
             "vegan": True,
             "vegetarian": True,

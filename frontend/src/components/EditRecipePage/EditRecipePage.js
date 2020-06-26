@@ -24,7 +24,6 @@ const EditRecipePage = () => {
   const history = useHistory();
 
 
-
   useEffect(() => {
     const loadRecipeAndImage = async (recipe_id) => {
       const recipe = await API.get_recipe(recipe_id)
@@ -37,8 +36,6 @@ const EditRecipePage = () => {
 
 
 
-
-
   if (recipe === null) {
     return <CircularProgress />
   }
@@ -47,7 +44,6 @@ const EditRecipePage = () => {
   const saveToDatabase = () => {
     setLoading(true)
     API.update_recipe(recipe_id, recipe).then((response) => {
-      console.log(response)
       history.push(`/recipe/${recipe_id}`)
     }).catch((error) => {
       setError(error.response.data.message)
