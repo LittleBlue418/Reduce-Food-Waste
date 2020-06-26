@@ -62,10 +62,6 @@
 }
 
 @media(min-width: 750px) {
-    .TitleDiv {
-        display: flex;
-        flex-direction: column;
-    }
     .SubmitButtonDiv {
         margin-top: 50px;
     }

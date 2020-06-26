@@ -7,6 +7,7 @@ import Alert from '@material-ui/lab/Alert';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ImageUploader from './ImageUploader/ImageUploader';
+import TitleSection from './TitleSection/TitleSection';
 
 import { APIContext } from '../../context/APIContext';
 import AddIngredientDialog from './AddIngredientmodal/AddIngredientDialog';
@@ -137,22 +138,12 @@ const AddRecipePage = () => {
 
       {sucess ? <Alert onClose={() => { setSucess(false) }} severity="success">{sucess.name} added!</Alert> : null}
 
-      <div className={classes.TitleDiv}>
-        <h3>Title &amp; Info</h3>
-        <TextField
-          label="Recipe Name"
-          fullWidth
-          value={newRecipe.name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <TextField
-          label="Brief Description"
-          fullWidth
-          multiline
-          value={newRecipe.description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-      </div>
+      <TitleSection
+          nameValue={newRecipe.name}
+          descriptionValue={newRecipe.description}
+          setName={setName}
+          setDescription={setDescription}
+      />
 
 
       <div className={classes.ImageUploaderWrapper}>
