@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import classes from './AddRecipePage.module.css';
 
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+
 import Alert from '@material-ui/lab/Alert';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -11,7 +10,7 @@ import TitleSection from './TitleSection/TitleSection';
 
 import { APIContext } from '../../context/APIContext';
 import AddIngredientDialog from './AddIngredientmodal/AddIngredientDialog';
-import { capitalize } from '../../utilityFunctions';
+import IngredientAutocomplete from './IngredientAutocomplete/IngredientAutocomplete';
 import IngredientEntry from './IngredientEntry/IngredientEntry';
 import MethodStep from './MethodStep/MethodStep';
 
@@ -158,7 +157,6 @@ const AddRecipePage = () => {
       </div>
 
 
-
       <div className={classes.Line}></div>
 
 
@@ -175,27 +173,13 @@ const AddRecipePage = () => {
         />
       ))}
 
-      <div className={classes.AutocompleteDiv}>
-        <Autocomplete
-          options={allIngredients.filter((ingredient) => !usedIngredients.includes(ingredient))}
+      <IngredientAutocomplete
+          allIngredients={allIngredients}
+          usedIngredients={usedIngredients}
           inputValue={inputValue}
-          onInputChange={(event, inputValue, reason) => {
-            if (reason === 'reset') {
-              setInputValue("")
-            } else {
-              setInputValue(inputValue)
-            }
-          }}
-          value={null}
-          loading={allIngredients.length === 0}
-          onChange={(event, ingredient, reason) => {
-            addIngredientEntry(ingredient)
-          }}
-          getOptionLabel={(option) => capitalize(option.name)}
-          className={classes.SearchBox}
-          renderInput={(params) => <TextField {...params} label="Select Ingredient" variant="outlined" />}
-        />
-      </div>
+          setInputValue={setInputValue}
+          addIngredientEntry={addIngredientEntry}
+      />
 
       <div className={classes.CreateNewIngredientDiv}>
         <p>Can't find the ingredient you are looking for?
@@ -227,7 +211,6 @@ const AddRecipePage = () => {
           Add Step
         </Button>
       </div>
-
 
 
       <div className={classes.Line}></div>
