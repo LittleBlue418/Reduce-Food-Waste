@@ -1,19 +1,17 @@
 import React, { useState, useEffect, useContext } from 'react';
 import classes from './AddRecipePage.module.css';
 
-
-import Alert from '@material-ui/lab/Alert';
-import Button from '@material-ui/core/Button';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import ImageUploader from './ImageUploader/ImageUploader';
-import TitleSection from './TitleSection/TitleSection';
-
 import { APIContext } from '../../context/APIContext';
 import AddIngredientDialog from './AddIngredientmodal/AddIngredientDialog';
 import IngredientAutocomplete from './IngredientAutocomplete/IngredientAutocomplete';
 import IngredientEntry from './IngredientEntry/IngredientEntry';
 import MethodStep from './MethodStep/MethodStep';
 
+import Alert from '@material-ui/lab/Alert';
+import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import ImageUploader from './ImageUploader/ImageUploader';
+import TitleSection from './TitleSection/TitleSection';
 
 
 const AddRecipePage = () => {
