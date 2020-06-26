@@ -50,7 +50,7 @@ E - CRUD functionality for recipes & ingredients  | 3 | 3
 D - A log in / user account system | 2 | 3
 
 
-![Importance / Feasibility Graph]('assets/documentation/pic' "graph of problems against viability and Importance")  **[FIX]**
+![Importance / Feasibility Graph](https://github.com/LittleBlue418/Reduce-Food-Waste/blob/master/frontend/src/assets/documentation/Reduce_foodwaste_importance_feasability_graph.jpg "graph of problems against viability and Importance") 
 
 ### Scope
 
@@ -86,10 +86,14 @@ After working through the layout in the wireframes I realized I also wanted to u
 Building the wireframes for the project was straightforward, I planned out the look and feel for mobile and the desktop. I wanted to keep it looking clean and uncluttered so I went with a minimalistic design. As I worked through the wireframes I realized I wanted to use Maretial UI components. The origional files were built with Adobe Xd, which allowed me to 'click through' the pages as i would on a website.
 
 ### Wireframes
-**[FIX]**
+- [Mobile Wireframe - AdobeXD document](https://github.com/LittleBlue418/Reduce-Food-Waste/blob/master/frontend/src/assets/documentation/reduce-foodwaste-wireframe-mobile.xd) 
+- [Mobile Wireframe - pdf](https://github.com/LittleBlue418/Reduce-Food-Waste/blob/master/frontend/src/assets/documentation/reduce-foodwaste-wireframe-mobile.pdf)
+- [Desktop Wireframe - AdobeXD document](https://github.com/LittleBlue418/Reduce-Food-Waste/blob/master/frontend/src/assets/documentation/reduce-foodwaste-wireframe-desktop.xd)
+- [Desktop Wireframe - pdf](https://github.com/LittleBlue418/Reduce-Food-Waste/blob/master/frontend/src/assets/documentation/reduce-foodwaste-wireframe-desktop.pdf)
 
 ### Database Schema
-**[FIX]**
+- [Initial SQL database scheme - NOT USED](https://github.com/LittleBlue418/Reduce-Food-Waste/blob/master/frontend/src/assets/documentation/rfw-SQL-design.pdf)
+- [MongoDB database scheme](https://github.com/LittleBlue418/Reduce-Food-Waste/blob/master/frontend/src/assets/documentation/rfw-MongoDB-design.pdf)
 
 ### Surface
 Early in the design process I decided I wanted to have a green and white colour scheme, to capitalize on the asociations with green: recycling, nature and freshness. The white is to give the site a clean and minimal feel. The purple of the chips gives a contrast with the green, making them pop.  **[FIX]**
