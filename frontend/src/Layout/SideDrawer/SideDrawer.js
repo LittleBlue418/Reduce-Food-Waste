@@ -2,7 +2,6 @@ import React from 'react';
 
 import classes from './SideDrawer.module.css';
 import Backdrop from '../../components/UI/Backdrop/Backdrop';
-import Auxiliary from '../../hoc/Auxiliary';
 import Logo from '../../components/UI/Logo/Logo';
 import NavItems from './NavItems/NavItems';
 
@@ -16,7 +15,7 @@ const SideDrawer = ({ toggleSidedrawer, sidedrawerShown }) => {
   }
 
   return (
-    <Auxiliary>
+    <>
       <Backdrop
         show={sidedrawerShown}
         clicked={toggleSidedrawer}
@@ -39,7 +38,7 @@ const SideDrawer = ({ toggleSidedrawer, sidedrawerShown }) => {
         </nav>
 
       </div>
-    </Auxiliary>
+    </>
 
   );
 };

@@ -10,7 +10,6 @@ import { APIContext } from '../../context/APIContext';
 import RecipeHeader from './ReceipeHeader/RecipeHeader';
 import RecipeIngrdients from './RecipyIngredients/RecipeIngredients';
 import RecipeMethod from './Recipemethod/RecipeMethod';
-import Auxiliary from '../../hoc/Auxiliary'
 
 
 const RecipePage = () => {
@@ -29,7 +28,7 @@ const RecipePage = () => {
   }
 
   return (
-    <Auxiliary>
+    <>
       <div className={classes.ButtonDiv}>
         <Link to="/"><ArrowBackIcon color="primary"/></Link>
         <Link to={`/editRecipe/${recipe_id}`}><EditIcon color="primary"/></Link>
@@ -66,7 +65,7 @@ const RecipePage = () => {
         />
 
       </div>
-    </Auxiliary>
+    </>
 
   );
 

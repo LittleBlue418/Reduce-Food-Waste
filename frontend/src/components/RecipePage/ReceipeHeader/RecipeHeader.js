@@ -1,11 +1,10 @@
 import React from 'react';
 import './RecipeHeader.css'
 
-import Auxiliary from '../../../hoc/Auxiliary';
 
 const RecipeHeader = ({ name, allergies }) => {
   return (
-    <Auxiliary>
+    <>
       <div className="RecipeHeader">
         <div className="TitleDiv">
           <h2>{name}</h2>
@@ -28,7 +27,7 @@ const RecipeHeader = ({ name, allergies }) => {
           </div>
         </div>
       </div>
-    </Auxiliary>
+    </>
   );
 };
 

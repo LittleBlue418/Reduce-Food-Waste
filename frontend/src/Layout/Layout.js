@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-import Auxiliary from '../hoc/Auxiliary';
 import SiteHeader from './SiteHeader/SiteHeader';
 import SideDrawer from './SideDrawer/SideDrawer';
 
@@ -15,7 +14,7 @@ const Layout = () => {
   }
 
     return (
-      <Auxiliary>
+      <>
 
         <SiteHeader
           toggleSidedrawer={toggleSidedrawer}
@@ -26,7 +25,7 @@ const Layout = () => {
           sidedrawerShown={sidedrawerShown}
         />
 
-      </Auxiliary>
+      </>
 
     );
 
