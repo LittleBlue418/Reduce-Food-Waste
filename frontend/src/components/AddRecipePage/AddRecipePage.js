@@ -3,15 +3,16 @@ import classes from './AddRecipePage.module.css';
 
 import { APIContext } from '../../context/APIContext';
 import AddIngredientDialog from './AddIngredientmodal/AddIngredientDialog';
+import ImageUploader from './ImageUploader/ImageUploader';
 import IngredientAutocomplete from './IngredientAutocomplete/IngredientAutocomplete';
 import IngredientEntry from './IngredientEntry/IngredientEntry';
 import MethodStep from './MethodStep/MethodStep';
+import TitleSection from './TitleSection/TitleSection';
 
 import Alert from '@material-ui/lab/Alert';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import ImageUploader from './ImageUploader/ImageUploader';
-import TitleSection from './TitleSection/TitleSection';
+
 
 
 const AddRecipePage = () => {
