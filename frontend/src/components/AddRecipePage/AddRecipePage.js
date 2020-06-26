@@ -13,6 +13,7 @@ import ImageUploader from './ImageUploader/ImageUploader';
 import { APIContext } from '../../context/APIContext';
 import AddIngredientDialog from './AddIngredientmodal/AddIngredientDialog';
 import { capitalize } from '../../utilityFunctions';
+import MethodStep from './MethodStep/MethodStep';
 
 
 
@@ -233,26 +234,18 @@ const AddRecipePage = () => {
       <div className={classes.Line}></div>
 
 
-
       <h3>Method</h3>
 
       {newRecipe.method.map((step, index) => (
-        <div
-          className={classes.MethodStepDiv}
+        <MethodStep
           key={"method" + index}
-        >
-          <TextField
-            fullWidth
-            multiline
-            label={"Method Step " + index}
-            value={step}
-            onChange={(e) => updateMethodStep(e.target.value, index)}
-          />
-          <IconButton aria-label="delete" onClick={() => removeMethodStep(index)}>
-            <DeleteIcon />
-          </IconButton>
-        </div>
+          index={index}
+          step={step}
+          updateMethodStep={updateMethodStep}
+          removeMethodStep={removeMethodStep}
+        />
       ))}
+
       <div className={classes.AddStepButtonDiv}>
         <Button variant="outlined" color="primary" onClick={addMethodStep}>
           Add Step

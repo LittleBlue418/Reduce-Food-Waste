@@ -1,0 +1,8 @@
+.MethodStepDiv{
+    border: lightgrey 2px dashed;
+    border-radius: 16px;
+    margin: 10px auto;
+    padding: 12px 10px;
+
+    display: flex;
+}
