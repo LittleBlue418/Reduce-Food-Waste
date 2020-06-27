@@ -21,7 +21,7 @@ const RecipeCard = ({recipe}) => {
           </div>
 
           <div className="IconDiv">
-            {Object.entries(recipe.allergies).map(([key, value]) => {
+            {Object.entries(recipe.dietary_requirements).map(([key, value]) => {
               if (value === true) {
                   return (
                     <div key={recipe.id+key}

@@ -174,9 +174,9 @@ class RecipeSearch(Resource):
 
         query = {}
 
-        # Building query - filter on allergies
-        for allergy in request_data.get('allergens', []):
-            query["allergies." + allergy] = True
+        # Building query - filter on dietary requirements
+        for dietary_requirement in request_data.get('dietary_requirements', []):
+            query["dietary_requirements." + dietary_requirement] = True
 
         # Building query - filter on ingredients
         if request_data.get('ingredient_ids'):

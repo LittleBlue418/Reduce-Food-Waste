@@ -26,7 +26,7 @@ class RecipesModel():
             'image_id': None,
             'method': [],
             'ingredients': [],
-            'allergies': {}
+            'dietary_requirements': {}
         }
 
         # Name
@@ -48,7 +48,7 @@ class RecipesModel():
 
 
         # Ingredients
-        allergies = {
+        dietary_requirements = {
             "vegan": True,
             "vegetarian": True,
             "gluten_free": True,
@@ -73,12 +73,12 @@ class RecipesModel():
             ingredient_object['ingredient']['name'] = ingredient_from_db['name']
 
 
-            # Allergies
-            for key in allergies.keys():
+            # Dietary requirements
+            for key in dietary_requirements.keys():
                 if not ingredient_from_db[key]:
-                    allergies[key] = False
+                    dietary_requirements[key] = False
 
-        built_recipy['allergies'] = allergies
+        built_recipy['dietary_requirements'] = dietary_requirements
 
         # Method
         built_recipy['method'] = request_data['method']

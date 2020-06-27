@@ -15,8 +15,8 @@ import RecipeCards from './RecipeCards/RecipeCards';
 const SearchPage = ({
   selectedIngredients,
   setSelectedIngredients,
-  dietaryFilters,
-  setDietaryFilters
+  dietaryRequirements,
+  setDietaryRequirements
 }) => {
 
   const API = useContext(APIContext)
@@ -36,16 +36,16 @@ const SearchPage = ({
   useEffect(() => {
     setLoading(true)
 
-    const allogens = Object.entries(dietaryFilters)
-                      .filter((alogen) => alogen[1])
-                      .map((allogen) => allogen[0])
+    const dietaryRequirementsAsArray = Object.entries(dietaryRequirements)
+                      .filter((dietaryRequirement) => dietaryRequirement[1])
+                      .map((dietaryRequirement) => dietaryRequirement[0])
 
     const ingredient_ids = selectedIngredients.map(ingredient => ingredient._id)
 
 
     const searchBody = {
       "ingredient_ids": ingredient_ids,
-      "allergens" : allogens
+      "dietary_requirements" : dietaryRequirementsAsArray
     }
 
     API.search_recipes(searchBody, currentPage).then(result => {
@@ -55,12 +55,12 @@ const SearchPage = ({
       setLoading(false)
     })
 
-  }, [API, selectedIngredients, dietaryFilters, currentPage])
+  }, [API, selectedIngredients, dietaryRequirements, currentPage])
 
-  const toggleAlogen = (tag) => {
-    const searchParams = {...dietaryFilters}
+  const toggleDietaryRequirement = (tag) => {
+    const searchParams = {...dietaryRequirements}
     searchParams[tag] = !searchParams[tag]
-    setDietaryFilters(searchParams)
+    setDietaryRequirements(searchParams)
     setCurrentPage(1)
   }
 
@@ -74,8 +74,8 @@ const SearchPage = ({
         <TipBox />
 
         <SearchFilters
-            alogenFilters={dietaryFilters}
-            toggleAlogen={toggleAlogen}
+            dietaryRequirements={dietaryRequirements}
+            toggleDietaryRequirement={toggleDietaryRequirement}
         />
         <SearchBox
             ingredients={allIngredients}

@@ -38,7 +38,7 @@ const RecipePage = () => {
       <div className={classes.RecipePage}>
         <RecipeHeader
           name={recipe.name}
-          allergies={recipe.allergies}
+          dietaryRequirements={recipe.dietary_requirements}
         />
 
         <div className={classes.Line}></div>

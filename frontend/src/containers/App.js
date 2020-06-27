@@ -28,7 +28,7 @@ const theme = createMuiTheme({
 
 const App = () => {
   const [selectedIngredients, setSelectedIngredients] = useState([])
-  const [dietaryFilters, setDietaryFilters] = useState({
+  const [dietaryRequirements, setDietaryRequirements] = useState({
     vegan: false,
     vegetarian: false,
     gluten_free: false,
@@ -62,8 +62,8 @@ const App = () => {
               <SearchPage
                 selectedIngredients={selectedIngredients}
                 setSelectedIngredients={setSelectedIngredients}
-                dietaryFilters={dietaryFilters}
-                setDietaryFilters={setDietaryFilters}
+                dietaryRequirements={dietaryRequirements}
+                setDietaryRequirements={setDietaryRequirements}
               />
             </Route>
 

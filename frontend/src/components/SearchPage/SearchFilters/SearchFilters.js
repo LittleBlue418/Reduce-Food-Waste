@@ -2,14 +2,14 @@ import React from 'react';
 import classes from './SearchFilters.module.css';
 import { labelFromKey } from '../../../utilityFunctions';
 
-const SearchFilters = ({alogenFilters, toggleAlogen}) => {
+const SearchFilters = ({dietaryRequirements, toggleDietaryRequirement}) => {
   return (
     <div className={classes.SearchFilters}>
       <form action="#">
         {
-          Object.entries(alogenFilters).map(([key, value]) => (
+          Object.entries(dietaryRequirements).map(([key, value]) => (
           <div key={key}>
-            <input type="checkbox"  checked={value} name={key} value={key} onChange={() => toggleAlogen(key)}/>
+            <input type="checkbox"  checked={value} name={key} value={key} onChange={() => toggleDietaryRequirement(key)}/>
             <label>{labelFromKey(key)}</label>
           </div>))
         }

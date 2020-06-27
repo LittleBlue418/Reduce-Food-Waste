@@ -2,7 +2,7 @@ import React from 'react';
 import './RecipeHeader.css'
 
 
-const RecipeHeader = ({ name, allergies }) => {
+const RecipeHeader = ({ name, dietaryRequirements }) => {
   return (
     <>
       <div className="RecipeHeader">
@@ -12,7 +12,7 @@ const RecipeHeader = ({ name, allergies }) => {
 
         <div className="IconsDiv">
           <div className="IconDivRecipe">
-            {Object.entries(allergies).map(([key, value]) => {
+            {Object.entries(dietaryRequirements).map(([key, value]) => {
               if (value === true) {
                 return (
                   <div key={key + "recipe"}
