@@ -3,12 +3,12 @@ from pymongo.collection import ObjectId
 import bson
 
 class ImageModel():
-    @classmethod
-    def find_by_id(cls, _id):
+    @staticmethod
+    def find_by_id(_id):
         return mongo.db.images.find_one({"_id": ObjectId(_id)})
 
-    @classmethod
-    def build_image(cls, image_data, image_content_type):
+    @staticmethod
+    def build_image(image_data, image_content_type):
         built_image = {
             'image_data': bson.Binary(image_data),
             'image_content_type': image_content_type

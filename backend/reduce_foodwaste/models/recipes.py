@@ -3,23 +3,24 @@ from reduce_foodwaste.models import mongo, ValidationError
 from pymongo.collection import ObjectId
 from reduce_foodwaste.resources.ingredients import IngredientsModel
 class RecipesModel():
+    @staticmethod
     def return_as_object(obj):
         return {
             key: str(value) if key == '_id' else value
             for key, value in obj.items()
         }
 
-    @classmethod
-    def find_by_name(cls, name):
+    @staticmethod
+    def find_by_name(name):
         return mongo.db.recipes.find_one({"name": name})
 
-    @classmethod
-    def find_by_id(cls, _id):
+    @staticmethod
+    def find_by_id( _id):
         return mongo.db.recipes.find_one({"_id": ObjectId(_id)})
 
 
-    @classmethod
-    def build_recipe_from_request(cls, request_data):
+    @staticmethod
+    def build_recipe_from_request(request_data):
         built_recipy = {
             'name': 'name',
             'description': 'description',
