@@ -54,7 +54,7 @@ E - CRUD functionality for recipes | 4 | 3
 F - A user account / admin system | 2 | 3
 
 
-![Importance / Feasibility Graph](https://github.com/LittleBlue418/Reduce-Food-Waste/blob/master/frontend/src/assets/documentation/Reduce_foodwaste_importance_feasability_graph.jpg "graph of problems against viability and Importance") 
+![Importance / Feasibility Graph](https://github.com/LittleBlue418/Reduce-Food-Waste/blob/master/frontend/src/assets/documentation/reduce-foodwaste-importance-feasability.png "graph of problems against viability and Importance") 
 
 ### Scope
 
@@ -103,7 +103,7 @@ Building the wireframes for the project was straightforward, I planned out the l
 ### Surface
 Early in the design process I decided I wanted to have a green and white colour scheme, to capitalize on the asociations with green: recycling, nature and freshness. The white is to give the site a clean and minimal feel. The purple of the chips gives a contrast with the green, making them pop. Each colour has a high contrast for optimal visibility. Finally i decided to limmit the pallet to just four colours to really give it a clean and modern feel. 
 
-![Colour Scheme](link "colour scheme")
+![Colour Scheme](https://github.com/LittleBlue418/Reduce-Food-Waste/blob/master/frontend/src/assets/documentation/color_scheme.png "colour scheme")
 
 ### Design Decisions
 Through the wireframing and the build process I toyed back and forth with having the dietry requirements in a collapsable section, as I do with the tips page. On a desktop screen it doesn't make a huge difference but on a mobile it takes a reasonable chunk of the screen. I decided to leave it as a full size feature for two reasons: firstly to make it immediately clear that this site is designed to be as inclusive and accessible as possible, more and more people are choosing to be vegetarian and vegan, and it is important to be aware of people's allergies. Secondly from a design perspective having a second drop down would save a couple of lines of text, but felt like an added thing for the user to click on, adding an 'unnessecary click' for the user. While you may not be interested in reading tips every time you use the site, many people could conceivably have to click open the requirements tab each time.
@@ -175,7 +175,7 @@ Through the wireframing and the build process I toyed back and forth with having
     - User can navigate to the add recipe page
 - User can add a recipe to the database easilly, confident that it will appear correctly.
 
-### Coe Validation
+### Code Validation
 **[FIX]**
 
 
