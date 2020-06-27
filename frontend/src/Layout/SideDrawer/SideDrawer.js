@@ -33,7 +33,7 @@ const SideDrawer = ({ toggleSidedrawer, sidedrawerShown }) => {
 
 
 
-        <nav>
+        <nav onClick={toggleSidedrawer}>
           <NavItems />
         </nav>
 
