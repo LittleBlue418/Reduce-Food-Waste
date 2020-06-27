@@ -20,6 +20,10 @@ class Recipe(Resource):
                         type=str,
                         required=True,
                         help="Recipe must have a description")
+    parser.add_argument('cook_time',
+                        type=str,
+                        required=True,
+                        help="Recipe must have a cook time")
     parser.add_argument('image',
                         type=str,
                         required=True,

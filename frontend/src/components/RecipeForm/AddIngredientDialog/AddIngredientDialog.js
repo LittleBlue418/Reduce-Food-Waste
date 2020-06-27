@@ -23,6 +23,7 @@ const AddIngredientDialog = ({ open, setOpen, onCreated }) => {
     vegan: false,
     vegetarian: false,
     gluten_free: false,
+    lactose_free: false,
     nut_free: false,
     egg_free: false,
   });
@@ -39,6 +40,7 @@ const AddIngredientDialog = ({ open, setOpen, onCreated }) => {
         vegan: false,
         vegetarian: false,
         gluten_free: false,
+        lactose_free: false,
         nut_free: false,
         egg_free: false,
       })

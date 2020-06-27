@@ -24,6 +24,7 @@ class RecipesModel():
         built_recipy = {
             'name': 'name',
             'description': 'description',
+            'cook_time': 'cook_time',
             'image_id': None,
             'method': [],
             'ingredients': [],
@@ -47,12 +48,21 @@ class RecipesModel():
         if len(built_recipy['description']) > 60:
             raise ValidationError('Description should be less than 60 charectors!')
 
+        # Cook Time
+        built_recipy['cook_time'] = request_data['cook_time'].strip()
+
+        if len(built_recipy['cook_time']) < 1:
+            raise ValidationError('Recipe must have a cook time!')
+        if len(built_recipy['cook_time']) > 20:
+            raise ValidationError('Cook time should be less than 20 charectors!')
+
 
         # Ingredients
         dietary_requirements = {
             "vegan": True,
             "vegetarian": True,
             "gluten_free": True,
+            "lactose_free": True,
             "nut_free": True,
             "egg_free": True
         }

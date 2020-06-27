@@ -6,11 +6,17 @@
 
 .TitleDiv {
     display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     padding: 5px 0 5px 10px;
 }
 
 .TitleDiv h2 {
     margin: 10px 0;
+}
+
+.TitleDiv p {
+    margin: 2px 0;
 }
 
 .IconsDiv {

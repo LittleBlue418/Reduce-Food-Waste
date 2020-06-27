@@ -2,12 +2,13 @@ import React from 'react';
 import './RecipeHeader.css'
 
 
-const RecipeHeader = ({ name, dietaryRequirements }) => {
+const RecipeHeader = ({ name, cookTime, dietaryRequirements }) => {
   return (
     <>
       <div className="RecipeHeader">
         <div className="TitleDiv">
           <h2>{name}</h2>
+          <p>{cookTime}</p>
         </div>
 
         <div className="IconsDiv">

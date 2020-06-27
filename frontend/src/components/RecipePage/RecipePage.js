@@ -38,6 +38,7 @@ const RecipePage = () => {
       <div className={classes.RecipePage}>
         <RecipeHeader
           name={recipe.name}
+          cookTime={recipe.cook_time}
           dietaryRequirements={recipe.dietary_requirements}
         />
 

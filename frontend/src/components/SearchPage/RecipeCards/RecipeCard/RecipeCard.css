@@ -96,6 +96,10 @@ a:-webkit-any-link {
     background-image: url(../../../../assets/icons/gluten_free.png);
 }
 
+.lactose_free {
+    background-image: url(../../../../assets//icons/vector-lactose-free-icon.jpg);
+}
+
 .nut_free {
     background-image: url(../../../../assets/icons/nut_free.png);
 }

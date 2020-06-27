@@ -28,6 +28,11 @@ class Ingredient(Resource):
                         required=True,
                         help="You must specify whether the ingredient is gluten_free"
                         )
+    parser.add_argument('lactose_free',
+                        type=bool,
+                        required=True,
+                        help="You must specify whether the ingredient is lactose_free"
+                        )
     parser.add_argument('nut_free',
                         type=bool,
                         required=True,
@@ -59,6 +64,7 @@ class Ingredient(Resource):
                     'vegan': request_data['vegan'],
                     'vegetarian': request_data['vegetarian'],
                     'gluten_free': request_data['gluten_free'],
+                    'lactose_free': request_data['lactose_free'],
                     'nut_free': request_data['nut_free'],
                     'egg_free': request_data['egg_free'],
                 }

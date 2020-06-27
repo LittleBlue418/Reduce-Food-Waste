@@ -16,6 +16,7 @@ const AddRecipePage = () => {
   const [newRecipe, setNewRecipe] = useState({
     name: "",
     description: "",
+    cook_time: "",
     image_data: "",
     image_content_type: "",
     method: [],

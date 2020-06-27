@@ -29,6 +29,7 @@ const RecipeForm = ({ recipe, setRecipe, previewImage, setPreviewImage }) => {
 
   const setName = (name) => setRecipe({ ...recipe, name: name });
   const setDescription = (description) => setRecipe({ ...recipe, description: description });
+  const setCookTime = (cook_time) => setRecipe({ ...recipe, cook_time: cook_time });
   const setImage = (image_data, image_content_type) => setRecipe({
     ...recipe,
     image_data: image_data,
@@ -97,8 +98,10 @@ const RecipeForm = ({ recipe, setRecipe, previewImage, setPreviewImage }) => {
       <TitleSection
           nameValue={recipe.name}
           descriptionValue={recipe.description}
+          cookTimeValue={recipe.cook_time}
           setName={setName}
           setDescription={setDescription}
+          setCookTime={setCookTime}
       />
 
 

@@ -3,7 +3,7 @@ import classes from './TitleSection.module.css';
 
 import TextField from '@material-ui/core/TextField';
 
-const TitleSection = ({ nameValue, descriptionValue, setName, setDescription }) => {
+const TitleSection = ({ nameValue, descriptionValue, setName, setDescription, cookTimeValue, setCookTime }) => {
   return (
     <div className={classes.TitleDiv}>
         <h3>Title &amp; Info</h3>
@@ -19,6 +19,12 @@ const TitleSection = ({ nameValue, descriptionValue, setName, setDescription }) 
           multiline
           value={descriptionValue}
           onChange={(e) => setDescription(e.target.value)}
+        />
+        <TextField
+          label="Cook Time"
+          fullWidth
+          value={cookTimeValue}
+          onChange={(e) => setCookTime(e.target.value)}
         />
       </div>
   );
