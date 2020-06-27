@@ -1,7 +1,7 @@
-from models import mongo, ValidationError
+from reduce_foodwaste.models import mongo, ValidationError
 
 from pymongo.collection import ObjectId
-from resources.ingredients import IngredientsModel
+from reduce_foodwaste.resources.ingredients import IngredientsModel
 class RecipesModel():
     def return_as_object(obj):
         return {

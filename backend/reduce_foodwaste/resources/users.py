@@ -1,7 +1,7 @@
 from flask_restful import Resource, reqparse
 
-from models import mongo
-from models.users import UserModel
+from reduce_foodwaste.models import mongo
+from reduce_foodwaste.models.users import UserModel
 from pymongo.collection import ObjectId
 
 class User(Resource):

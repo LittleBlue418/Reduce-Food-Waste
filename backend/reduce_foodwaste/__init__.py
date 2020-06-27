@@ -5,11 +5,11 @@ from flask import Flask
 from flask_restful import reqparse, Api
 from flask_cors import CORS
 
-from models import mongo
-from resources.ingredients import Ingredient, IngredientsCollection
-from resources.users import User, UserCollection
-from resources.recipes import Recipe, RecipeCollection, RecipeSearch
-from resources.images import Image
+from reduce_foodwaste.models import mongo
+from reduce_foodwaste.resources.ingredients import Ingredient, IngredientsCollection
+from reduce_foodwaste.resources.users import User, UserCollection
+from reduce_foodwaste.resources.recipes import Recipe, RecipeCollection, RecipeSearch
+from reduce_foodwaste.resources.images import Image
 
 load_dotenv()
 

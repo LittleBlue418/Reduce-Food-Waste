@@ -5,6 +5,7 @@ venv
 data.db
 __pycache__
 .env
+*.egg-info
 
 # frontend
 

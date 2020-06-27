@@ -2,9 +2,9 @@ from flask_restful import Resource, reqparse
 from flask import request
 from math import ceil
 
-from models import mongo, ValidationError
-from models.recipes import RecipesModel
-from models.images import ImageModel
+from reduce_foodwaste.models import mongo, ValidationError
+from reduce_foodwaste.models.recipes import RecipesModel
+from reduce_foodwaste.models.images import ImageModel
 from pymongo.collection import ObjectId
 from pymongo import ASCENDING
 

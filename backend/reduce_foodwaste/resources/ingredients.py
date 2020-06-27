@@ -1,9 +1,9 @@
 from flask_restful import Resource, reqparse
-
-from models import mongo
-from pymongo.collection import ObjectId
-from models.ingredients import IngredientsModel
 from pymongo import ASCENDING
+from pymongo.collection import ObjectId
+
+from reduce_foodwaste.models import mongo
+from reduce_foodwaste.models.ingredients import IngredientsModel
 
 
 class Ingredient(Resource):

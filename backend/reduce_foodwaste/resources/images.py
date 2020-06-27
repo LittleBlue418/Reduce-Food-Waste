@@ -1,8 +1,8 @@
 from flask_restful import Resource
 from flask import make_response
 
-from models import mongo
-from models.images import ImageModel
+from reduce_foodwaste.models import mongo
+from reduce_foodwaste.models.images import ImageModel
 
 class Image(Resource):
     def get(self, image_id):
