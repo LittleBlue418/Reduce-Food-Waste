@@ -12,7 +12,8 @@ import RecipePage from '../components/RecipePage/RecipePage';
 import AddRecipePage from '../components/AddRecipePage/AddRecipePage';
 import EditRecipePage from '../components/EditRecipePage/EditRecipePage';
 
-import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+// MateriaUI bug: https://github.com/mui-org/material-ui/issues/13394
+import { ThemeProvider, unstable_createMuiStrictModeTheme as createMuiTheme, } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
   palette: {
