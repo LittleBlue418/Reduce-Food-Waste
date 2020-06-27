@@ -1,0 +1,27 @@
+README.md
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+## Editors
+.vscode
+
+## Python artifacts
+*.pyc
+*.egg-info
+__pycache__
+
+## Python virtual environment
+venv
+
+## Frontend artifacts
+frontend/node_modules
+frontend/build
+frontend/npm-debug.log*
+
+## Tapaus artifacts
+stdout.*

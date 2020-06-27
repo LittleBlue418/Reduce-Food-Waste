@@ -12,12 +12,12 @@ setup(
         'flask-pymongo',
         'flask-restful',
         'dnspython',
+        'python-dotenv',
     ],
     extras_require={
         'dev': [
             'ipython',
             'mypy',
-            'python-dotenv',
             'rope',
         ]
     },

@@ -3,7 +3,7 @@ import axios from 'axios'
 export class APIClient {
   constructor() {
     this.http = axios.create()
-    this.baseUrl = 'http://localhost:5000'
+    this.baseUrl = ''
 
     this.updateImageURL = this.updateImageURL.bind(this)
 
