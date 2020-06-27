@@ -45,8 +45,8 @@ class RecipesModel():
 
         if len(built_recipy['description']) < 1:
             raise ValidationError('Recipe must have a description!')
-        if len(built_recipy['description']) > 60:
-            raise ValidationError('Description should be less than 60 charectors!')
+        if len(built_recipy['description']) > 120:
+            raise ValidationError('Description should be less than 120 charectors!')
 
         # Cook Time
         built_recipy['cook_time'] = request_data['cook_time'].strip()
