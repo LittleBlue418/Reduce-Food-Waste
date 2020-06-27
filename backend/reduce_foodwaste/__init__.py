@@ -7,7 +7,6 @@ from flask_cors import CORS
 
 from reduce_foodwaste.models import mongo
 from reduce_foodwaste.resources.ingredients import Ingredient, IngredientsCollection
-from reduce_foodwaste.resources.users import User, UserCollection
 from reduce_foodwaste.resources.recipes import Recipe, RecipeCollection, RecipeSearch
 from reduce_foodwaste.resources.images import Image
 
@@ -28,8 +27,6 @@ api = Api(app)
 
 api.add_resource(IngredientsCollection, '/api/ingredients')
 api.add_resource(Ingredient, '/api/ingredients/<ingredient_id>')
-api.add_resource(UserCollection, '/api/users')
-api.add_resource(User, '/api/users/<user_id>')
 api.add_resource(RecipeSearch, '/api/recipes/_search')
 api.add_resource(RecipeCollection, '/api/recipes')
 api.add_resource(Recipe, '/api/recipes/<recipe_id>')
