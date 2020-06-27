@@ -19,6 +19,8 @@ setup(
             'ipython',
             'mypy',
             'rope',
+            'pytest',
+            'mongomock',
         ]
     },
     python_requires='>=3.6.*'
