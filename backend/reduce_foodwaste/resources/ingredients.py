@@ -69,7 +69,8 @@ class Ingredient(Resource):
 
         except ValidationError as error:
             return {"message": error.message}, 400
-        except:
+        except Exception as error:
+            print(error)
             return {"message": "An error occurred saving to database"}, 500
 
 
@@ -113,5 +114,6 @@ class IngredientsCollection(Resource):
 
         except ValidationError as error:
             return {"message": error.message}, 400
-        except:
-            return {"message": "An error occurred"}, 500
+        except Exception as error:
+            print(error)
+            return {"message": "An error occurred saving to database"}, 500
