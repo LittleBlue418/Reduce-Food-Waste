@@ -3,6 +3,21 @@
     border-radius: 16px;
     margin: 10px auto;
     padding: 12px 10px;
-
     display: flex;
+    animation-name: flash;
+    animation-timing-function: ease-in-out;
+    animation-duration: 500ms;
+    animation-iteration-count: 2;
+    animation-direction: alternate;
+}
+
+@keyframes flash {
+    0% {
+        border-color: lightgray;
+        background-color: white;
+    }
+    100% {
+        border-color: darkgreen;
+        background-color: rgba(0, 100, 0, 0.158);
+    }
 }
