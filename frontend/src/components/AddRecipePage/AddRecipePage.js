@@ -34,6 +34,7 @@ const AddRecipePage = () => {
       setNewRecipe({
         name: "",
         description: "",
+        cook_time: "",
         image_data: "",
         image_content_type: "",
         method: [],
