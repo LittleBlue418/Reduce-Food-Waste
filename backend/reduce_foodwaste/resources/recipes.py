@@ -55,28 +55,31 @@ class Recipe(Resource):
             return {"message": "A Recipe with that ID does not exist"}
 
         try:
-            updated_recipe = RecipesModel.build_recipe_from_request(request_data)
+            # Using a transaction to ensure image & recipe both update or neither does
+            with mongo.cx.start_session()as session:
+                with session.start_transaction():
+                    updated_recipe = RecipesModel.build_recipe_from_request(request_data)
 
-            # If key exists in a dictionary (If new image)
-            if 'image_data' in request_data:
-                mongo.db.images.remove({"_id": ObjectId(old_recipe['image_id'])})
+                    # If key exists in a dictionary (If new image)
+                    if 'image_data' in request_data:
+                        mongo.db.images.remove({"_id": ObjectId(old_recipe['image_id'])})
 
-                image_data = b64decode(request_data['image_data'])
-                image_content_type = request_data['image_content_type']
-                built_image = ImageModel.build_image(image_data, image_content_type)
+                        image_data = b64decode(request_data['image_data'])
+                        image_content_type = request_data['image_content_type']
+                        built_image = ImageModel.build_image(image_data, image_content_type)
 
-                result = mongo.db.images.insert_one(built_image)
+                        result = mongo.db.images.insert_one(built_image)
 
-                updated_recipe['image_id'] = str(result.inserted_id)
-            else:
-                # If we want the origional image
-                updated_recipe['image_id'] = old_recipe['image_id']
+                        updated_recipe['image_id'] = str(result.inserted_id)
+                    else:
+                        # If we want the origional image
+                        updated_recipe['image_id'] = old_recipe['image_id']
 
-            mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, updated_recipe)
+                    mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, updated_recipe)
 
-            updated_recipe['_id'] = recipe_id
+                    updated_recipe['_id'] = recipe_id
 
-            return RecipesModel.return_as_object(updated_recipe)
+                    return RecipesModel.return_as_object(updated_recipe)
 
         except ValidationError as error:
             return {"message": error.message}, 400
@@ -91,8 +94,11 @@ class Recipe(Resource):
         if not recipe:
             return {"message": "A recipe with this name does not exist"}
 
-        mongo.db.recipes.remove({"_id": ObjectId(recipe_id)})
-        mongo.db.images.remove({"_id": ObjectId(image_id)})
+        # Using a transaction to ensure image & recipe both delete or neither does
+        with mongo.cx.start_session()as session:
+            with session.start_transaction():
+                mongo.db.recipes.remove({"_id": ObjectId(recipe_id)})
+                mongo.db.images.remove({"_id": ObjectId(image_id)})
 
         return {"message": "Recipe deleted"}, 200
 
@@ -136,25 +142,28 @@ class RecipeCollection(Resource):
            return {'message': "A recipe with name '{}' already exists".format(request_data['name'])}, 400
 
         try:
-            # Image required when creating a recipe
-            if len(request_data["image_data"]) < 1:
-                raise ValidationError('Recipe must have an image!')
+            # Using a transaction to ensure image & recipe are both created or neither is
+            with mongo.cx.start_session()as session:
+                with session.start_transaction():
+                    # Image required when creating a recipe
+                    if len(request_data["image_data"]) < 1:
+                        raise ValidationError('Recipe must have an image!')
 
-            built_recipe = RecipesModel.build_recipe_from_request(request_data)
+                    built_recipe = RecipesModel.build_recipe_from_request(request_data)
 
-            image_data = b64decode(request_data['image_data'])
-            image_content_type = request_data['image_content_type']
-            built_image = ImageModel.build_image(image_data, image_content_type)
+                    image_data = b64decode(request_data['image_data'])
+                    image_content_type = request_data['image_content_type']
+                    built_image = ImageModel.build_image(image_data, image_content_type)
 
-            result = mongo.db.images.insert_one(built_image)
+                    result = mongo.db.images.insert_one(built_image)
 
-            built_recipe['image_id'] = str(result.inserted_id)
+                    built_recipe['image_id'] = str(result.inserted_id)
 
-            result = mongo.db.recipes.insert_one(built_recipe)
+                    result = mongo.db.recipes.insert_one(built_recipe)
 
-            built_recipe['_id'] = result.inserted_id
+                    built_recipe['_id'] = result.inserted_id
 
-            return RecipesModel.return_as_object(built_recipe)
+                    return RecipesModel.return_as_object(built_recipe)
 
         except ValidationError as error:
             return {"message": error.message}, 400
