@@ -1,10 +1,11 @@
 import os
 
 from dotenv import load_dotenv
-from flask import Flask
-from flask_restful import reqparse, Api
+from flask import Flask, jsonify
+from flask_restful import reqparse
 from flask_cors import CORS
 
+from reduce_foodwaste.error_propagating_api import ErrorPropagatingApi
 from reduce_foodwaste.models import mongo
 from reduce_foodwaste.resources.ingredients import Ingredient, IngredientsCollection
 from reduce_foodwaste.resources.recipes import Recipe, RecipeCollection, RecipeSearch
@@ -22,7 +23,7 @@ app.config["MONGO_URI"] = 'mongodb+srv://root:{}@food-waste-cluster-1n8bd.mongod
     password)
 
 mongo.init_app(app)
-api = Api(app)
+api = ErrorPropagatingApi(app)
 
 
 api.add_resource(IngredientsCollection, '/api/ingredients')
@@ -33,7 +34,10 @@ api.add_resource(Recipe, '/api/recipes/<recipe_id>')
 api.add_resource(Image, '/api/images/<image_id>')
 
 
-
+@app.errorhandler(500)
+def error_handler(error):
+    print(error)
+    return jsonify(message="Something went wrong behind the scenes!"), 500
 
 
 
