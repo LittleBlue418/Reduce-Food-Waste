@@ -41,40 +41,6 @@ def error_handler(error):
 
 
 
-
-
-
-
-# LOGIN ENDPOINTS
-
-@app.route('/login', methods=['POST'])
-def log_in():
-    return "Logged in"
-
-
-@app.route('/logout', methods=['GET'])
-def log_out():
-    return "Logged out"
-
-
-# FAVORITE END POINTS
-
-@app.route('/favorites', methods=['GET'])
-def list_user_favorites():
-    return "All user favorites"
-
-
-@app.route('/favorites', methods=['POST'])
-def add_user_favorite():
-    return "User favorite added"
-
-
-@app.route('/favorites/<favorite>', methods=['DELETE'])
-def delete_user_favorite(favorite):
-    return "User favorite deleted"
-
-
-
 if __name__ == '__main__':
     app.run(
         host="0.0.0.0",
