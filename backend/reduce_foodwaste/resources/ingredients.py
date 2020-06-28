@@ -57,21 +57,21 @@ class Ingredient(Resource):
     def put(self, ingredient_id):
         request_data = Ingredient.parser.parse_args()
 
-        if IngredientsModel.find_by_id(ingredient_id):
-            mongo.db.ingredients.update({"_id": ObjectId(ingredient_id)},
-                {
-                    'name': request_data['name'],
-                    'vegan': request_data['vegan'],
-                    'vegetarian': request_data['vegetarian'],
-                    'gluten_free': request_data['gluten_free'],
-                    'lactose_free': request_data['lactose_free'],
-                    'nut_free': request_data['nut_free'],
-                    'egg_free': request_data['egg_free'],
-                }
-            )
-            return IngredientsModel.return_as_object(request_data)
-        else:
+        if not IngredientsModel.find_by_id(ingredient_id):
             return {"message": "An ingredient with that ID does not exist"}, 404
+
+        try:
+            updated_ingredient = IngredientsModel.built_ingredient_from_request(request_data)
+            mongo.db.ingredients.update({"_id": ObjectId(ingredient_id)}, ingredieupdated_ingredientnt)
+            updated_ingredient['_id'] = ingredient_id
+
+            return IngredientsModel.return_as_object(updated_ingredient)
+
+        except ValidationError as error:
+            return {"message": error.message}, 400
+        except:
+            return {"message": "An error occurred saving to database"}, 500
+
 
 
     def delete(self, ingredient_id):
@@ -105,7 +105,13 @@ class IngredientsCollection(Resource):
              return {'message': "An item with name '{}' already exists".format(request_data['name'])}, 400
 
         try:
-            mongo.db.ingredients.insert_one(request_data)
-            return IngredientsModel.return_as_object(request_data)
+            new_ingredient = IngredientsModel.built_ingredient_from_request(request_data)
+            result = mongo.db.ingredients.insert_one(new_ingredient)
+            new_ingredient['_id'] = result.inserted_id
+
+            return IngredientsModel.return_as_object(new_ingredient)
+
+        except ValidationError as error:
+            return {"message": error.message}, 400
         except:
             return {"message": "An error occurred"}, 500
