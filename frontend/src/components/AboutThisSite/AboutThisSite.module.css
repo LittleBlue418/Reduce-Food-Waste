@@ -1,0 +1,67 @@
+.HeaderDiv {
+    width: 80%;
+    margin: auto;
+}
+
+.Header {
+    height: fit-content;
+}
+
+.Header img {
+    height: auto;
+    width: 100%;
+}
+
+.Header h1 {
+    font-family: 'Gloria Hallelujah', cursive;
+    margin: 0;
+    font-size: 25px;
+    font-weight: 100;
+}
+
+.Line {
+    background-color: lightgrey;
+    width: 80%;
+    height: 2px;
+    margin: 20px auto;
+}
+
+.PageBody {
+    margin: auto;
+    width: 80%;
+}
+
+.PageBody h2 {
+    font-family: 'Gloria Hallelujah', cursive;
+    margin: 0;
+    font-size: 22px;
+    font-weight: 100;
+}
+
+.DietaryKeyDiv {
+    margin: 5px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.DietaryIconsDiv {
+    margin: 4px 0;
+    display: flex;
+    justify-content: start;
+}
+
+.DietaryIconsDiv img {
+    height: 30px;
+    width: 30px;
+}
+
+.DietaryIconsDiv p {
+    margin: auto 5px;
+}
+
+@media (min-width: 700px) {
+    .Header img {
+        height: auto;
+        width: 80%;
+    }
+}

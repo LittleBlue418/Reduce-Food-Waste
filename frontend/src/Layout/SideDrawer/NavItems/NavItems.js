@@ -15,7 +15,7 @@ const NavItems = () => {
         Add Recipe
     </NavItem>
     <NavItem
-      link="/">
+      link="/aboutThisSite">
         About This Site
     </NavItem>
     <NavItem

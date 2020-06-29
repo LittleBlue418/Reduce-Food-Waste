@@ -11,6 +11,7 @@ import SearchPage from '../components/SearchPage/SearchPage';
 import RecipePage from '../components/RecipePage/RecipePage';
 import AddRecipePage from '../components/AddRecipePage/AddRecipePage';
 import EditRecipePage from '../components/EditRecipePage/EditRecipePage';
+import AboutThisSite from '../components/AboutThisSite/AboutThisSite';
 
 // MateriaUI bug: https://github.com/mui-org/material-ui/issues/13394
 import { ThemeProvider, unstable_createMuiStrictModeTheme as createMuiTheme, } from '@material-ui/core/styles';
@@ -53,6 +54,10 @@ const App = () => {
 
             <Route path="/addRecipe">
               <AddRecipePage />
+            </Route>
+
+            <Route path="/aboutThisSite">
+              <AboutThisSite />
             </Route>
 
             <Route path="/editRecipe/:recipe_id">
