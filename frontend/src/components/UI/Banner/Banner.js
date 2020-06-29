@@ -14,14 +14,16 @@ const Banner = () => (
       </div>
     </Link>
 
-    <div className={classes.SiteBanner}>
-      <div className={classes.BannerText}>
-        <p>
-          Reduce Food Waste
+    <Link to="/">
+      <div className={classes.SiteBanner}>
+        <div className={classes.BannerText}>
+          <p>
+            Reduce Food Waste
         </p>
 
+        </div>
       </div>
-    </div>
+    </Link>
 
   </div>
 );
