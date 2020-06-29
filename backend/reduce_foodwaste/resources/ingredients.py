@@ -67,6 +67,7 @@ class Ingredient(Resource):
             # Transaction
             with mongo.cx.start_session()as session:
                 with session.start_transaction():
+
                     # Updating the ingredient in the ingredients databse
                     updated_ingredient = IngredientsModel.built_ingredient_from_request(request_data)
                     mongo.db.ingredients.update({"_id": ObjectId(ingredient_id)}, updated_ingredient)
@@ -74,19 +75,42 @@ class Ingredient(Resource):
                     # Adding the ID back into the ingredient (ready to return)
                     updated_ingredient['_id'] = ingredient_id
 
-                    ####
 
+                    #### - UPDATING RECIPES USING THAT INGREDIENT
 
 
                     # Find all recipes containing [x] ingredient
                     recipes_with_ingredient = RecipesModel.find_recipe_by_ingredient(ingredient_id)
 
-                    # Saving all the ingredients we look up in our db
+                    # For saving all the ingredients that we will look up in our db
                     cached_ingredients = {ingredient_id: updated_ingredient}
 
-                    # Loop through [y] recipes
-                    for recipe in recipes_with_ingredient:
+                    # Set to hold all the ingredient id's that we will look up in the db
+                    ingredient_ids = set()
 
+                    # Looping through all the recipes to get all the ingredient ids we need
+                    for recipe in recipes_with_ingredient:
+                        for ingredient in recipe['ingredients']:
+                            ingredient_id = ingredient_object['ingredient']['_id']
+                            ingredient_ids.add(ObjectId(ingredient_id))
+
+                    # Call to db to get all the ingredients we need (using the ids we just got)
+                    curser = mondo.db.ingredients.find({
+                        "_id": {
+                            "$in": list(ingredient_ids)
+                        }
+                    })
+
+                    # Adding each ingredient to our list of cached ingredients
+                    for ingredient in curser:
+                        cached_ingredients[str(ingredient['_id'])]: ingredient
+
+
+                    ### Actual update loop for the recipes
+
+
+                    # Loop through all the recipes (again)
+                    for recipe in recipes_with_ingredient:
 
                         # Placeholder dietary requirements to edit
                         dietary_requirements = {
@@ -98,20 +122,19 @@ class Ingredient(Resource):
                             "egg_free": True
                         }
 
-                        # loop through the ingredient objects
+                        # loop through the ingredients in the recipe we are in
                         for ingredient_object in recipe['ingredients']:
                             ingredient_id = ingredient_object['ingredient']['_id']
 
-                            if ingredient_id in cached_ingredients:
-                                ingredient_from_db = cached_ingredients[ingredient_id]
-                            else:
-                                # Look up ingredient in the db
-                                ingredient_from_db = IngredientsModel.find_by_id(ingredient_id)
-                                cached_ingredients[ingredient_id] = ingredient_from_db
+                            # Checking for errors in the db (corrupt data etc)
+                            if ingredient_id not in cached_ingredients:
+                                raise Exception(f'Missing ingredient in database: {ingredient_id}')
+
+                            # look up the ingredient we are on, in our cached ingredients set
+                            ingredient_from_db = cached_ingredients[ingredient_id]
 
 
-
-                            # Update the ingredient name
+                            # Use the cahced ingredient info (from the db) to update the ingredient name on the recipe
                             ingredient_object['ingredient']['name'] = ingredient_from_db['name']
 
 
@@ -127,20 +150,8 @@ class Ingredient(Resource):
                         mongo.db.recipes.update({"_id": ObjectId(recipe['_id'])}, recipe)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-            return IngredientsModel.return_as_object(updated_ingredient)
+                    # After updating and saving each recipe, we finally return our updated ingredient
+                    return IngredientsModel.return_as_object(updated_ingredient)
 
         except ValidationError as error:
             return {"message": error.message}, 400
