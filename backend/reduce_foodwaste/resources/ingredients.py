@@ -103,7 +103,7 @@ class Ingredient(Resource):
 
                     # Adding each ingredient to our list of cached ingredients
                     for ingredient in curser:
-                        cached_ingredients[str(ingredient['_id'])]: ingredient
+                        cached_ingredients[str(ingredient['_id'])] = ingredient
 
 
                     ### Actual update loop for the recipes
@@ -164,6 +164,12 @@ class Ingredient(Resource):
 
         if ingredient is None:
             return {"message": "An ingredient with that ID does not exist"}, 404
+
+        # Check if any recipes are using that ingredient
+        recipes_with_ingredient = RecipesModel.find_recipe_by_ingredient(ingredient_id)
+
+        if recipes_with_ingredient:
+            return {"message": "You cannot delete an ingredient that is being used by a recipe"}
 
         mongo.db.ingredients.remove({"_id": ObjectId(ingredient_id)})
 
