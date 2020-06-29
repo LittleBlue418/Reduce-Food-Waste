@@ -30,7 +30,6 @@ const AddRecipePage = () => {
   const saveToDatabase = () => {
     setLoading(true)
     API.create_recipe(newRecipe).then((response) => {
-      console.log('saved')
       setNewRecipe({
         name: "",
         description: "",

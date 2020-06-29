@@ -11,7 +11,6 @@ const SideDrawer = ({ toggleSidedrawer, sidedrawerShown }) => {
 
   if (sidedrawerShown === true) {
     attachedClasses = [classes.SideDrawer, classes.Open];
-    console.log('here')
   }
 
   return (
