@@ -76,9 +76,13 @@ class Ingredient(Resource):
 
                     ####
 
+
+
                     # Find all recipes containing [x] ingredient
                     recipes_with_ingredient = RecipesModel.find_recipe_by_ingredient(ingredient_id)
 
+                    # Saving all the ingredients we look up in our db
+                    cached_ingredients = {ingredient_id: updated_ingredient}
 
                     # Loop through [y] recipes
                     for recipe in recipes_with_ingredient:
@@ -98,11 +102,16 @@ class Ingredient(Resource):
                         for ingredient_object in recipe['ingredients']:
                             ingredient_id = ingredient_object['ingredient']['_id']
 
-                            # Update the ingredient name
-                            ingredient_from_db = IngredientsModel.find_by_id(ingredient_id)
-                            if not ingredient_from_db:
-                                raise ValidationError('Ingredient not found in database')
+                            if ingredient_id in cached_ingredients:
+                                ingredient_from_db = cached_ingredients[ingredient_id]
+                            else:
+                                # Look up ingredient in the db
+                                ingredient_from_db = IngredientsModel.find_by_id(ingredient_id)
+                                cached_ingredients[ingredient_id] = ingredient_from_db
 
+
+
+                            # Update the ingredient name
                             ingredient_object['ingredient']['name'] = ingredient_from_db['name']
 
 
