@@ -22,7 +22,7 @@ class IngredientsModel():
     @classmethod
     def built_ingredient_from_request(cls, request_data):
         built_ingredient = {
-            'name': request_data.get('name', '').strip(),
+            'name': request_data.get('name', '').strip().lower(),
         }
 
         # Name
