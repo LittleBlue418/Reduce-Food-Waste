@@ -105,7 +105,7 @@ class RecipesModel():
         return built_recipy
 
 
-    @classmethod
+    @staticmethod
     def find_recipe_by_ingredient(ingredient_id):
         query =  {}
 
