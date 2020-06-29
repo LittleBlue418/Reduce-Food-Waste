@@ -192,7 +192,7 @@ class IngredientsCollection(Resource):
     def post(self):
         request_data = Ingredient.parser.parse_args()
 
-        if IngredientsModel.find_by_name(request_data['name']):
+        if IngredientsModel.find_by_name(request_data['name'].strip().lower()):
              return {'message': "An item with name '{}' already exists".format(request_data['name'])}, 400
 
         try:
