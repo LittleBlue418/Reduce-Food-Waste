@@ -7,12 +7,21 @@ import { Link } from "react-router-dom"
 
 const Banner = () => (
   <div className={classes.Banner}>
+
     <Link to="/">
-    <div className={classes.LogoContainer}>
+      <div className={classes.LogoContainer}>
         <Logo />
-    </div>
+      </div>
     </Link>
-    <div className={classes.BannerText}>Reduce Food Waste</div>
+
+    <div className={classes.SiteBanner}>
+      <div className={classes.BannerText}>
+        <p>
+          Reduce Food Waste
+        </p>
+
+      </div>
+    </div>
 
   </div>
 );
