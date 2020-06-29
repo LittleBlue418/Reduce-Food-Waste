@@ -67,13 +67,16 @@ class RecipesModel():
             "egg_free": True
         }
 
-        built_recipy['ingredients'] = request_data['ingredients']
-        if  len(built_recipy['ingredients']) < 2:
+
+        if  len(request_data['ingredients']) < 2:
             raise ValidationError('All recipes need at least two ingredients!')
 
-        ingredient_list = built_recipy['ingredients']
-        for ingredient_object in ingredient_list:
+        built_recipy['ingredients'] = request_data['ingredients']
+
+        for ingredient_object in built_recipy['ingredients']:
+
             ingredient_id = ingredient_object['ingredient']['_id']
+
             if not ingredient_id:
                 raise ValidationError('Ingredient needs and ID!')
 
@@ -81,7 +84,10 @@ class RecipesModel():
             if not ingredient_from_db:
                 raise ValidationError('Ingredient not found in database')
 
-            ingredient_object['ingredient']['name'] = ingredient_from_db['name']
+            ingredient_object['ingredient'] = {
+                '_id': ingredient_id,
+                'name': ingredient_from_db['name'],
+            }
 
 
             # Dietary requirements
