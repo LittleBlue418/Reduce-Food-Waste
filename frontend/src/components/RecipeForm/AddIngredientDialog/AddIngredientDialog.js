@@ -79,6 +79,7 @@ const AddIngredientDialog = ({ open, setOpen, onCreated }) => {
           <DialogContentText>
             If you didn't find the ingredient in the drop down list you can add it here!
           </DialogContentText>
+          <h3>Ingredient Name</h3>
           <TextField
             autoFocus
             margin="dense"
@@ -88,6 +89,10 @@ const AddIngredientDialog = ({ open, setOpen, onCreated }) => {
             fullWidth
             onChange={(e) => setIngredientName(e.target.value)}
           />
+
+          <h3>Dietary Requirements Information</h3>
+          <p>Tick all that apply.</p>
+
           <FormGroup>
             {
               Object.entries(dietaryRequirements).map(([key, value]) => {

@@ -105,5 +105,29 @@ class RecipesModel():
         return built_recipy
 
 
+    @classmethod
+    def find_recipe_by_ingredient(ingredient_id):
+        query =  {}
+
+        query["ingredients"] = {
+            "$all" : [
+                {
+                    "$elemMatch": {
+                            "ingredient._id": ingredient_id
+                        }
+                }
+            ]
+        }
+
+        query_cursor = mongo.db.recipes.find(query)
+
+        recipes = [
+            recipe
+            for recipe in query_cursor
+        ]
+
+        return recipes
+
+
 
 
