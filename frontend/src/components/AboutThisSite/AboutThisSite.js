@@ -15,7 +15,7 @@ const AboutThisSite = () => {
     <div>
       <div className={classes.HeaderDiv}>
         <div className={classes.Header}>
-          <img src={BannerImage}></img>
+          <img src={BannerImage} alt="Site logo"></img>
           <h1>Tackle food waste &amp; save money!</h1>
         </div>
       </div>

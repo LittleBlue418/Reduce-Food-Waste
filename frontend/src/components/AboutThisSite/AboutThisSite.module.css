@@ -47,7 +47,7 @@
 .DietaryIconsDiv {
     margin: 4px 0;
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
 }
 
 .DietaryIconsDiv img {
