@@ -207,7 +207,7 @@ I used Jest to write unit tests for the React frontend. On a high level I test t
 
 ### User Story Testing
 
-Read the full user story testing [here]() **[FIX]**
+Read the full user story testing [here](https://github.com/LittleBlue418/Reduce-Food-Waste/blob/master/frontend/src/assets/documentation/user-story-testing.pdf)
 
 ### Code Validation
 The code has been validated with ESlint, as well as the online code validators [W3C CSS](https://jigsaw.w3.org/css-validator/) and [W3C Markup Service](https://validator.w3.org/#validate_by_uri).
