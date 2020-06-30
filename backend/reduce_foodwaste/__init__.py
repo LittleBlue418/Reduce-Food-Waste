@@ -3,7 +3,6 @@ import os
 from dotenv import load_dotenv
 from flask import Flask, jsonify
 from flask_restful import reqparse
-from flask_cors import CORS
 
 from reduce_foodwaste.error_propagating_api import ErrorPropagatingApi
 from reduce_foodwaste.models import mongo
@@ -14,7 +13,6 @@ from reduce_foodwaste.resources.images import Image
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app)
 
 password = os.environ.get("MONGODB_PASSWORD")
 
