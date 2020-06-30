@@ -14,11 +14,9 @@ load_dotenv()
 
 app = Flask(__name__)
 
-password = os.environ.get("MONGODB_PASSWORD")
 
-app.config["MONGO_DBNAME"] = 'food-waste-database'
-app.config["MONGO_URI"] = 'mongodb+srv://root:{}@food-waste-cluster-1n8bd.mongodb.net/food-waste-database?retryWrites=true&w=majority'.format(
-    password)
+app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
+app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 
 mongo.init_app(app)
 api = ErrorPropagatingApi(app)
