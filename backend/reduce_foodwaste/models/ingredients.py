@@ -1,4 +1,4 @@
-from reduce_foodwaste.models import mongo
+from reduce_foodwaste.models import mongo, ValidationError
 from pymongo.collection import ObjectId
 
 

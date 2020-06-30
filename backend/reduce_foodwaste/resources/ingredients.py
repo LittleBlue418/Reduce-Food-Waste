@@ -192,11 +192,12 @@ class IngredientsCollection(Resource):
     def post(self):
         request_data = Ingredient.parser.parse_args()
 
-        if IngredientsModel.find_by_name(request_data['name'].strip().lower()):
-             return {'message': "An item with name '{}' already exists".format(request_data['name'])}, 400
-
         try:
             new_ingredient = IngredientsModel.built_ingredient_from_request(request_data)
+
+            if IngredientsModel.find_by_name(new_ingredient['name']):
+             return {'message': "An item with name '{}' already exists".format(new_ingredient['name'])}, 400
+
             result = mongo.db.ingredients.insert_one(new_ingredient)
             new_ingredient['_id'] = result.inserted_id
 

@@ -27,7 +27,7 @@ const AddIngredientDialog = ({ open, setOpen, onCreated }) => {
     nut_free: false,
     egg_free: false,
   })
-  const [ingredientName, setIngredientName] = useState(null)
+  const [ingredientName, setIngredientName] = useState('')
   const [error, setError] = useState(false)
 
   const handleChange = (event) => {
