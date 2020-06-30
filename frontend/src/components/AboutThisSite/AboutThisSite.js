@@ -23,7 +23,7 @@ const AboutThisSite = () => {
       <div className={classes.PageBody}>
         <p>
           We all know how it goes, you use half a packet of something for a meal and the
-          other half sits in the fridge untill it goes off and has to be thrown away. We've
+          other half sits in the fridge until it goes off and has to be thrown away. We've
           all done it. It's estimated that in developed countries we waste about 100kg of food
           a year. That's a lot of waste, and a lot of money!
         </p>
@@ -31,7 +31,7 @@ const AboutThisSite = () => {
         <h2>How to use this site:</h2>
 
         <p>
-          Each recipe is marked with dietary requirement icons. These are automatically genrated
+          Each recipe is marked with dietary requirement icons. These are automatically generated
           from the ingredients in the recipe.
         </p>
 
@@ -64,8 +64,10 @@ const AboutThisSite = () => {
 
         <p>
           NOTE: These are a rough guide, and should not substitute the information on
-          the ingredient lable!
+          the ingredient label!
         </p>
+
+        <div className={classes.Line}></div>
 
 
 
