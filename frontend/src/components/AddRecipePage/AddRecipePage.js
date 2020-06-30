@@ -1,18 +1,18 @@
-import React, { useState, useContext } from 'react';
-import classes from './AddRecipePage.module.css';
+import React, { useState, useContext } from 'react'
+import classes from './AddRecipePage.module.css'
 
-import { APIContext } from '../../context/APIContext';
-import RecipeForm from '../RecipeForm/RecipeForm';
+import { APIContext } from '../../context/APIContext'
+import RecipeForm from '../RecipeForm/RecipeForm'
 
-import Alert from '@material-ui/lab/Alert';
-import Button from '@material-ui/core/Button';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import Alert from '@material-ui/lab/Alert'
+import Button from '@material-ui/core/Button'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 
 
 const AddRecipePage = () => {
   const API = useContext(APIContext)
-  const [previewImage, setPreviewImage] = useState(null);
+  const [previewImage, setPreviewImage] = useState(null)
   const [newRecipe, setNewRecipe] = useState({
     name: "",
     description: "",
@@ -62,10 +62,10 @@ const AddRecipePage = () => {
       {sucess ? <Alert onClose={() => { setSucess(false) }} severity="success">{sucess.name} added!</Alert> : null}
 
       <RecipeForm
-          recipe={newRecipe}
-          setRecipe={setNewRecipe}
-          previewImage={previewImage}
-          setPreviewImage={setPreviewImage}
+        recipe={newRecipe}
+        setRecipe={setNewRecipe}
+        previewImage={previewImage}
+        setPreviewImage={setPreviewImage}
       />
 
       <div className={classes.SubmitButtonDiv}>
@@ -74,7 +74,7 @@ const AddRecipePage = () => {
         </Button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AddRecipePage;
+export default AddRecipePage

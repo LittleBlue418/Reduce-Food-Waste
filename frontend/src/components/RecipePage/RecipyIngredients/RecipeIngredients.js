@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import RecipeIngredient from './RecipeIngredient/RecipeIngredient'
 import classes from './RecipeIngredients.module.css'
 
@@ -14,7 +14,7 @@ const RecipeIngredients = ({ ingredients }) => {
         )
       })}
     </div>
-  );
-};
+  )
+}
 
-export default RecipeIngredients;
+export default RecipeIngredients

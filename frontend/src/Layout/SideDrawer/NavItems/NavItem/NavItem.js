@@ -1,5 +1,5 @@
 import React from 'react'
-import classes from './NavItem.module.css';
+import classes from './NavItem.module.css'
 import { Link } from "react-router-dom"
 
 const NavItem = ({ link, children, external }) => (
@@ -9,16 +9,16 @@ const NavItem = ({ link, children, external }) => (
         href={link}
         target="_blank"
         rel="noopener noreferrer">
-          {children}
+        {children}
       </a>
     ) : (
       <Link
-      to={link}>
+        to={link}>
         {children}
-    </Link>
+      </Link>
     )}
 
   </li>
-);
+)
 
-export default NavItem;
+export default NavItem

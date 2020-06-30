@@ -1,30 +1,30 @@
-import React from 'react';
-import classes from './NavItems.module.css';
-import NavItem from './NavItem/NavItem';
+import React from 'react'
+import classes from './NavItems.module.css'
+import NavItem from './NavItem/NavItem'
 
 
 const NavItems = () => {
   return (
     <ul className={classes.NavItems}>
-    <NavItem
-      link="/">
+      <NavItem
+        link="/">
         Search
-    </NavItem>
-    <NavItem
-      link="/addRecipe">
+      </NavItem>
+      <NavItem
+        link="/addRecipe">
         Add Recipe
-    </NavItem>
-    <NavItem
-      link="/aboutThisSite">
+      </NavItem>
+      <NavItem
+        link="/aboutThisSite">
         About This Site
-    </NavItem>
-    <NavItem
-      link="https://github.com/LittleBlue418"
-      external>
+      </NavItem>
+      <NavItem
+        link="https://github.com/LittleBlue418"
+        external>
         Developer page
-    </NavItem>
-  </ul>
-  );
-};
+      </NavItem>
+    </ul>
+  )
+}
 
-export default NavItems;
+export default NavItems

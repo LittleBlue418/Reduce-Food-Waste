@@ -1,21 +1,21 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext } from 'react'
 
-import { APIContext } from '../../../context/APIContext';
-import { labelFromKey } from '../../../utilityFunctions';
+import { APIContext } from '../../../context/APIContext'
+import { labelFromKey } from '../../../utilityFunctions'
 
-import TextField from '@material-ui/core/TextField';
-import Alert from '@material-ui/lab/Alert';
-import Button from '@material-ui/core/Button';
-import Checkbox from '@material-ui/core/Checkbox';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { green } from '@material-ui/core/colors';
-import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField'
+import Alert from '@material-ui/lab/Alert'
+import Button from '@material-ui/core/Button'
+import Checkbox from '@material-ui/core/Checkbox'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import FormGroup from '@material-ui/core/FormGroup'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import { green } from '@material-ui/core/colors'
+import { withStyles } from '@material-ui/core/styles'
 
 const AddIngredientDialog = ({ open, setOpen, onCreated }) => {
   const API = useContext(APIContext)
@@ -26,26 +26,26 @@ const AddIngredientDialog = ({ open, setOpen, onCreated }) => {
     lactose_free: false,
     nut_free: false,
     egg_free: false,
-  });
+  })
   const [ingredientName, setIngredientName] = useState(null)
   const [error, setError] = useState(false)
 
   const handleChange = (event) => {
-    setDietaryRequirements({ ...dietaryRequirements, [event.target.name]: event.target.checked });
-  };
+    setDietaryRequirements({ ...dietaryRequirements, [event.target.name]: event.target.checked })
+  }
 
   const handleClose = () => {
-    setOpen(false);
+    setOpen(false)
     setDietaryRequirements({
-        vegan: false,
-        vegetarian: false,
-        gluten_free: false,
-        lactose_free: false,
-        nut_free: false,
-        egg_free: false,
-      })
+      vegan: false,
+      vegetarian: false,
+      gluten_free: false,
+      lactose_free: false,
+      nut_free: false,
+      egg_free: false,
+    })
     setError(false)
-  };
+  }
 
   const saveToDatabase = () => {
     const newIngredient = {
@@ -68,7 +68,7 @@ const AddIngredientDialog = ({ open, setOpen, onCreated }) => {
       },
     },
     checked: {},
-  })((props) => <Checkbox color="default" {...props} />);
+  })((props) => <Checkbox color="default" {...props} />)
 
   return (
     <div>
@@ -120,7 +120,7 @@ const AddIngredientDialog = ({ open, setOpen, onCreated }) => {
       </Dialog>
     </div>
 
-  );
-};
+  )
+}
 
-export default AddIngredientDialog;
+export default AddIngredientDialog

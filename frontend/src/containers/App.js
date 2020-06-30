@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import './App.css';
+import React, { useState } from 'react'
+import './App.css'
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-} from "react-router-dom";
+} from "react-router-dom"
 
-import Layout from '../Layout/Layout';
-import SearchPage from '../components/SearchPage/SearchPage';
-import RecipePage from '../components/RecipePage/RecipePage';
-import AddRecipePage from '../components/AddRecipePage/AddRecipePage';
-import EditRecipePage from '../components/EditRecipePage/EditRecipePage';
-import AboutThisSite from '../components/AboutThisSite/AboutThisSite';
+import Layout from '../Layout/Layout'
+import SearchPage from '../components/SearchPage/SearchPage'
+import RecipePage from '../components/RecipePage/RecipePage'
+import AddRecipePage from '../components/AddRecipePage/AddRecipePage'
+import EditRecipePage from '../components/EditRecipePage/EditRecipePage'
+import AboutThisSite from '../components/AboutThisSite/AboutThisSite'
 
 // MateriaUI bug: https://github.com/mui-org/material-ui/issues/13394
-import { ThemeProvider, unstable_createMuiStrictModeTheme as createMuiTheme, } from '@material-ui/core/styles';
+import { ThemeProvider, unstable_createMuiStrictModeTheme as createMuiTheme, } from '@material-ui/core/styles'
 
 const theme = createMuiTheme({
   palette: {
@@ -25,7 +25,7 @@ const theme = createMuiTheme({
       main: '#7e57c2'
     },
   },
-});
+})
 
 const App = () => {
   const [selectedIngredients, setSelectedIngredients] = useState([])
@@ -81,7 +81,7 @@ const App = () => {
 
       </Router>
     </ThemeProvider>
-  );
+  )
 }
 
-export default App;
+export default App

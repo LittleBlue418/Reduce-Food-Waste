@@ -1,15 +1,15 @@
-import React, { useState, useEffect, useContext } from 'react';
-import classes from './SearchPage.module.css';
+import React, { useState, useEffect, useContext } from 'react'
+import classes from './SearchPage.module.css'
 
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Pagination from '@material-ui/lab/Pagination';
+import CircularProgress from '@material-ui/core/CircularProgress'
+import Pagination from '@material-ui/lab/Pagination'
 
-import { APIContext } from '../../context/APIContext';
-import TipBox from './TipBox/TipBox';
-import SearchFilters from './SearchFilters/SearchFilters';
-import SearchBox from './SearchBox/SearchBox';
-import IngredientsChips from './IngredientsChips/IngredientsChips';
-import RecipeCards from './RecipeCards/RecipeCards';
+import { APIContext } from '../../context/APIContext'
+import TipBox from './TipBox/TipBox'
+import SearchFilters from './SearchFilters/SearchFilters'
+import SearchBox from './SearchBox/SearchBox'
+import IngredientsChips from './IngredientsChips/IngredientsChips'
+import RecipeCards from './RecipeCards/RecipeCards'
 
 
 const SearchPage = ({
@@ -37,8 +37,8 @@ const SearchPage = ({
     setLoading(true)
 
     const dietaryRequirementsAsArray = Object.entries(dietaryRequirements)
-                      .filter((dietaryRequirement) => dietaryRequirement[1])
-                      .map((dietaryRequirement) => dietaryRequirement[0])
+      .filter((dietaryRequirement) => dietaryRequirement[1])
+      .map((dietaryRequirement) => dietaryRequirement[0])
 
     const ingredient_ids = selectedIngredients.map(ingredient => ingredient._id)
 
@@ -69,52 +69,52 @@ const SearchPage = ({
     setCurrentPage(1)
   }
 
-    return (
-      <div>
-        <TipBox />
+  return (
+    <div>
+      <TipBox />
 
-        <SearchFilters
-            dietaryRequirements={dietaryRequirements}
-            toggleDietaryRequirement={toggleDietaryRequirement}
+      <SearchFilters
+        dietaryRequirements={dietaryRequirements}
+        toggleDietaryRequirement={toggleDietaryRequirement}
+      />
+      <SearchBox
+        ingredients={allIngredients}
+        selectedIngredients={selectedIngredients}
+        setSelectedIngredients={updateSelectedIngredients}
+      />
+
+      <IngredientsChips
+        selectedIngredients={selectedIngredients}
+        setSelectedIngredients={updateSelectedIngredients}
+      />
+
+      {
+        loading && (
+          <CircularProgress />
+        )
+      }
+
+      <RecipeCards
+        recipes={recipes}
+      />
+
+      <div className={classes.PaginationDiv}>
+        <Pagination
+          color="primary"
+          count={totalPages}
+          page={currentPage}
+          variant="outlined"
+          siblingCount={0}
+          boundaryCount={1}
+          onChange={(event, page) => {
+            setCurrentPage(page)
+            window.scrollTo(0, 0)
+          }}
         />
-        <SearchBox
-            ingredients={allIngredients}
-            selectedIngredients={selectedIngredients}
-            setSelectedIngredients={updateSelectedIngredients}
-        />
-
-        <IngredientsChips
-            selectedIngredients={selectedIngredients}
-            setSelectedIngredients={updateSelectedIngredients}
-        />
-
-        {
-          loading && (
-            <CircularProgress />
-          )
-        }
-
-        <RecipeCards
-          recipes={recipes}
-        />
-
-        <div className={classes.PaginationDiv}>
-            <Pagination
-              color="primary"
-              count={totalPages}
-              page={currentPage}
-              variant="outlined"
-              siblingCount={0}
-              boundaryCount={1}
-              onChange={(event, page) => {
-                setCurrentPage(page)
-                window.scrollTo(0, 0)
-              }}
-            />
-        </div>
-
       </div>
-    );
+
+    </div>
+  )
 }
 
-export default SearchPage;
+export default SearchPage

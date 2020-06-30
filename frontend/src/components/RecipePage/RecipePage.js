@@ -1,27 +1,27 @@
-import React, { useState, useEffect, useContext } from 'react';
-import classes from './RecipePage.module.css';
+import React, { useState, useEffect, useContext } from 'react'
+import classes from './RecipePage.module.css'
 
-import CircularProgress from '@material-ui/core/CircularProgress';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import EditIcon from '@material-ui/icons/Edit';
-import { useParams, Link } from "react-router-dom";
+import CircularProgress from '@material-ui/core/CircularProgress'
+import ArrowBackIcon from '@material-ui/icons/ArrowBack'
+import EditIcon from '@material-ui/icons/Edit'
+import { useParams, Link } from "react-router-dom"
 
-import { APIContext } from '../../context/APIContext';
-import RecipeHeader from './ReceipeHeader/RecipeHeader';
-import RecipeIngrdients from './RecipyIngredients/RecipeIngredients';
-import RecipeMethod from './Recipemethod/RecipeMethod';
+import { APIContext } from '../../context/APIContext'
+import RecipeHeader from './ReceipeHeader/RecipeHeader'
+import RecipeIngrdients from './RecipyIngredients/RecipeIngredients'
+import RecipeMethod from './Recipemethod/RecipeMethod'
 
 
 const RecipePage = () => {
   const API = useContext(APIContext)
   const [recipe, setRecipe] = useState(null)
-  const { recipe_id } = useParams();
+  const { recipe_id } = useParams()
 
   useEffect(() => {
     API.get_recipe(recipe_id).then((recipe) => {
       setRecipe(recipe)
     })
-  }, [recipe_id, API]);
+  }, [recipe_id, API])
 
   if (recipe === null) {
     return <CircularProgress />
@@ -43,7 +43,7 @@ const RecipePage = () => {
         />
 
         <div className={classes.Line}></div>
-            <div><em>{recipe.description}</em></div>
+        <div><em>{recipe.description}</em></div>
         <div className={classes.Line}></div>
 
         <div className={classes.middleSection}>
@@ -51,10 +51,10 @@ const RecipePage = () => {
             ingredients={recipe.ingredients}
           />
           <div
-              className={classes.RecipePicture}
-              style={{
-                backgroundImage: 'url(' + recipe.image_url + ')'
-              }}
+            className={classes.RecipePicture}
+            style={{
+              backgroundImage: 'url(' + recipe.image_url + ')'
+            }}
           />
 
         </div>
@@ -68,8 +68,8 @@ const RecipePage = () => {
       </div>
     </>
 
-  );
+  )
 
-};
+}
 
-export default RecipePage;
+export default RecipePage

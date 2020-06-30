@@ -1,16 +1,16 @@
-import React from 'react';
+import React from 'react'
 
-import classes from './SideDrawer.module.css';
-import Backdrop from '../../components/UI/Backdrop/Backdrop';
-import Logo from '../../components/UI/Logo/Logo';
-import NavItems from './NavItems/NavItems';
+import classes from './SideDrawer.module.css'
+import Backdrop from '../../components/UI/Backdrop/Backdrop'
+import Logo from '../../components/UI/Logo/Logo'
+import NavItems from './NavItems/NavItems'
 
 
 const SideDrawer = ({ toggleSidedrawer, sidedrawerShown }) => {
-  let attachedClasses = [classes.SideDrawer, classes.Close];
+  let attachedClasses = [classes.SideDrawer, classes.Close]
 
   if (sidedrawerShown === true) {
-    attachedClasses = [classes.SideDrawer, classes.Open];
+    attachedClasses = [classes.SideDrawer, classes.Open]
   }
 
   return (
@@ -23,12 +23,12 @@ const SideDrawer = ({ toggleSidedrawer, sidedrawerShown }) => {
 
       <div className={attachedClasses.join(' ')}>
 
-          <div
-            className={classes.MenuLogo}
-            onClick={toggleSidedrawer}
-          >
-            <Logo />
-          </div>
+        <div
+          className={classes.MenuLogo}
+          onClick={toggleSidedrawer}
+        >
+          <Logo />
+        </div>
 
 
 
@@ -39,7 +39,7 @@ const SideDrawer = ({ toggleSidedrawer, sidedrawerShown }) => {
       </div>
     </>
 
-  );
-};
+  )
+}
 
-export default SideDrawer;
+export default SideDrawer

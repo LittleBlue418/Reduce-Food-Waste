@@ -1,15 +1,15 @@
-import React, { useState, useEffect, useContext } from 'react';
-import classes from './RecipeForm.module.css';
+import React, { useState, useEffect, useContext } from 'react'
+import classes from './RecipeForm.module.css'
 
-import { APIContext } from '../../context/APIContext';
-import AddIngredientDialog from './AddIngredientDialog/AddIngredientDialog';
-import ImageUploader from './ImageUploader/ImageUploader';
-import IngredientAutocomplete from './IngredientAutocomplete/IngredientAutocomplete';
-import IngredientEntry from './IngredientEntry/IngredientEntry';
-import MethodStep from './MethodStep/MethodStep';
-import TitleSection from './TitleSection/TitleSection';
+import { APIContext } from '../../context/APIContext'
+import AddIngredientDialog from './AddIngredientDialog/AddIngredientDialog'
+import ImageUploader from './ImageUploader/ImageUploader'
+import IngredientAutocomplete from './IngredientAutocomplete/IngredientAutocomplete'
+import IngredientEntry from './IngredientEntry/IngredientEntry'
+import MethodStep from './MethodStep/MethodStep'
+import TitleSection from './TitleSection/TitleSection'
 
-import Button from '@material-ui/core/Button';
+import Button from '@material-ui/core/Button'
 
 
 
@@ -27,14 +27,14 @@ const RecipeForm = ({ recipe, setRecipe, previewImage, setPreviewImage }) => {
 
   const usedIngredients = recipe.ingredients.map(ingredient => ingredient.ingredient)
 
-  const setName = (name) => setRecipe({ ...recipe, name: name });
-  const setDescription = (description) => setRecipe({ ...recipe, description: description });
-  const setCookTime = (cook_time) => setRecipe({ ...recipe, cook_time: cook_time });
+  const setName = (name) => setRecipe({ ...recipe, name: name })
+  const setDescription = (description) => setRecipe({ ...recipe, description: description })
+  const setCookTime = (cook_time) => setRecipe({ ...recipe, cook_time: cook_time })
   const setImage = (image_data, image_content_type) => setRecipe({
     ...recipe,
     image_data: image_data,
     image_content_type: image_content_type
-  });
+  })
 
   const addMethodStep = () => {
     recipe.method.push("")
@@ -96,12 +96,12 @@ const RecipeForm = ({ recipe, setRecipe, previewImage, setPreviewImage }) => {
 
 
       <TitleSection
-          nameValue={recipe.name}
-          descriptionValue={recipe.description}
-          cookTimeValue={recipe.cook_time}
-          setName={setName}
-          setDescription={setDescription}
-          setCookTime={setCookTime}
+        nameValue={recipe.name}
+        descriptionValue={recipe.description}
+        cookTimeValue={recipe.cook_time}
+        setName={setName}
+        setDescription={setDescription}
+        setCookTime={setCookTime}
       />
 
 
@@ -134,11 +134,11 @@ const RecipeForm = ({ recipe, setRecipe, previewImage, setPreviewImage }) => {
       ))}
 
       <IngredientAutocomplete
-          allIngredients={allIngredients}
-          usedIngredients={usedIngredients}
-          inputValue={inputValue}
-          setInputValue={setInputValue}
-          addIngredientEntry={addIngredientEntry}
+        allIngredients={allIngredients}
+        usedIngredients={usedIngredients}
+        inputValue={inputValue}
+        setInputValue={setInputValue}
+        addIngredientEntry={addIngredientEntry}
       />
 
       <div className={classes.CreateNewIngredientDiv}>
@@ -176,7 +176,7 @@ const RecipeForm = ({ recipe, setRecipe, previewImage, setPreviewImage }) => {
       <div className={classes.Line}></div>
 
     </>
-  );
-};
+  )
+}
 
-export default RecipeForm;
+export default RecipeForm

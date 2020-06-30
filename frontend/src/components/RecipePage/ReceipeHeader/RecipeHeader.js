@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import './RecipeHeader.css'
 
 
@@ -29,7 +29,7 @@ const RecipeHeader = ({ name, cookTime, dietaryRequirements }) => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default RecipeHeader;
+export default RecipeHeader

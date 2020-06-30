@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import classes from './RecipeIngredient.module.css'
 
 const RecipeIngredients = ({ ingredient_entry }) => {
@@ -14,25 +14,25 @@ const RecipeIngredients = ({ ingredient_entry }) => {
   }
 
   return (
-          <div className={ingredientClass}>
-            <input type="checkbox"
-                className={classes.checkbox}
-                checked={clicked}
-                onChange={() => toggleClicked(
-                clicked => !clicked
-                )}/>
+    <div className={ingredientClass}>
+      <input type="checkbox"
+        className={classes.checkbox}
+        checked={clicked}
+        onChange={() => toggleClicked(
+          clicked => !clicked
+        )}/>
 
-            <div className={classes.amount}>
-              {amount}
-            </div>
-            <div className={classes.unit}>
-              {unit}
-            </div>
-            <div className={classes.name}>
-              {name}
-            </div >
-          </div>
-        )
-};
+      <div className={classes.amount}>
+        {amount}
+      </div>
+      <div className={classes.unit}>
+        {unit}
+      </div>
+      <div className={classes.name}>
+        {name}
+      </div >
+    </div>
+  )
+}
 
-export default RecipeIngredients;
+export default RecipeIngredients

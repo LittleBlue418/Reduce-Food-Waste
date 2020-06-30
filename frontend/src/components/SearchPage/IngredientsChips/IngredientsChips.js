@@ -1,7 +1,7 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Chip from '@material-ui/core/Chip';
-import { capitalize } from '../../../utilityFunctions';
+import React from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import Chip from '@material-ui/core/Chip'
+import { capitalize } from '../../../utilityFunctions'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -13,14 +13,14 @@ const useStyles = makeStyles((theme) => ({
     },
     marginBottom: '10px'
   },
-}));
+}))
 
 const IngredientsChips = ({ selectedIngredients, setSelectedIngredients}) => {
-  const classes = useStyles();
+  const classes = useStyles()
 
   const unSelectIngredient = (ingredient_id) => {
     setSelectedIngredients(
-        selectedIngredients.filter(ingredient => ingredient._id !== ingredient_id)
+      selectedIngredients.filter(ingredient => ingredient._id !== ingredient_id)
     )
   }
 
@@ -37,7 +37,7 @@ const IngredientsChips = ({ selectedIngredients, setSelectedIngredients}) => {
         )
       })}
     </div>
-  );
-};
+  )
+}
 
-export default IngredientsChips;
+export default IngredientsChips

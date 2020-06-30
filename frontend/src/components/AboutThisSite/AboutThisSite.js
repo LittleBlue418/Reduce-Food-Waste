@@ -1,13 +1,13 @@
-import React from 'react';
-import classes from './AboutThisSite.module.css';
+import React from 'react'
+import classes from './AboutThisSite.module.css'
 
 import BannerImage from '../../assets/images/site-banner-double.png'
-import VeganIcon from '../../assets/icons/vegan.png';
-import VegetarianIcon from '../../assets/icons/vegetarian.png';
-import GlutenFreeIcon from '../../assets/icons/gluten_free.png';
-import LactoseFreeIcon from '../../assets/icons/lactose_free.png';
-import NutFreeIcon from '../../assets/icons/nut_free.png';
-import EggFreeIcon from '../../assets/icons/egg_free.png';
+import VeganIcon from '../../assets/icons/vegan.png'
+import VegetarianIcon from '../../assets/icons/vegetarian.png'
+import GlutenFreeIcon from '../../assets/icons/gluten_free.png'
+import LactoseFreeIcon from '../../assets/icons/lactose_free.png'
+import NutFreeIcon from '../../assets/icons/nut_free.png'
+import EggFreeIcon from '../../assets/icons/egg_free.png'
 
 
 const AboutThisSite = () => {
@@ -49,16 +49,16 @@ const AboutThisSite = () => {
             <p>Gluten Free</p>
           </div>
           <div className={classes.DietaryIconsDiv}>
-             <img src={LactoseFreeIcon} alt="icon for lactose free"/>
-             <p>Lactose Free</p>
+            <img src={LactoseFreeIcon} alt="icon for lactose free"/>
+            <p>Lactose Free</p>
           </div>
           <div className={classes.DietaryIconsDiv}>
             <img src={NutFreeIcon} alt="icon for nut free"/>
             <p>Nut Free</p>
           </div>
           <div className={classes.DietaryIconsDiv}>
-             <img src={EggFreeIcon} alt="icon for egg free"/>
-             <p>Egg Free</p>
+            <img src={EggFreeIcon} alt="icon for egg free"/>
+            <p>Egg Free</p>
           </div>
         </div>
 
@@ -71,7 +71,7 @@ const AboutThisSite = () => {
 
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AboutThisSite;
+export default AboutThisSite

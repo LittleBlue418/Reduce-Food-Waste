@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import TextField from '@material-ui/core/TextField'
+import Autocomplete from '@material-ui/lab/Autocomplete'
 
 import classes from './SearchBox.module.css'
-import { capitalize } from '../../../utilityFunctions';
+import { capitalize } from '../../../utilityFunctions'
 
 const SearchBox = ({ingredients, selectedIngredients, setSelectedIngredients}) => {
   const [inputValue, setInputValue] = useState ("")
@@ -35,8 +35,8 @@ const SearchBox = ({ingredients, selectedIngredients, setSelectedIngredients}) =
         />
       )}
     />
-  );
-};
+  )
+}
 
 
-export default SearchBox;
+export default SearchBox

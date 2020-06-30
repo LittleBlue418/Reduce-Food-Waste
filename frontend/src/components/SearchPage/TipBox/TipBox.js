@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState} from 'react'
 import classes from './TipBox.module.css'
 
 import Chevron from '../../../assets/icons/chevron-down-solid.svg'
@@ -12,7 +12,7 @@ const tips = [
 ]
 
 const randomNumber = (min, max) => {
-  return Math.floor(Math.random() * (max - min) + min);
+  return Math.floor(Math.random() * (max - min) + min)
 }
 
 const randomTip = () => {
@@ -40,7 +40,7 @@ const TipBox = () => {
       }
 
     </div>
-  );
-};
+  )
+}
 
-export default TipBox;
+export default TipBox

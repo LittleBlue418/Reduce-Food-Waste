@@ -1,34 +1,34 @@
-import React, { useState, useEffect, useContext } from 'react';
-import classes from './EditRecipePage.module.css';
+import React, { useState, useEffect, useContext } from 'react'
+import classes from './EditRecipePage.module.css'
 
-import { APIContext } from '../../context/APIContext';
-import RecipeForm from '../RecipeForm/RecipeForm';
-import { useParams, Link, useHistory } from "react-router-dom";
+import { APIContext } from '../../context/APIContext'
+import RecipeForm from '../RecipeForm/RecipeForm'
+import { useParams, Link, useHistory } from "react-router-dom"
 
-import Alert from '@material-ui/lab/Alert';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import Button from '@material-ui/core/Button';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import DeleteIcon from '@material-ui/icons/Delete';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import IconButton from '@material-ui/core/IconButton';
+import Alert from '@material-ui/lab/Alert'
+import ArrowBackIcon from '@material-ui/icons/ArrowBack'
+import Button from '@material-ui/core/Button'
+import CircularProgress from '@material-ui/core/CircularProgress'
+import DeleteIcon from '@material-ui/icons/Delete'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import IconButton from '@material-ui/core/IconButton'
 
 
 
 const EditRecipePage = () => {
   const API = useContext(APIContext)
-  const [previewImage, setPreviewImage] = useState(null);
+  const [previewImage, setPreviewImage] = useState(null)
   const [recipe, setRecipe] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
-  const { recipe_id } = useParams();
+  const { recipe_id } = useParams()
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false)
 
-  const history = useHistory();
+  const history = useHistory()
 
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const EditRecipePage = () => {
       setPreviewImage(data_url)
     }
     loadRecipeAndImage(recipe_id)
-  }, [recipe_id, API]);
+  }, [recipe_id, API])
 
 
 
@@ -120,7 +120,7 @@ const EditRecipePage = () => {
         </Button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default EditRecipePage;
+export default EditRecipePage

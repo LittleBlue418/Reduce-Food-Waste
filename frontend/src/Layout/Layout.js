@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 
-import SiteHeader from './SiteHeader/SiteHeader';
-import SideDrawer from './SideDrawer/SideDrawer';
+import SiteHeader from './SiteHeader/SiteHeader'
+import SideDrawer from './SideDrawer/SideDrawer'
 
 
 const Layout = () => {
@@ -13,22 +13,22 @@ const Layout = () => {
     setSidedrawerShown(newState)
   }
 
-    return (
-      <>
+  return (
+    <>
 
-        <SiteHeader
-          toggleSidedrawer={toggleSidedrawer}
-        />
+      <SiteHeader
+        toggleSidedrawer={toggleSidedrawer}
+      />
 
-        <SideDrawer
-          toggleSidedrawer={toggleSidedrawer}
-          sidedrawerShown={sidedrawerShown}
-        />
+      <SideDrawer
+        toggleSidedrawer={toggleSidedrawer}
+        sidedrawerShown={sidedrawerShown}
+      />
 
-      </>
+    </>
 
-    );
+  )
 
 }
 
-export default Layout;
+export default Layout

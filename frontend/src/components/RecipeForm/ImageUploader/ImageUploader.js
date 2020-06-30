@@ -1,24 +1,24 @@
-import React from 'react';
+import React from 'react'
 import classes from './ImageUploader.module.css'
 
-import { Preview } from './Preview/Preview';
-import { resizeImage } from './ImageResizer/ImageResizer';
+import { Preview } from './Preview/Preview'
+import { resizeImage } from './ImageResizer/ImageResizer'
 
-import PublishIcon from "@material-ui/icons/Publish";
+import PublishIcon from "@material-ui/icons/Publish"
 
 
 const ImageUploader = ({ setImage, previewImage, setPreviewImage }) => {
-  const reader = new FileReader();
+  const reader = new FileReader()
 
   // Using 16:9 aspect ratio
-  const maxHeight = 600;
-  const maxWidth = (maxHeight / 9) * 16;
+  const maxHeight = 600
+  const maxWidth = (maxHeight / 9) * 16
 
   const scaleImage = dataurl => {
     resizeImage(dataurl, maxHeight, maxWidth).then((data_url) => {
       // regular expression pulls the base64 and image type from the
       // data url to give to the back end
-      const regex = /^data:(.+);base64,(.*)$/;
+      const regex = /^data:(.+);base64,(.*)$/
       const matches = data_url.match(regex)
       setImage(matches[2], matches[1])
       setPreviewImage(data_url)
@@ -41,7 +41,7 @@ const ImageUploader = ({ setImage, previewImage, setPreviewImage }) => {
     reader.readAsDataURL(file)
   }
 
-  const inputRef = React.createRef();
+  const inputRef = React.createRef()
 
   return (
     <div
@@ -60,7 +60,7 @@ const ImageUploader = ({ setImage, previewImage, setPreviewImage }) => {
     </div>
 
   )
-};
+}
 
-export default ImageUploader;
+export default ImageUploader
 

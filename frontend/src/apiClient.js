@@ -27,7 +27,7 @@ export class APIClient {
 
   // Convert image id to url
   updateImageURL(recipe) {
-    recipe['image_url'] = this.baseUrl + '/api/images/' + recipe['image_id']
+    recipe.image_url = this.baseUrl + '/api/images/' + recipe.image_id
     return recipe
   }
 
@@ -122,4 +122,4 @@ export class APIClient {
 
 }
 
-export default APIClient;
+export default APIClient

@@ -1,11 +1,11 @@
-import React from 'react';
-import './RecipeCard.css';
-import { Link } from "react-router-dom";
+import React from 'react'
+import './RecipeCard.css'
+import { Link } from "react-router-dom"
 
 
 const RecipeCard = ({recipe}) => {
   return (
-      <Link to={"/recipe/" + recipe._id}>
+    <Link to={"/recipe/" + recipe._id}>
 
       <div className="RecipeCard">
 
@@ -23,12 +23,12 @@ const RecipeCard = ({recipe}) => {
           <div className="IconDiv">
             {Object.entries(recipe.dietary_requirements).map(([key, value]) => {
               if (value === true) {
-                  return (
-                    <div key={recipe.id+key}
-                        className={key}
-                        alt={key}
-                    />
-                  )
+                return (
+                  <div key={recipe.id+key}
+                    className={key}
+                    alt={key}
+                  />
+                )
               } else {
                 return null
               }
@@ -38,9 +38,9 @@ const RecipeCard = ({recipe}) => {
         </div>
 
       </div>
-      </Link>
+    </Link>
   )
 
-};
+}
 
-export default RecipeCard;
+export default RecipeCard
