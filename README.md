@@ -1,16 +1,17 @@
 # Reduce Food Waste
 
-This goal of this web app is to reduce the food waste thatg we generate in developed countries, specifically food waste in the home.
+The goal of this app is to allow users to search for recipes based on the ingredients that they already have, helping them to reduce the amount of food that they throw away. 
 
-Traditionally one would start with a dish idea, find a specific recipe, buy all the ingredients and cooking that dish. The problem is that we often end up with leftovers, half used packets of things that sit in the back of the fridge or cupboard while we guiltilly ignore them.
+On a normal recipe website you would search for a specific dish, for example omelet, and the recipe would tell you the ingredients you need to buy. You then buy those ingredients and make the dish, often finding that you have ingredients left over. Here the idea is to search on things that you have in your fridge, for example carrots and onions, and see things that you can make that include those like vegetable soup. 
 
-This app turns that process on it's head. You start with the things you have, the bag of carrots that's looking a bit sad, the half a pot of cream, the packet of flour that's almost at it's best before date, and find recipes where you can use those ingredients. In this way you find new recipes and experiment, while making sure that as little as possible gets thrown away.
+I wanted to focus on the idea of 'using up' ingredients as part of the wider concern about food waste contributing to climate change. In developed countries we throw away on average 100kg of food per person per year. Using this site won't fix that, but it might help inspire people to try new recipes and use up things that would otherwise be destined for the bin.  
+
 
 ***
 
 ### Website
 
-[You can view the website here](https://reduce-food-waste-app.herokuapp.com/)
+You can view the website [here](https://reduce-food-waste-app.herokuapp.com/)
 
 ***
 
@@ -36,13 +37,14 @@ My UX design process focussed on a mobile first design that would present recipe
 * As an admin I am able to edit ingredients.
 * As an admin I am able to delete ingredients.
 * As a site owner I am able to display links to my profile / github
-* As a site owner i am able to interact with the site as a user and benifit from it as such.
 * As a community we are able to use eachother's recipe's to reduce food waste by finding recipes to cook the food that we already have.
 
 
 #### Research & Prioritization
 
-Working from the user stories I broke the core concept down into problems to solve. Given the ammount of user stories and the complexity of the idea I wanted to be clear with what my baseline for the project would be. I decided that displaying the recipes, giving advice, and searching were the core features. I also wanted to maKe sure that the search was an inclusive as possible, allowing users to be able to search on ingredients, but also on dietry requirements and preferences. Being able to create an account and being able to add & modify recipes and ingredients were further down the prioritization.
+Working from the user stories I broke the core concepts down into problems to solve. Given the amount of user stories and the complexity of the idea I wanted to be clear with what my baseline for the project would be. I decided that having the ability to log in and to have users and admins would be something that was nice to have, but wasn't part of the core scope. This decision also meant that being able to 'favorite' recipes moved to MVP2, and shaped the database design (see the Structure section for more information). Displaying the recipes, showing tips, and searching for recipes based on ingredients and dietary requirements were the core features.
+
+
 
 Opportunity / Problem | Importance | Feasibility
 ----------------------|-------------|----------------------
@@ -58,35 +60,50 @@ F - A user account / admin system | 2 | 3
 
 ### Scope
 
-Breaking the scope down it was clear that to build all of it in the time available would leade to some corners cut on quality. I decided to move the account structure (and by extension the admin aspect) to MVP2. Ideally this is something that i will return to at a later stage and fully impliment. As part of this i also decided not to impliment full CRUD functionality for ingredients. Editing and deleting ingredients would be a descrictive process, that would affect the search and the main recipes. A such i decided to impliment the full CRUD functionality for recipes, build the end points for the ingredients but only impliment the create & read. I was still able to fully utilize these end points through the back end using postman.
+MVP1 scope was clear, full CRUD functionality for recipes and a robust search that allowed filtering on ingredients and dietary requirements. I prioritized searching on both ingredients and dietary requirements to make the site as inclusive as possible. Given that my motivation was to be 'green' and help lessen our impact on the environment it felt very logical to include vegan and vegetarian filters. As someone who struggles to find recipes that meet my own allergy needs I also wanted to have dietary requirements included. I decided that an 'about' page would also be in scope, talking about how to use the site and breaking down the dietary requirement symbols in a key. 
+
+As part of the edit recipes functionality it was clear that I needed users to be able to create new ingredients, otherwise they would be restricted to adding recipes that had ingredients already in the database. Similarly I needed to be able to read all ingredients from the database to construct the search query and to display them for users to add them to new recipes. I would build all of the CRUD end points for ingredients in the backend, but I decided that implementing 'delete' and 'edit' for the frontend would be part of MVP2. The primary reason for this is that to correct a spelling mistake in an ingredient title would have little consequence, but a user could edit an ingredient to be something completely different (changing a carrot to a sausage for example) and thus completely changing existing recipes. Edit and delete ingredients are end points that I will implement for the frontend but they will be accessible to admin users only, since I had decided to make the account system MVP2 implementing these needed to be MVP2 as well. 
+
 
 #### Core Scope
-* A landing page that is also the search page, where the user can see a tip and see all recipes, and can search based on ingredients.
-* A 'recipe' page that generates from a template, to display the recipe that the user wants to use.
-* A 'create recipe' page that generates from a template, to allow the user to add new recipes to the database.
-* An 'edit recipe' page that populates from the chosen recipe, allows the user to update and then saves to database.
+* A landing page that is also the search page, where the user can see a tip and see all recipes, and can search based on ingredients and dietary requirements.
+* A 'recipe' page that displays the recipe that the user wants to use.
+* A 'create recipe' page that allows the user to add new recipes to the database.
+* An 'edit recipe' page that allows the user to update and then saves to database.
 * A 'create ingredient' dialogue box with a form to allow users to add new ingredients as they create recipes.
-* An about the site info page, breaking down the dietary requirements information.
+* An about the site info page, that explains how to use the site and the dietary requirement symbols.
 * A link to my profile.
 
 #### MVP2
 * A log in page
 * A create account page
 * Functionality for users and admins
+* Ability for users to favorite recipes
 * Edit & delete functionality for ingredients (for admins).
 
 
 ### Structure
 
-When thinking about the structure for the back end I decided to use MongoDB, a noSQL database. My initial thoughts were to build a series of relational SQL tables, but after working it through it felt like I was making this harder than it had to be. Instead I decided to do the checking and relational work in my back end code. When building a new recipe, I will generate a list of possible ingredients you can add from an ingredients table. This ensures I don't have recipes with ingredients that don't exist in the search, while keeping the database structure simple and easy to manage.
+#### Backend 
+My initial plan for the backend structure was to use an SQL database, the reasoning being that the recipes and the ingredients clearly had relational elements that mapped well into a relational database. After working on the designs I realized that I would actually be better off using a NoSQL database like MongoDB for two reasons. Firstly it would make constructing the search query much simpler, and secondly it would allow me to use complex nested structure documents. 
 
-For the front end I decided to use React. The main reason for that decisions was user experience. Rather than creating many pages I wanted to build a single page aplication that would load faster and once loaded be faster for the user to use, reusing all of the components to minimise load times. After working a little with jinja templating I decided to use React instead for several reasons: I personally find it more fun to work with, the components you can build in React allow you to do more than the jija templates giving you more freedome, and React has become an industry standard so by using it I would be adding a sought after skill to my repertoire.
+When constructing the database I optimized it in two key ways. Firstly I chose to store both the ingredient ID and the name of the ingredient within the recipe document, this minimised the number of search queries to the database and made loading recipes faster. Secondly, when creating or updating a recipe I pre-calculate the dietary requirements and saved them to the recipe. This also helps me minimize calls to the database, and makes constructing the search query in my backend code much simpler.  
 
-After working through the layout in the wireframes I realized I also wanted to use Material UI components for components like the ingredient 'chips' and the autofill on the search bar. As a library it's easy to use, and provides some great 'baked in' functionality.
+The final database structural decision was in how I handle the update endpoints. For Ingredient and Recipe the whole document is overwritten in the database, rather than single calls updating individual fields. I knew that I didn't want to do this for images though, since they are much larger than a few lines of data. instead I have a check, and if the image has not changed it is not touched.
+
+#### Frontend
+
+For the front end I decided to use React. The main reason for that decision was user experience. Rather than creating many pages I wanted to build a single page application that would load faster and once loaded be faster for the user to use, reusing all of the components to minimise load times. After working a little with jinja templating I decided to use React instead for several reasons: I personally find it more fun to work with, the components you can build in React allow you to do more than the jija templates giving you more freedom, and React has become an industry standard so by using it I would be adding a sought after skill to my repertoire.
+
+Considering what I hoped to achieve with the search query, auto filling from a list of ingredients and then displaying the selected as styled 'chips' the use of MaterialUI as a library seemed a logical choice. The autocomplete feature in particular was a great component to have access to. Furthermore, since it's based on Google's Material Design framework I knew that it would both provide a well developed set of components, but also provide a familiar feel for the user (being the framework many android apps are built in). 
+
+I also decided that I wanted to use a pagination system. Although 'on build' the site would be populated with a small handful of recipes the idea is for it to grow over time. From a user perspective having an endless scroll of recipes would not be ideal! I decided to hard code the number of recipes displayed on a page to 10, that number fit into two columns of five on a tablet device while not being too many to reasonably scroll through on a mobile. One possible future exploration could be to look into responsive pagination, generating the number of cards per page based on the device width.   
+
+
 
 ### Skeleton
 
-Building the wireframes for the project was straightforward, I planned out the look and feel for mobile and the desktop. I wanted to keep it looking clean and uncluttered so I went with a minimalistic design. As I worked through the wireframes I realized I wanted to use Maretial UI components. The origional files were built with Adobe Xd, which allowed me to 'click through' the pages as i would on a website.
+Building the wireframes for the project was straightforward, I planned out the look and feel for mobile and the desktop. I wanted to keep it looking clean and uncluttered so I went with a minimalistic design. The origional files were built with Adobe Xd, which allowed me to 'click through' the pages as I would on a website.
 
 ### Wireframes
 - [Mobile Wireframe - AdobeXD document](https://github.com/LittleBlue418/Reduce-Food-Waste/blob/master/frontend/src/assets/documentation/reduce-foodwaste-wireframe-mobile.xd)
@@ -101,12 +118,12 @@ Building the wireframes for the project was straightforward, I planned out the l
 
 
 ### Surface
-Early in the design process I decided I wanted to have a green and white colour scheme, to capitalize on the asociations with green: recycling, nature and freshness. The white is to give the site a clean and minimal feel. The purple of the chips gives a contrast with the green, making them pop. Each colour has a high contrast for optimal visibility. Finally i decided to limmit the pallet to just four colours to really give it a clean and modern feel.
+Early in the design process I decided I wanted to have a green and white colour scheme, to capitalize on the asociations with green: recycling, nature and freshness. The white is to give the site a clean and minimal feel. The purple of the chips gives a contrast with the green, making them pop. Each colour has a high contrast for optimal visibility. Finally I decided to limit the pallet to just four colours to really give it a clean and modern feel.
 
 ![Colour Scheme](https://github.com/LittleBlue418/Reduce-Food-Waste/blob/master/frontend/src/assets/documentation/color_scheme.png "colour scheme")
 
 ### Design Decisions
-Through the wireframing and the build process I toyed back and forth with having the dietry requirements in a collapsable section, as I do with the tips page. On a desktop screen it doesn't make a huge difference but on a mobile it takes a reasonable chunk of the screen. I decided to leave it as a full size feature for two reasons: firstly to make it immediately clear that this site is designed to be as inclusive and accessible as possible, more and more people are choosing to be vegetarian and vegan, and it is important to be aware of people's allergies. Secondly from a design perspective having a second drop down would save a couple of lines of text, but felt like an added thing for the user to click on, adding an 'unnessecary click' for the user. While you may not be interested in reading tips every time you use the site, many people could conceivably have to click open the requirements tab each time.
+Through the wireframing and the build process I toyed back and forth with having the dietary requirements in a collapsable section, as I do with the tips page. On a desktop screen it doesn't make a huge difference but on a mobile it takes a reasonable chunk of the screen. I decided to leave it as a full size feature for two reasons: firstly to make it immediately clear that this site is designed to be as inclusive and accessible as possible, more and more people are choosing to be vegetarian and vegan, and it is important to be aware of people's allergies. Secondly from a design perspective having a second drop down would save a couple of lines of text, but felt like an added thing for the user to click on, adding an 'unnessecary click' for the user. While you may not be interested in reading tips every time you use the site, many people could conceivably have to click open the requirements tab each time.
 
 ***
 
@@ -114,86 +131,104 @@ Through the wireframing and the build process I toyed back and forth with having
 
 ### Existing Features
 
-* **A robust search landing page** - Front and center of the site, the core feature. Allows users to find recipes by specifying dietry requirements & ingredients from a pre-set list. With no search criteria the site will display all recipes, with each ingredient / requirement added the recipe cards will be filtered down to the search requirements.
-* **Individual Recipe page** - Once a recipe has been selected the user will be presented with the page for that recipe. This will clearly lay out the ingredients with the ammounts, and a step by step method. Both sections have a 'tick off' feature to allow the user to track their progrerss through the recipe.
+* **A robust search landing page** - Front and center of the site, the core feature. Allows users to find recipes by specifying dietary requirements & ingredients from a pre-set list. With no search criteria the site will display all recipes, with each ingredient / requirement added the recipe cards will be filtered down to the search requirements.
+* **Individual Recipe page** - Once a recipe has been selected the user will be presented with the page for that recipe. This will clearly lay out the ingredients with the amounts, and a step by step method. Both sections have a 'tick off' feature to allow the user to track their progrerss through the recipe.
 * **Add Recipe** - The user can go to the menu and open the add recipe page. This gives the user a place to upload their own recipes and add them to the database.
 * **Add Ingredient** - While adding a new recipe, if the user does not find the ingredient they are looking for they can choose to add an ingredient to the database. This opens a dialogue box where the user inputs the details.
-* **About this site** * - The user can read more information about the dietary requirement symbols, as well as getting general information about the site.
+* **About this site** - The user can read more information about the dietary requirement symbols, as well as getting general information about the site.
 
 ### Features Left To Impliment
 
 * **User Accounts** - Account creation, editing & deletion, logging in and out.
 * **User Favorites** - The ability to 'star' favorite recipes and have then displayed in a user favorites page. An alternate form of filtering.
 * **Admin** - Designating certain users as 'Admins' to give them access to different parts of the site.
-* **Edit & Delete ingredients** - Building front end capability for the edit and delete ingredient end point (for admin users).
+* **Edit & Delete ingredients** - Building frontend capability for the edit and delete ingredient end point (for admin users).
 
 ***
 
 ## Technologies Used
 
-* [HTML](https://en.wikipedia.org/wiki/HTML) - Building the initial index page.
-* [CSS](https://en.wikipedia.org/wiki/Cascading_Style_Sheets) - Providing styling for the components.
-* [JavaScript](https://en.wikipedia.org/wiki/JavaScript) - Adding functionality to the skill circles, as well as 'on click', 'hidden' and 'scroll'.
-* [React](https://reactjs.org/) - Front end built using React.
-* [Material UI](https://material-ui.com/) - React component library, used to built the ingredient 'chips' and the autofill on the search box & add ingredient search box. Also used for adding a few icons and buttons.
-* [React Router](https://reacttraining.com/react-router/) - Used for routing within the pages of the React application.
-* [Python](https://www.python.org/) - Back end API is written in python.
-* [Pymongo](https://pypi.org/project/pymongo/) - Interacting with the MongoDB database.
-* [Flask](https://flask.palletsprojects.com/en/1.1.x/) - Handling requests to the back end.
-* [Axios](https://github.com/axios/axios) - Promise based HTTP client for the browser.
-* [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/) - HTTP server.
-* [MongoDB](https://www.mongodb.com/) - The database for the app.
-* [Heroku](https://www.heroku.com/) - Hosting the app.
-* [Adobe XD](https://www.adobe.com/products/xd.html) - Used for designing and hooking up wireframes to make a 'click through' wireframe of the initial design.
+### Frontend
 
-### Version control & Hosting
+I built the frontend in a React framework using JavsScript, CSS and HTML. I use some Material UI components and icons throughout the project. I use React Router to allow multiple pages in a single page app, and I use axios as a http client for communicating with the backend. I use ESlint for validating JavaScript & React code, and Jest for writing unit tests. 
+
+* [HTML](https://en.wikipedia.org/wiki/HTML)
+* [CSS](https://en.wikipedia.org/wiki/Cascading_Style_Sheets)
+* [JavaScript](https://en.wikipedia.org/wiki/JavaScript)
+* [React](https://reactjs.org/)
+* [Material UI](https://material-ui.com/)
+* [React Router](https://reacttraining.com/react-router/)
+* [Axios](https://github.com/axios/axios)
+* [ESlint](https://eslint.org/)
+* [Jest](https://jestjs.io/)
+
+### Backend
+
+The backend is built using python based framework flask and the extension flask restful. It uses a MongoDB database as it's datastore, and pymongo to interact with that database. Finally I am using pytest & mongomock for backend unit testing. 
+
+* [Python](https://www.python.org/)
+* [Pymongo](https://pypi.org/project/pymongo/)
+* [Flask](https://flask.palletsprojects.com/en/1.1.x/)
+* [Flask RESTful](https://flask-restful.readthedocs.io/en/latest/)
+* [MongoDB](https://www.mongodb.com/)
+* [pytest](https://docs.pytest.org/en/latest/)
+* [mongomock](https://github.com/mongomock/mongomock)
+
+### Deployment
+
+I serve both frontend and backend using uWSGI, all packaged into a single docker image. I deploy this docker image on Heroku.   
+
+* [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/)
+* [Docker](https://www.docker.com/)
+* [Heroku](https://www.heroku.com/)
+
+### Version Control
+
 * [git](https://git-scm.com/) - Version controll.
 * [GitHub](https://github.com/) - Host directory.
-* [Heroku](https://www.heroku.com/) - Hosting deploed app.
+
 
 ***
 
 ## Testing
-* **Chrome Developer Tools:** Ensure the app is mobile first, but works well on all devices / console tool to identify error, but also conform to best practices and write clean code with react warning messages / Comnponents & Profiler (React tools within the browser) to identify problems, get real time rror feedback and stack tracing.
-* **User Testing** * Sending the app to friends & colleges to use, collecting their feedback for bug fixes and adjustments.
-* **Python Unit Testing:** Unit tests written with pytest.
-* **React Unit Testing:** **[FIX]**
+
+### Chrome Developer Tools
+ Ensure the app is mobile first, but works well on all devices / console tool to identify error, but also conform to best practices and write clean code with react warning messages / Components & Profiler (React tools within the browser) to identify problems, get real time error feedback and stack tracing.
+
+### User Testing
+Sending the app to friends & colleges to use, collecting their feedback for bug fixes and adjustments. A key peice of feedback was to make it clearer that there was an expectation on the user to tick the dietary requirements boxes upon adding a new ingredient. As such I added a title and piece of text to indicate that this was a required step.
+
+### Python Unit Testing
+I wrote unit tests for the backend using pytest & mongomock. The tests check the helper functions on the models to ensure that the correct data is being handled and retruned in the correct format.
+
+
+### React Unit Testing
+I used Jest to write unit tests for the React frontend. On a high level I test that the App loads correctly, and for stand alone functions like the utility functions I check that they handle data in the intended way, and return the expected data.
 
 ### User Story Testing
-- User opens app / nagivates to home page
-    - User immediately sees the first page of recipes and can scroll down and click through to load the next page of recipes.
-    - User can click on an allogen or a dietary preference to imediately filter search results.
-    - User can input any number of ingredients (that exist in the database) to filter results by those specific ingredients.
-    - User can filter on both allogens and ingredients.
-    - User can easilly un-tick allogens and remove ingredient chips to widen the search again.
-- User selectes a recipe and clicks on it
-    - User immediately sees the full recipe with information laid out.
-    - User can 'tick off' ingredients as they are used (or added to a shopping list)
-    - User can 'tick off' steps in the method as they complete them.
-    - User can navigate back to their search, where their initial search parametors will still be avtive.
-- User can toggle the menu
-    - User can navigate to the add recipe page
-- User can add a recipe to the database easilly, confident that it will appear correctly.
+
+Read the full user story testing [here]() **[FIX]**
 
 ### Code Validation
-**[FIX]**
+The code has been validated with ESlint, as well as the online code validators [W3C CSS](https://jigsaw.w3.org/css-validator/) and [W3C Markup Service](https://validator.w3.org/#validate_by_uri).
 
 
 ### Known Bugs
-**[FIX]**
+It is currently possible to use the edit ingredient endpoint to change the name of an ingredient to one that already exists, thus creating a duplicate. Currently this endpoint is not exposed to the frontend, but it is something that I will fix in MVP2.
 
 ### Expected Behavior
-* Pagination - If you send a get all request to the API it will return the first 'page' of results, but will give ionformation to make it clear that is what is happening.
+* Pagination - If you send a get all request to the API it will return the first 'page' of results, but will give information to make it clear that is what is happening.
 * Pagination - If you send a get all request to the API with a page number greater than the possible number of pages that can be generated you will get a response with no recipes, but you will see the pagination information to make it clear what is happening.
-* It is not possible to edit or delete ingredients from the front end (yet) this is by design as it would be very descructive editing. This will be implimented once i have added the ability to log in, and to set admin users.
+* It is not possible to edit or delete ingredients from the front end (yet) this is by design as it would be potentially descructive editing. This will be implimented once I have added the ability to log in, and to set admin users (see write up in structure section).
+
 ***
 
 ## Deployment
 This site is currently deployed to Heroku  **[FIX]**
 * steps for hosting on heroku
 
-### Live App Link
-[Live App](https://reduce-food-waste-app.herokuapp.com/)
+### App Link
+you can find the app deployed at [this link](https://reduce-food-waste-app.herokuapp.com/)
 
 ### Local Development
 To host this site locally, or work on the code yourself, you can clone or download the repository.
@@ -210,9 +245,16 @@ You can read more at this [Github help page](https://help.github.com/en/articles
 
 ***
 
-## Credits / Acknowledgements
-- **ART** - The logo & icons for the project were created by [Sofia Persson](https://www.linkedin.com/in/sofia-persson-52a9aa146/?originalSubdomain=se) for this project. [You can find her portfolio here](https://www.sofiapersson.space/)
-- **Food Photographs** - At time of site publishing:
+## Credits
+
+### Code
+- The code for the image uploader was inspired by [this article](https://hacks.mozilla.org/2011/01/how-to-develop-a-html5-image-uploader/)
+- I had help building the Docker image and configuring uWSGI from my partner.
+
+### Media & Content
+- The text for the recipes was written by me
+- The logo & icons for the project were created by [Sofia Persson](https://www.sofiapersson.space/) for this project.
+- Food Photographs - At time of site publishing:
     - Potato Salad - Image by <a href="https://pixabay.com/users/cokolatetnica-6262510/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2678536">cokolatetnica</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2678536">Pixabay</a>
     - Banana Bread - Image by <a href="https://pixabay.com/users/greleht-5168740/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2459926">greleht</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2459926">Pixabay</a>
     - French Toast - Image by <a href="https://pixabay.com/users/annaj-94790/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=995532">annaj</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=995532">Pixabay</a>
@@ -224,9 +266,10 @@ You can read more at this [Github help page](https://help.github.com/en/articles
     - Poke bowl - <span>Photo by <a href="https://unsplash.com/@jonathanborba?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Jonathan Borba</a> on <a href="/s/photos/poke?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
     - Soup - <span>Photo by <a href="https://unsplash.com/@tinagraphy?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Tina Vanhove</a> on <a href="/s/photos/vegetable-soup?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
     - Green curry - Image by <a href="https://pixabay.com/users/Huahom-2139128/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2457236">Huahom</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2457236">Pixabay</a>
-- **Inspiration** - I was inspired by the Love Food Hate Waste campaign which has been running in the UK, they have a [nice website](https://lovefoodhatewaste.com/), but i was frustraited that there wasn't more focuss on using up so i was inspired to build a site that was focussed around using up food that would go to waste.
-- **User Testing** - Thank you to [Craig Fleming](https://www.linkedin.com/in/craig-fleming-633bb4125/) for your time and feedback with testing the app.
-- **Support** - Thank you most of all to my partner for the support! <3
-**[FIX]**
+- The data on food waste came from [wikipedia](https://en.wikipedia.org/wiki/Food_waste)
+
+### Acknowledgements
+- I was inspired by the website for the [Love Food Hate Waste](https://lovefoodhatewaste.com/) campaign which has been running in the UK. Their website was a jumping off point, but I knew I wanted to build something centered around a search that included multiple ingredients and dietary filters. 
+
 
 
