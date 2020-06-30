@@ -33,11 +33,11 @@ My UX design process focussed on a mobile first design that would present recipe
 * As a user I am able to log out.
 * As a logged in I am able to 'favorite' recipes.
 * As a logged in user I am able to filter, to view only my favorited recipes.
-* As an admin I am able to edit ingredients. 
-* As an admin I am able to delete ingredients. 
+* As an admin I am able to edit ingredients.
+* As an admin I am able to delete ingredients.
 * As a site owner I am able to display links to my profile / github
 * As a site owner i am able to interact with the site as a user and benifit from it as such.
-* As a community we are able to use eachother's recipe's to reduce food waste by finding recipes to cook the food that we already have. 
+* As a community we are able to use eachother's recipe's to reduce food waste by finding recipes to cook the food that we already have.
 
 
 #### Research & Prioritization
@@ -54,11 +54,11 @@ E - CRUD functionality for recipes | 4 | 3
 F - A user account / admin system | 2 | 3
 
 
-![Importance / Feasibility Graph](https://github.com/LittleBlue418/Reduce-Food-Waste/blob/master/frontend/src/assets/documentation/reduce-foodwaste-importance-feasability.png "graph of problems against viability and Importance") 
+![Importance / Feasibility Graph](https://github.com/LittleBlue418/Reduce-Food-Waste/blob/master/frontend/src/assets/documentation/reduce-foodwaste-importance-feasability.png "graph of problems against viability and Importance")
 
 ### Scope
 
-Breaking the scope down it was clear that to build all of it in the time available would leade to some corners cut on quality. I decided to move the account structure (and by extension the admin aspect) to MVP2. Ideally this is something that i will return to at a later stage and fully impliment. As part of this i also decided not to impliment full CRUD functionality for ingredients. Editing and deleting ingredients would be a descrictive process, that would affect the search and the main recipes. A such i decided to impliment the full CRUD functionality for recipes, build the end points for the ingredients but only impliment the create & read. I was still able to fully utilize these end points through the back end using postman.     
+Breaking the scope down it was clear that to build all of it in the time available would leade to some corners cut on quality. I decided to move the account structure (and by extension the admin aspect) to MVP2. Ideally this is something that i will return to at a later stage and fully impliment. As part of this i also decided not to impliment full CRUD functionality for ingredients. Editing and deleting ingredients would be a descrictive process, that would affect the search and the main recipes. A such i decided to impliment the full CRUD functionality for recipes, build the end points for the ingredients but only impliment the create & read. I was still able to fully utilize these end points through the back end using postman.
 
 #### Core Scope
 * A landing page that is also the search page, where the user can see a tip and see all recipes, and can search based on ingredients.
@@ -66,13 +66,13 @@ Breaking the scope down it was clear that to build all of it in the time availab
 * A 'create recipe' page that generates from a template, to allow the user to add new recipes to the database.
 * An 'edit recipe' page that populates from the chosen recipe, allows the user to update and then saves to database.
 * A 'create ingredient' dialogue box with a form to allow users to add new ingredients as they create recipes.
-* An about the site info page, breaking down the dietary requirements information. 
-* A link to my profile. 
+* An about the site info page, breaking down the dietary requirements information.
+* A link to my profile.
 
 #### MVP2
 * A log in page
 * A create account page
-* Functionality for users and admins 
+* Functionality for users and admins
 * Edit & delete functionality for ingredients (for admins).
 
 
@@ -89,7 +89,7 @@ After working through the layout in the wireframes I realized I also wanted to u
 Building the wireframes for the project was straightforward, I planned out the look and feel for mobile and the desktop. I wanted to keep it looking clean and uncluttered so I went with a minimalistic design. As I worked through the wireframes I realized I wanted to use Maretial UI components. The origional files were built with Adobe Xd, which allowed me to 'click through' the pages as i would on a website.
 
 ### Wireframes
-- [Mobile Wireframe - AdobeXD document](https://github.com/LittleBlue418/Reduce-Food-Waste/blob/master/frontend/src/assets/documentation/reduce-foodwaste-wireframe-mobile.xd) 
+- [Mobile Wireframe - AdobeXD document](https://github.com/LittleBlue418/Reduce-Food-Waste/blob/master/frontend/src/assets/documentation/reduce-foodwaste-wireframe-mobile.xd)
 - [Mobile Wireframe - pdf](https://github.com/LittleBlue418/Reduce-Food-Waste/blob/master/frontend/src/assets/documentation/reduce-foodwaste-wireframe-mobile.pdf)
 - [Desktop Wireframe - AdobeXD document](https://github.com/LittleBlue418/Reduce-Food-Waste/blob/master/frontend/src/assets/documentation/reduce-foodwaste-wireframe-desktop.xd)
 - [Desktop Wireframe - pdf](https://github.com/LittleBlue418/Reduce-Food-Waste/blob/master/frontend/src/assets/documentation/reduce-foodwaste-wireframe-desktop.pdf)
@@ -101,7 +101,7 @@ Building the wireframes for the project was straightforward, I planned out the l
 
 
 ### Surface
-Early in the design process I decided I wanted to have a green and white colour scheme, to capitalize on the asociations with green: recycling, nature and freshness. The white is to give the site a clean and minimal feel. The purple of the chips gives a contrast with the green, making them pop. Each colour has a high contrast for optimal visibility. Finally i decided to limmit the pallet to just four colours to really give it a clean and modern feel. 
+Early in the design process I decided I wanted to have a green and white colour scheme, to capitalize on the asociations with green: recycling, nature and freshness. The white is to give the site a clean and minimal feel. The purple of the chips gives a contrast with the green, making them pop. Each colour has a high contrast for optimal visibility. Finally i decided to limmit the pallet to just four colours to really give it a clean and modern feel.
 
 ![Colour Scheme](https://github.com/LittleBlue418/Reduce-Food-Waste/blob/master/frontend/src/assets/documentation/color_scheme.png "colour scheme")
 
@@ -117,7 +117,7 @@ Through the wireframing and the build process I toyed back and forth with having
 * **A robust search landing page** - Front and center of the site, the core feature. Allows users to find recipes by specifying dietry requirements & ingredients from a pre-set list. With no search criteria the site will display all recipes, with each ingredient / requirement added the recipe cards will be filtered down to the search requirements.
 * **Individual Recipe page** - Once a recipe has been selected the user will be presented with the page for that recipe. This will clearly lay out the ingredients with the ammounts, and a step by step method. Both sections have a 'tick off' feature to allow the user to track their progrerss through the recipe.
 * **Add Recipe** - The user can go to the menu and open the add recipe page. This gives the user a place to upload their own recipes and add them to the database.
-* **Add Ingredient** - While adding a new recipe, if the user does not find the ingredient they are looking for they can choose to add an ingredient to the database. This opens a dialogue box where the user inputs the details. 
+* **Add Ingredient** - While adding a new recipe, if the user does not find the ingredient they are looking for they can choose to add an ingredient to the database. This opens a dialogue box where the user inputs the details.
 * **About this site** * - The user can read more information about the dietary requirement symbols, as well as getting general information about the site.
 
 ### Features Left To Impliment
@@ -141,22 +141,22 @@ Through the wireframing and the build process I toyed back and forth with having
 * [Pymongo](https://pypi.org/project/pymongo/) - Interacting with the MongoDB database.
 * [Flask](https://flask.palletsprojects.com/en/1.1.x/) - Handling requests to the back end.
 * [Axios](https://github.com/axios/axios) - Promise based HTTP client for the browser.
-* [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/) - HTTP server.  
+* [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/) - HTTP server.
 * [MongoDB](https://www.mongodb.com/) - The database for the app.
 * [Heroku](https://www.heroku.com/) - Hosting the app.
 * [Adobe XD](https://www.adobe.com/products/xd.html) - Used for designing and hooking up wireframes to make a 'click through' wireframe of the initial design.
 
 ### Version control & Hosting
-* [git](https://git-scm.com/) - Version controll. 
-* [GitHub](https://github.com/) - Host directory. 
-* [Heroku](https://www.heroku.com/) - Hosting deploed app. 
+* [git](https://git-scm.com/) - Version controll.
+* [GitHub](https://github.com/) - Host directory.
+* [Heroku](https://www.heroku.com/) - Hosting deploed app.
 
 ***
 
 ## Testing
 * **Chrome Developer Tools:** Ensure the app is mobile first, but works well on all devices / console tool to identify error, but also conform to best practices and write clean code with react warning messages / Comnponents & Profiler (React tools within the browser) to identify problems, get real time rror feedback and stack tracing.
-* **User Testing** * Sending the app to friends & colleges to use, collecting their feedback for bug fixes and adjustments. 
-* **Python Unit Testing:** Unit tests written with pytest. 
+* **User Testing** * Sending the app to friends & colleges to use, collecting their feedback for bug fixes and adjustments.
+* **Python Unit Testing:** Unit tests written with pytest.
 * **React Unit Testing:** **[FIX]**
 
 ### User Story Testing
@@ -185,7 +185,7 @@ Through the wireframing and the build process I toyed back and forth with having
 ### Expected Behavior
 * Pagination - If you send a get all request to the API it will return the first 'page' of results, but will give ionformation to make it clear that is what is happening.
 * Pagination - If you send a get all request to the API with a page number greater than the possible number of pages that can be generated you will get a response with no recipes, but you will see the pagination information to make it clear what is happening.
-* It is not possible to edit or delete ingredients from the front end (yet) this is by design as it would be very descructive editing. This will be implimented once i have added the ability to log in, and to set admin users. 
+* It is not possible to edit or delete ingredients from the front end (yet) this is by design as it would be very descructive editing. This will be implimented once i have added the ability to log in, and to set admin users.
 ***
 
 ## Deployment
@@ -196,7 +196,7 @@ This site is currently deployed to Heroku  **[FIX]**
 [Live App](https://reduce-food-waste-app.herokuapp.com/)
 
 ### Local Development
-To host this site locally, or work on the code yourself, you can clone or download the repository. 
+To host this site locally, or work on the code yourself, you can clone or download the repository.
 1. You can find the repository page [here](https://github.com/LittleBlue418/Milestone1)
 1. Click on the "clone or download" button at the top right
 1. Copy the URL
@@ -206,15 +206,27 @@ To host this site locally, or work on the code yourself, you can clone or downlo
  1. Press enter
 1. The local clone will now be created
 
-You can read more at this [Github help page](https://help.github.com/en/articles/cloning-a-repository)  
+You can read more at this [Github help page](https://help.github.com/en/articles/cloning-a-repository)
 
 ***
 
 ## Credits / Acknowledgements
-* **ART** - The logo & icons for the project were created by [Sofia Persson](https://www.linkedin.com/in/sofia-persson-52a9aa146/?originalSubdomain=se) for this project. [You can find her portfolio here](https://www.sofiapersson.space/)
-* **Inspiration** - I was inspired by the Love Food Hate Waste campaign which has been running in the UK, they have a [nice website](https://lovefoodhatewaste.com/), but i was frustraited that there wasn't more focuss on using up so i was inspired to build a site that was focussed around using up food that would go to waste. 
-* **User Testing** - Thank you to [Craig Fleming](https://www.linkedin.com/in/craig-fleming-633bb4125/) for your time and feedback with testing the app. 
-* **Support** - Thank you most of all to my partner for the support! <3
+- **ART** - The logo & icons for the project were created by [Sofia Persson](https://www.linkedin.com/in/sofia-persson-52a9aa146/?originalSubdomain=se) for this project. [You can find her portfolio here](https://www.sofiapersson.space/)
+- **Food Photographs** - At time of site publishing:
+    - Potato Salad - Image by <a href="https://pixabay.com/users/cokolatetnica-6262510/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2678536">cokolatetnica</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2678536">Pixabay</a>
+    - Banana Bread - Image by <a href="https://pixabay.com/users/greleht-5168740/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2459926">greleht</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2459926">Pixabay</a>
+    - French Toast - Image by <a href="https://pixabay.com/users/annaj-94790/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=995532">annaj</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=995532">Pixabay</a>
+    - Nasi Goreng - Image by <a href="https://pixabay.com/users/ratreeratsajj1-6496851/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2837771">Ratreerat Sajjapattarakul</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2837771">Pixabay</a>
+    - Tomato Salad - Image by <a href="https://pixabay.com/users/RitaE-19628/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1207570">RitaE</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1207570">Pixabay</a>
+    - Omelet - Image by <a href="https://pixabay.com/users/nemoelguedes-796029/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=775746">Nemoel Nemo</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=775746">Pixabay</a>
+    - Risotto - Image by <a href="https://pixabay.com/users/Simone_ph-3320615/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1823664">Simone_ph</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1823664">Pixabay</a>
+    - Flapjack - <span>Photo by <a href="https://unsplash.com/@stri_khedonia?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Alice Pasqual</a> on <a href="/s/photos/flapjack?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
+    - Poke bowl - <span>Photo by <a href="https://unsplash.com/@jonathanborba?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Jonathan Borba</a> on <a href="/s/photos/poke?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
+    - Soup - <span>Photo by <a href="https://unsplash.com/@tinagraphy?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Tina Vanhove</a> on <a href="/s/photos/vegetable-soup?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
+    - Green curry - Image by <a href="https://pixabay.com/users/Huahom-2139128/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2457236">Huahom</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2457236">Pixabay</a>
+- **Inspiration** - I was inspired by the Love Food Hate Waste campaign which has been running in the UK, they have a [nice website](https://lovefoodhatewaste.com/), but i was frustraited that there wasn't more focuss on using up so i was inspired to build a site that was focussed around using up food that would go to waste.
+- **User Testing** - Thank you to [Craig Fleming](https://www.linkedin.com/in/craig-fleming-633bb4125/) for your time and feedback with testing the app.
+- **Support** - Thank you most of all to my partner for the support! <3
 **[FIX]**
 
 
