@@ -1,3 +1,5 @@
+## CODE WRITTEN WITH HELP FROM A FRIEND
+
 ## Build frontend
 FROM docker.io/library/node:12 AS frontend_builder
 WORKDIR /builddir

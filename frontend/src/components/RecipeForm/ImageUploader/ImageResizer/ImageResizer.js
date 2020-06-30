@@ -1,3 +1,10 @@
+//====================================================================
+// CODE INSPIRED BY THIS ARTICLE:
+// https://hacks.mozilla.org/2011/01/how-to-develop-a-html5-image-uploader/
+//====================================================================
+
+
+
 export const resizeImage = (dataurl, max_height, max_width) => {
 
   // Using a promise to allow time for image to load

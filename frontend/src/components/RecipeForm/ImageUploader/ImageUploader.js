@@ -1,3 +1,9 @@
+//====================================================================
+// CODE INSPIRED BY THIS ARTICLE:
+// https://hacks.mozilla.org/2011/01/how-to-develop-a-html5-image-uploader/
+//====================================================================
+
+
 import React from 'react'
 import classes from './ImageUploader.module.css'
 
