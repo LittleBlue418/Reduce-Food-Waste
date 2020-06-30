@@ -91,11 +91,11 @@ class Ingredient(Resource):
                     # Looping through all the recipes to get all the ingredient ids we need
                     for recipe in recipes_with_ingredient:
                         for ingredient in recipe['ingredients']:
-                            ingredient_id = ingredient_object['ingredient']['_id']
+                            ingredient_id = ingredient['ingredient']['_id']
                             ingredient_ids.add(ObjectId(ingredient_id))
 
                     # Call to db to get all the ingredients we need (using the ids we just got)
-                    curser = mondo.db.ingredients.find({
+                    curser = mongo.db.ingredients.find({
                         "_id": {
                             "$in": list(ingredient_ids)
                         }
