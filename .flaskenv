@@ -1,0 +1,1 @@
+FLASK_APP=reduce_foodwaste:app
