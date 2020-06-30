@@ -224,24 +224,52 @@ It is currently possible to use the edit ingredient endpoint to change the name 
 ***
 
 ## Deployment
-This site is currently deployed to Heroku  **[FIX]**
-* steps for hosting on heroku
+
+### Setting up a MongoDB Database
+- Set up a mongoDB database.
+- Create three collections in it: `recipes`, `ingredients`, `images`.
+
+### Local Development - Backend
+- Clone this directory to your local computer.
+- Create a virtual enviroment
+`virtualenv venv`.
+- Activate the virtual environment `source venv/bin/activate`.
+- Change to the backend folder `cd backend`.
+- Do a pip install for all dependancies & dev dependancies, linking to your. live code `pip install -e .[dev]`.
+- Create a `.env` file with the following content
+  ```
+  MONGO_URI="$MONGO_URI"
+  ```
+  where `$MONGO_URI` is the URI to your database.
+- Run the backend `flask run --reload`.
+- Leave this terminal window open and running.
+
+### Local Development - Frontend
+- Open a second terminal window.
+- Change to your front end directory `cd frontend`.
+- Install all dependancies `npm install`.
+- Start the frontend `npm start`.
+
+
+### Deploy to Heroku
+These instructions assume that you have a github account and a Heroku account, and have set up the Heroku CLI on your computer.
+- Clone this git repository to your own github account
+- Run the following commands
+  ```bash
+  heroku apps:create $APP_NAME --region eu
+  heroku stack:set container -a $APP_NAME
+  heroku config:set -a $APP_NAME MONGO_URI="$MONGO_DB_URI"
+  ```
+  where `$APP_NAME` is the name of your Heroku app, and `$MONGO_DB_URI` is
+  your MongoDB
+- On the Heroku website, in your new app, connect to your github
+- Select the repo you have cloned
+- On the deploy tab manually deploy
 
 ### App Link
 you can find the app deployed at [this link](https://reduce-food-waste-app.herokuapp.com/)
 
-### Local Development
-To host this site locally, or work on the code yourself, you can clone or download the repository.
-1. You can find the repository page [here](https://github.com/LittleBlue418/Milestone1)
-1. Click on the "clone or download" button at the top right
-1. Copy the URL
-1. Go to your Terminal aplication
- 1. `cd` Change the current working directory to the location where you want your clone directory to be made
- 1. Type `git clone` and paste in the URL
- 1. Press enter
-1. The local clone will now be created
 
-You can read more at this [Github help page](https://help.github.com/en/articles/cloning-a-repository)
 
 ***
 
